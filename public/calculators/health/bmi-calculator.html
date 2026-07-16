@@ -1,0 +1,559 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BMI Calculator - Check Your Body Mass Index | Calculator12</title>
+    <meta
+      name="description"
+      content="Calculate your BMI instantly. Know your health category and ideal weight range."
+    />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect fill='%238B5CF6' width='100' height='100' rx='20'/><text x='50' y='68' text-anchor='middle' font-family='Arial' font-size='60' font-weight='bold' fill='white'>C</text></svg>"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Poppins:wght@600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
+    <link rel="stylesheet" href="../../assets/css/variables.css" />
+    <link rel="stylesheet" href="../../assets/css/reset.css" />
+    <link rel="stylesheet" href="../../assets/css/base.css" />
+    <link rel="stylesheet" href="../../assets/css/theme.css" />
+    <link rel="stylesheet" href="../../assets/css/layout.css" />
+    <link rel="stylesheet" href="../../assets/css/components.css" />
+    <link rel="stylesheet" href="../../assets/css/pages/calculator.css" />
+  </head>
+  <body>
+    <!-- HEADER (Standard for All Calculators) -->
+    <header class="header" role="banner">
+      <div class="container">
+        <div class="header__wrapper">
+          <div class="header__logo">
+            <a
+              href="../../index.html"
+              aria-label="Calculator12 Home"
+              class="logo-wrapper"
+            >
+              <div class="logo-icon">
+                <svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+                  <defs>
+                    <linearGradient
+                      id="logoGrad1"
+                      x1="0%"
+                      y1="0%"
+                      x2="100%"
+                      y2="100%"
+                    >
+                      <stop
+                        offset="0%"
+                        style="stop-color: #8b5cf6; stop-opacity: 1"
+                      />
+                      <stop
+                        offset="100%"
+                        style="stop-color: #06b6d4; stop-opacity: 1"
+                      />
+                    </linearGradient>
+                    <linearGradient
+                      id="logoGrad2"
+                      x1="100%"
+                      y1="0%"
+                      x2="0%"
+                      y2="100%"
+                    >
+                      <stop
+                        offset="0%"
+                        style="stop-color: #ec4899; stop-opacity: 1"
+                      />
+                      <stop
+                        offset="100%"
+                        style="stop-color: #8b5cf6; stop-opacity: 1"
+                      />
+                    </linearGradient>
+                    <filter id="glow">
+                      <feGaussianBlur stdDeviation="3" result="coloredBlur" />
+                      <feMerge>
+                        <feMergeNode in="coloredBlur" />
+                        <feMergeNode in="SourceGraphic" />
+                      </feMerge>
+                    </filter>
+                  </defs>
+                  <rect
+                    x="10"
+                    y="10"
+                    width="100"
+                    height="100"
+                    rx="25"
+                    fill="url(#logoGrad1)"
+                    opacity="0.15"
+                    stroke="url(#logoGrad1)"
+                    stroke-width="3"
+                  />
+                  <rect
+                    x="25"
+                    y="22"
+                    width="70"
+                    height="25"
+                    rx="6"
+                    fill="url(#logoGrad2)"
+                    opacity="0.9"
+                  />
+                  <text
+                    x="60"
+                    y="40"
+                    font-family="Arial, sans-serif"
+                    font-size="18"
+                    fill="white"
+                    text-anchor="middle"
+                    font-weight="bold"
+                  >
+                    =
+                  </text>
+                  <circle
+                    cx="35"
+                    cy="62"
+                    r="10"
+                    fill="url(#logoGrad1)"
+                    opacity="0.8"
+                    filter="url(#glow)"
+                  />
+                  <text
+                    x="35"
+                    y="67"
+                    font-family="Arial"
+                    font-size="14"
+                    fill="white"
+                    text-anchor="middle"
+                    font-weight="bold"
+                  >
+                    +
+                  </text>
+                  <circle
+                    cx="60"
+                    cy="62"
+                    r="10"
+                    fill="url(#logoGrad2)"
+                    opacity="0.8"
+                    filter="url(#glow)"
+                  />
+                  <text
+                    x="60"
+                    y="67"
+                    font-family="Arial"
+                    font-size="14"
+                    fill="white"
+                    text-anchor="middle"
+                    font-weight="bold"
+                  >
+                    −
+                  </text>
+                  <circle
+                    cx="85"
+                    cy="62"
+                    r="10"
+                    fill="url(#logoGrad1)"
+                    opacity="0.8"
+                    filter="url(#glow)"
+                  />
+                  <text
+                    x="85"
+                    y="67"
+                    font-family="Arial"
+                    font-size="14"
+                    fill="white"
+                    text-anchor="middle"
+                    font-weight="bold"
+                  >
+                    ×
+                  </text>
+                  <circle
+                    cx="35"
+                    cy="87"
+                    r="10"
+                    fill="url(#logoGrad2)"
+                    opacity="0.8"
+                    filter="url(#glow)"
+                  />
+                  <text
+                    x="35"
+                    y="92"
+                    font-family="Arial"
+                    font-size="14"
+                    fill="white"
+                    text-anchor="middle"
+                    font-weight="bold"
+                  >
+                    ÷
+                  </text>
+                  <circle
+                    cx="60"
+                    cy="87"
+                    r="10"
+                    fill="url(#logoGrad1)"
+                    opacity="0.8"
+                    filter="url(#glow)"
+                  />
+                  <text
+                    x="60"
+                    y="92"
+                    font-family="Arial"
+                    font-size="14"
+                    fill="white"
+                    text-anchor="middle"
+                    font-weight="bold"
+                  >
+                    √
+                  </text>
+                  <circle
+                    cx="85"
+                    cy="87"
+                    r="10"
+                    fill="url(#logoGrad2)"
+                    opacity="0.8"
+                    filter="url(#glow)"
+                  />
+                  <text
+                    x="85"
+                    y="92"
+                    font-family="Arial"
+                    font-size="14"
+                    fill="white"
+                    text-anchor="middle"
+                    font-weight="bold"
+                  >
+                    %
+                  </text>
+                </svg>
+              </div>
+              <span class="logo-text"
+                >Calculator<span class="logo-number">12</span></span
+              >
+            </a>
+          </div>
+
+          <nav
+            class="header__nav"
+            role="navigation"
+            aria-label="Main navigation"
+          >
+            <ul class="nav__list">
+              <li class="nav__item">
+                <a href="../../index.html" class="nav__link">Home</a>
+              </li>
+              <li class="nav__item">
+                <a href="#" class="nav__link">Finance</a>
+              </li>
+              <li class="nav__item">
+                <a href="../../all-calculators.html" class="nav__link"
+                  >Categories</a
+                >
+              </li>
+              <li class="nav__item">
+                <a href="#" class="nav__link">Popular</a>
+              </li>
+              <li class="nav__item"><a href="#" class="nav__link">About</a></li>
+            </ul>
+          </nav>
+
+          <div class="header__actions">
+            <button class="theme-toggle" aria-label="Toggle dark mode">
+              <i
+                class="fas fa-sun theme-toggle__icon theme-toggle__icon--sun"
+              ></i>
+              <i
+                class="fas fa-moon theme-toggle__icon theme-toggle__icon--moon"
+              ></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <main id="main-content" role="main">
+      <div class="container">
+        <!-- Breadcrumbs -->
+        <nav class="breadcrumbs" aria-label="Breadcrumb">
+          <ol class="breadcrumbs__list">
+            <li class="breadcrumbs__item">
+              <a href="../../index.html">Home</a>
+            </li>
+            <li class="breadcrumbs__item"><a href="#">Health</a></li>
+            <li class="breadcrumbs__item" aria-current="page">
+              BMI Calculator
+            </li>
+          </ol>
+        </nav>
+
+        <!-- Page Header -->
+        <div class="page-header">
+          <h1 class="page-header__title">BMI Calculator</h1>
+          <p class="page-header__desc">
+            Calculate your Body Mass Index (BMI) to understand your health
+            category.
+          </p>
+        </div>
+
+        <!-- Calculator Section -->
+        <section class="calculator-section">
+          <div class="calculator-layout">
+            <div class="calculator-inputs card">
+              <h2 class="calculator-inputs__title">Enter Your Details</h2>
+              <div id="bmi-engine-container">
+                <!-- Universal Engine will inject form here -->
+              </div>
+            </div>
+
+            <div class="calculator-results card">
+              <h2 class="calculator-results__title">Your Results</h2>
+              <div id="bmi-results-container">
+                <!-- Universal Engine will inject results here -->
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- SEO Content -->
+        <section class="calculator-content">
+          <div class="content-block">
+            <h2>What is BMI?</h2>
+            <p>
+              BMI (Body Mass Index) is a simple calculation using a person's
+              height and weight. The formula is BMI = kg/m².
+            </p>
+          </div>
+          <div class="content-block">
+            <h2>BMI Categories</h2>
+            <ul>
+              <li><strong>Underweight:</strong> BMI less than 18.5</li>
+              <li><strong>Normal weight:</strong> BMI 18.5 – 24.9</li>
+              <li><strong>Overweight:</strong> BMI 25 – 29.9</li>
+              <li><strong>Obesity:</strong> BMI 30 or greater</li>
+            </ul>
+          </div>
+        </section>
+      </div>
+
+      <!-- Related Calculators Section -->
+      <section class="related-calculators">
+        <div class="container">
+          <h2 id="related-title" class="section-title">
+            Explore More Calculators
+          </h2>
+
+          <div class="related-calculators__grid">
+            <!-- Finance Category -->
+            <div class="related-category">
+              <h3 class="related-category__title">
+                <i class="fas fa-calculator" aria-hidden="true"></i>
+                Finance Calculators
+              </h3>
+              <ul class="related-category__list">
+                <li>
+                  <a href="../finance/emi-calculator.html"
+                    >Home Loan EMI Calculator</a
+                  >
+                </li>
+                <li><a href="#">Car Loan EMI Calculator</a></li>
+                <li><a href="#">SIP Calculator</a></li>
+                <li><a href="#">PPF Calculator</a></li>
+                <li><a href="#">Income Tax Calculator</a></li>
+                <li><a href="#">GST Calculator</a></li>
+              </ul>
+            </div>
+
+            <!-- Health Category -->
+            <div class="related-category">
+              <h3 class="related-category__title">
+                <i class="fas fa-heartbeat" aria-hidden="true"></i>
+                Health & Fitness
+              </h3>
+              <ul class="related-category__list">
+                <li><a href="bmi-calculator.html">BMI Calculator</a></li>
+                <li><a href="#">BMR Calculator</a></li>
+                <li><a href="#">Body Fat Calculator</a></li>
+                <li><a href="#">Calorie Calculator</a></li>
+                <li><a href="#">Pregnancy Due Date Calculator</a></li>
+                <li><a href="#">Ideal Weight Calculator</a></li>
+              </ul>
+            </div>
+
+            <!-- Math Category -->
+            <div class="related-category">
+              <h3 class="related-category__title">
+                <i class="fas fa-square-root-alt" aria-hidden="true"></i>
+                Math Calculators
+              </h3>
+              <ul class="related-category__list">
+                <li><a href="#">Percentage Calculator</a></li>
+                <li><a href="#">Simple Interest Calculator</a></li>
+                <li><a href="#">Compound Interest Calculator</a></li>
+                <li><a href="#">Ratio Calculator</a></li>
+                <li><a href="#">Average Calculator</a></li>
+                <li><a href="#">Square Root Calculator</a></li>
+              </ul>
+            </div>
+
+            <!-- Unit Converters Category -->
+            <div class="related-category">
+              <h3 class="related-category__title">
+                <i class="fas fa-exchange-alt" aria-hidden="true"></i>
+                Unit Converters
+              </h3>
+              <ul class="related-category__list">
+                <li><a href="#">Currency Converter</a></li>
+                <li><a href="#">Length Converter</a></li>
+                <li><a href="#">Weight Converter</a></li>
+                <li><a href="#">Temperature Converter</a></li>
+                <li><a href="#">Area Converter</a></li>
+                <li><a href="#">Speed Converter</a></li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- View All Calculators Button -->
+          <div class="related-calculators__footer">
+            <a
+              href="../../all-calculators.html"
+              class="btn btn-primary btn-large"
+            >
+              View All Calculators
+              <i class="fas fa-arrow-right" style="margin-left: 8px"></i>
+            </a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- FOOTER (Standard for All Calculators) -->
+    <footer class="footer footer-compact" role="contentinfo">
+      <div class="container">
+        <div class="footer__wrapper footer-compact__wrapper">
+          <div class="footer__brand footer-compact__brand">
+            <a href="../../index.html" class="logo-text footer-logo"
+              >Calculator<span class="logo-number">12</span></a
+            >
+            <div class="footer__social footer-compact__social">
+              <a href="#" class="footer__social-link" aria-label="Facebook"
+                ><i class="fab fa-facebook-f"></i
+              ></a>
+              <a href="#" class="footer__social-link" aria-label="Twitter"
+                ><i class="fab fa-twitter"></i
+              ></a>
+              <a href="#" class="footer__social-link" aria-label="Instagram"
+                ><i class="fab fa-instagram"></i
+              ></a>
+              <a href="#" class="footer__social-link" aria-label="LinkedIn"
+                ><i class="fab fa-linkedin-in"></i
+              ></a>
+            </div>
+          </div>
+          <div class="footer__links footer-compact__links">
+            <div class="footer__column">
+              <h4 class="footer__title">Company</h4>
+              <ul class="footer__list">
+                <li><a href="#">About Us</a></li>
+                <li><a href="#">Contact</a></li>
+              </ul>
+            </div>
+            <div class="footer__column">
+              <h4 class="footer__title">Legal</h4>
+              <ul class="footer__list">
+                <li><a href="#">Privacy Policy</a></li>
+                <li><a href="#">Terms of Service</a></li>
+              </ul>
+            </div>
+            <div class="footer__column">
+              <h4 class="footer__title">Resources</h4>
+              <ul class="footer__list">
+                <li><a href="#">FAQ</a></li>
+                <li><a href="#">Sitemap</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="footer__bottom footer-compact__bottom">
+          <p class="footer__copyright">
+            &copy; 2026 Calculator12. All rights reserved.
+          </p>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="../../assets/js/core/theme-switcher.js" defer></script>
+    <script
+      src="../../assets/js/engines/universal-calculator.js"
+      defer
+    ></script>
+    <script>
+      // BMI Calculator Config with Advanced Feature
+      document.addEventListener("DOMContentLoaded", () => {
+        buildCalculator("bmi-engine-container", {
+          title: "BMI",
+          showTable: true,
+          inputs: [
+            {
+              id: "weight",
+              label: "Weight (kg)",
+              type: "number",
+              placeholder: "e.g., 70",
+            },
+            {
+              id: "height",
+              label: "Height (cm)",
+              type: "number",
+              placeholder: "e.g., 175",
+            },
+          ],
+          calculate: (vals) => {
+            if (vals.weight <= 0 || vals.height <= 0)
+              return { bmi: 0, category: "Invalid" };
+            const heightInMeters = vals.height / 100;
+            const bmi = vals.weight / (heightInMeters * heightInMeters);
+            let category = "";
+            if (bmi < 18.5) category = "Underweight";
+            else if (bmi < 24.9) category = "Normal Weight";
+            else if (bmi < 29.9) category = "Overweight";
+            else category = "Obese";
+            return { bmi: bmi, category: category };
+          },
+          results: [
+            { id: "bmi", label: "Your BMI Score" },
+            { id: "category", label: "Health Category" },
+          ],
+          renderAdvanced: (results, vals, container) => {
+            let color = "#3B82F6";
+            let message = "Keep it up!";
+            if (results.category === "Underweight") {
+              color = "#F59E0B";
+              message = "You need to gain some weight.";
+            }
+            if (results.category === "Normal Weight") {
+              color = "#10B981";
+              message = "Perfect! You are in great shape.";
+            }
+            if (results.category === "Overweight") {
+              color = "#F97316";
+              message = "A little exercise can help.";
+            }
+            if (results.category === "Obese") {
+              color = "#EF4444";
+              message = "Please consult a doctor.";
+            }
+            container.innerHTML = `
+            <div style="background: ${color}; color: white; padding: 15px; border-radius: 10px; text-align: center; font-weight: bold; box-shadow: 0 4px 6px rgba(0,0,0,0.1); transition: all 0.3s ease;">
+              <div style="font-size: 1.2rem; margin-bottom: 5px;">Status: ${results.category}</div>
+              <div style="font-size: 0.9rem; font-weight: normal; opacity: 0.9;">${message}</div>
+            </div>
+          `;
+          },
+        });
+      });
+    </script>
+  </body>
+</html>

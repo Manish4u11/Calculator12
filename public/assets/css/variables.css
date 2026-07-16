@@ -1,0 +1,470 @@
+/* ============================================
+   Calculator12.com - Design Tokens & CSS Variables
+   ============================================
+   Ye file poore project ka design foundation hai.
+   Har calculator page isi ke colors aur styles use karega.
+   ============================================ */
+
+/* ============================================
+   1. COLOR PALETTE
+   ============================================ */
+
+:root {
+  /* Primary Colors - Brand Identity */
+  --color-purple-primary: #8b5cf6;
+  --color-purple-light: #a78bfa;
+  --color-purple-dark: #7c3aed;
+  --color-purple-50: #f5f3ff;
+  --color-purple-100: #ede9fe;
+  --color-purple-200: #ddd6fe;
+  --color-purple-300: #c4b5fd;
+  --color-purple-400: #a78bfa;
+  --color-purple-500: #8b5cf6;
+  --color-purple-600: #7c3aed;
+  --color-purple-700: #6d28d9;
+  --color-purple-800: #5b21b6;
+  --color-purple-900: #4c1d95;
+
+  /* Secondary Colors - Sea Blue */
+  --color-sea-blue-primary: #06b6d4;
+  --color-sea-blue-light: #22d3ee;
+  --color-sea-blue-dark: #0891b2;
+  --color-sea-blue-50: #ecfeff;
+  --color-sea-blue-100: #cffafe;
+  --color-sea-blue-200: #a5f3fc;
+  --color-sea-blue-300: #67e8f9;
+  --color-sea-blue-400: #22d3ee;
+  --color-sea-blue-500: #06b6d4;
+  --color-sea-blue-600: #0891b2;
+  --color-sea-blue-700: #0e7490;
+  --color-sea-blue-800: #155e75;
+  --color-sea-blue-900: #164e63;
+
+  /* Accent Colors - Pink */
+  --color-pink-primary: #ec4899;
+  --color-pink-light: #f472b6;
+  --color-pink-dark: #db2777;
+  --color-pink-50: #fdf2f8;
+  --color-pink-100: #fce7f3;
+  --color-pink-200: #fbcfe8;
+  --color-pink-300: #f9a8d4;
+  --color-pink-400: #f472b6;
+  --color-pink-500: #ec4899;
+  --color-pink-600: #db2777;
+  --color-pink-700: #be185d;
+  --color-pink-800: #9d174d;
+  --color-pink-900: #831843;
+
+  /* Neutral Colors - Grayscale */
+  --color-white: #ffffff;
+  --color-gray-50: #f9fafb;
+  --color-gray-100: #f3f4f6;
+  --color-gray-200: #e5e7eb;
+  --color-gray-300: #d1d5db;
+  --color-gray-400: #9ca3af;
+  --color-gray-500: #6b7280;
+  --color-gray-600: #4b5563;
+  --color-gray-700: #374151;
+  --color-gray-800: #1f2937;
+  --color-gray-900: #111827;
+  --color-black: #000000;
+
+  /* Semantic Colors - Status Messages */
+  --color-success: #10b981;
+  --color-success-light: #34d399;
+  --color-success-dark: #059669;
+  --color-warning: #f59e0b;
+  --color-warning-light: #fbbf24;
+  --color-warning-dark: #d97706;
+  --color-error: #ef4444;
+  --color-error-light: #f87171;
+  --color-error-dark: #dc2626;
+  --color-info: #3b82f6;
+  --color-info-light: #60a5fa;
+  --color-info-dark: #2563eb;
+}
+
+/* ============================================
+   2. LIGHT MODE (Default)
+   ============================================ */
+
+:root {
+  /* Background Colors */
+  --bg-primary: var(--color-white);
+  --bg-secondary: var(--color-gray-50);
+  --bg-tertiary: var(--color-gray-100);
+  --bg-elevated: var(--color-white);
+  --bg-overlay: rgba(0, 0, 0, 0.5);
+
+  /* Text Colors */
+  --text-primary: var(--color-gray-900);
+  --text-secondary: var(--color-gray-700);
+  --text-tertiary: var(--color-gray-500);
+  --text-disabled: var(--color-gray-400);
+  --text-inverse: var(--color-white);
+
+  /* Border Colors */
+  --border-primary: var(--color-gray-200);
+  --border-secondary: var(--color-gray-300);
+  --border-focus: var(--color-purple-500);
+
+  /* Glassmorphism - Light Mode */
+  --glass-bg: rgba(255, 255, 255, 0.7);
+  --glass-bg-hover: rgba(255, 255, 255, 0.8);
+  --glass-border: rgba(255, 255, 255, 0.3);
+  --glass-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
+  --glass-blur: 12px;
+
+  /* Shadows */
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md:
+    0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --shadow-lg:
+    0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  --shadow-xl:
+    0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  --shadow-2xl: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  --shadow-glow-purple: 0 0 20px rgba(139, 92, 246, 0.3);
+  --shadow-glow-sea-blue: 0 0 20px rgba(6, 182, 212, 0.3);
+  --shadow-glow-pink: 0 0 20px rgba(236, 72, 153, 0.3);
+
+  /* Gradients */
+  --gradient-primary: linear-gradient(
+    135deg,
+    var(--color-purple-500) 0%,
+    var(--color-sea-blue-500) 100%
+  );
+  --gradient-secondary: linear-gradient(
+    135deg,
+    var(--color-pink-500) 0%,
+    var(--color-purple-500) 100%
+  );
+  --gradient-accent: linear-gradient(
+    135deg,
+    var(--color-sea-blue-500) 0%,
+    var(--color-pink-500) 100%
+  );
+  --gradient-mesh:
+    radial-gradient(at 0% 0%, rgba(139, 92, 246, 0.15) 0px, transparent 50%),
+    radial-gradient(at 100% 0%, rgba(6, 182, 212, 0.15) 0px, transparent 50%),
+    radial-gradient(
+      at 100% 100%,
+      rgba(236, 72, 153, 0.15) 0px,
+      transparent 50%
+    ),
+    radial-gradient(at 0% 100%, rgba(139, 92, 246, 0.15) 0px, transparent 50%);
+}
+
+/* ============================================
+   3. DARK MODE
+   ============================================ */
+
+[data-theme="dark"] {
+  /* Background Colors */
+  --bg-primary: var(--color-gray-900);
+  --bg-secondary: var(--color-gray-800);
+  --bg-tertiary: var(--color-gray-700);
+  --bg-elevated: var(--color-gray-800);
+  --bg-overlay: rgba(0, 0, 0, 0.7);
+
+  /* Text Colors */
+  --text-primary: var(--color-white);
+  --text-secondary: var(--color-gray-300);
+  --text-tertiary: var(--color-gray-400);
+  --text-disabled: var(--color-gray-600);
+  --text-inverse: var(--color-gray-900);
+
+  /* Border Colors */
+  --border-primary: var(--color-gray-700);
+  --border-secondary: var(--color-gray-600);
+  --border-focus: var(--color-purple-400);
+
+  /* Glassmorphism - Dark Mode */
+  --glass-bg: rgba(31, 41, 55, 0.7);
+  --glass-bg-hover: rgba(31, 41, 55, 0.8);
+  --glass-border: rgba(255, 255, 255, 0.1);
+  --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.4);
+  --glass-blur: 12px;
+
+  /* Shadows - Dark Mode (more subtle) */
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.3);
+  --shadow-md:
+    0 4px 6px -1px rgba(0, 0, 0, 0.4), 0 2px 4px -1px rgba(0, 0, 0, 0.3);
+  --shadow-lg:
+    0 10px 15px -3px rgba(0, 0, 0, 0.4), 0 4px 6px -2px rgba(0, 0, 0, 0.3);
+  --shadow-xl:
+    0 20px 25px -5px rgba(0, 0, 0, 0.4), 0 10px 10px -5px rgba(0, 0, 0, 0.3);
+  --shadow-2xl: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+  --shadow-glow-purple: 0 0 20px rgba(139, 92, 246, 0.4);
+  --shadow-glow-sea-blue: 0 0 20px rgba(6, 182, 212, 0.4);
+  --shadow-glow-pink: 0 0 20px rgba(236, 72, 153, 0.4);
+
+  /* Gradients - Dark Mode (more vibrant) */
+  --gradient-primary: linear-gradient(
+    135deg,
+    var(--color-purple-400) 0%,
+    var(--color-sea-blue-400) 100%
+  );
+  --gradient-secondary: linear-gradient(
+    135deg,
+    var(--color-pink-400) 0%,
+    var(--color-purple-400) 100%
+  );
+  --gradient-accent: linear-gradient(
+    135deg,
+    var(--color-sea-blue-400) 0%,
+    var(--color-pink-400) 100%
+  );
+  --gradient-mesh:
+    radial-gradient(at 0% 0%, rgba(139, 92, 246, 0.2) 0px, transparent 50%),
+    radial-gradient(at 100% 0%, rgba(6, 182, 212, 0.2) 0px, transparent 50%),
+    radial-gradient(at 100% 100%, rgba(236, 72, 153, 0.2) 0px, transparent 50%),
+    radial-gradient(at 0% 100%, rgba(139, 92, 246, 0.2) 0px, transparent 50%);
+}
+
+/* ============================================
+   4. TYPOGRAPHY
+   ============================================ */
+
+:root {
+  /* Font Families */
+  --font-primary:
+    "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, sans-serif;
+  --font-secondary:
+    "Poppins", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-mono: "JetBrains Mono", "Fira Code", "Courier New", monospace;
+
+  /* Font Sizes - Mobile First */
+  --text-xs: 0.75rem; /* 12px */
+  --text-sm: 0.875rem; /* 14px */
+  --text-base: 1rem; /* 16px */
+  --text-lg: 1.125rem; /* 18px */
+  --text-xl: 1.25rem; /* 20px */
+  --text-2xl: 1.5rem; /* 24px */
+  --text-3xl: 1.875rem; /* 30px */
+  --text-4xl: 2.25rem; /* 36px */
+  --text-5xl: 3rem; /* 48px */
+  --text-6xl: 3.75rem; /* 60px */
+
+  /* Font Weights */
+  --font-light: 300;
+  --font-regular: 400;
+  --font-medium: 500;
+  --font-semibold: 600;
+  --font-bold: 700;
+  --font-extrabold: 800;
+
+  /* Line Heights */
+  --leading-tight: 1.25;
+  --leading-snug: 1.375;
+  --leading-normal: 1.5;
+  --leading-relaxed: 1.625;
+  --leading-loose: 2;
+
+  /* Letter Spacing */
+  --tracking-tighter: -0.05em;
+  --tracking-tight: -0.025em;
+  --tracking-normal: 0em;
+  --tracking-wide: 0.025em;
+  --tracking-wider: 0.05em;
+  --tracking-widest: 0.1em;
+}
+
+/* ============================================
+   5. SPACING SYSTEM
+   ============================================ */
+
+:root {
+  /* Spacing Scale (8px base) */
+  --space-0: 0;
+  --space-1: 0.25rem; /* 4px */
+  --space-2: 0.5rem; /* 8px */
+  --space-3: 0.75rem; /* 12px */
+  --space-4: 1rem; /* 16px */
+  --space-5: 1.25rem; /* 20px */
+  --space-6: 1.5rem; /* 24px */
+  --space-8: 2rem; /* 32px */
+  --space-10: 2.5rem; /* 40px */
+  --space-12: 3rem; /* 48px */
+  --space-16: 4rem; /* 64px */
+  --space-20: 5rem; /* 80px */
+  --space-24: 6rem; /* 96px */
+  --space-32: 8rem; /* 128px */
+
+  /* Component Spacing */
+  --padding-sm: var(--space-3);
+  --padding-md: var(--space-4);
+  --padding-lg: var(--space-6);
+  --padding-xl: var(--space-8);
+
+  --margin-sm: var(--space-3);
+  --margin-md: var(--space-4);
+  --margin-lg: var(--space-6);
+  --margin-xl: var(--space-8);
+
+  --gap-sm: var(--space-2);
+  --gap-md: var(--space-4);
+  --gap-lg: var(--space-6);
+  --gap-xl: var(--space-8);
+}
+
+/* ============================================
+   6. BORDER RADIUS
+   ============================================ */
+
+:root {
+  --radius-none: 0;
+  --radius-sm: 0.25rem; /* 4px */
+  --radius-md: 0.375rem; /* 6px */
+  --radius-lg: 0.5rem; /* 8px */
+  --radius-xl: 0.75rem; /* 12px */
+  --radius-2xl: 1rem; /* 16px */
+  --radius-3xl: 1.5rem; /* 24px */
+  --radius-full: 9999px;
+
+  /* Component Radius */
+  --radius-button: var(--radius-lg);
+  --radius-card: var(--radius-xl);
+  --radius-input: var(--radius-md);
+  --radius-modal: var(--radius-2xl);
+}
+
+/* ============================================
+   7. TRANSITIONS & ANIMATIONS
+   ============================================ */
+
+:root {
+  /* Transition Durations */
+  --duration-fast: 150ms;
+  --duration-normal: 250ms;
+  --duration-slow: 350ms;
+  --duration-slower: 500ms;
+
+  /* Transition Easings */
+  --ease-in: cubic-bezier(0.4, 0, 1, 1);
+  --ease-out: cubic-bezier(0, 0, 0.2, 1);
+  --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+
+  /* Common Transitions */
+  --transition-fast: all var(--duration-fast) var(--ease-in-out);
+  --transition-normal: all var(--duration-normal) var(--ease-in-out);
+  --transition-slow: all var(--duration-slow) var(--ease-in-out);
+}
+
+/* ============================================
+   8. Z-INDEX SCALE
+   ============================================ */
+
+:root {
+  --z-index-dropdown: 1000;
+  --z-index-sticky: 1020;
+  --z-index-fixed: 1030;
+  --z-index-modal-backdrop: 1040;
+  --z-index-modal: 1050;
+  --z-index-popover: 1060;
+  --z-index-tooltip: 1070;
+  --z-index-toast: 1080;
+}
+
+/* ============================================
+   9. BREAKPOINTS (Media Queries)
+   ============================================ */
+
+/*
+  Usage in CSS:
+  @media (min-width: 640px) { ... }
+  @media (min-width: 768px) { ... }
+*/
+
+:root {
+  --breakpoint-sm: 640px; /* Mobile landscape */
+  --breakpoint-md: 768px; /* Tablet */
+  --breakpoint-lg: 1024px; /* Laptop */
+  --breakpoint-xl: 1280px; /* Desktop */
+  --breakpoint-2xl: 1536px; /* Large desktop */
+}
+
+/* ============================================
+   10. CONTAINER WIDTHS
+   ============================================ */
+
+:root {
+  --container-sm: 640px;
+  --container-md: 768px;
+  --container-lg: 1024px;
+  --container-xl: 1280px;
+  --container-2xl: 1536px;
+  --container-full: 100%;
+}
+
+/* ============================================
+   11. CALCULATOR SPECIFIC VARIABLES
+   ============================================ */
+
+:root {
+  /* Calculator Card */
+  --calculator-card-bg: var(--glass-bg);
+  --calculator-card-border: var(--glass-border);
+  --calculator-card-shadow: var(--glass-shadow);
+  --calculator-card-radius: var(--radius-2xl);
+  --calculator-card-padding: var(--space-8);
+
+  /* Calculator Input */
+  --input-bg: var(--bg-primary);
+  --input-border: var(--border-primary);
+  --input-border-focus: var(--border-focus);
+  --input-text: var(--text-primary);
+  --input-placeholder: var(--text-tertiary);
+  --input-radius: var(--radius-input);
+  --input-padding: var(--space-3) var(--space-4);
+  --input-height: 48px;
+
+  /* Calculator Button */
+  --button-primary-bg: var(--gradient-primary);
+  --button-primary-text: var(--color-white);
+  --button-secondary-bg: var(--bg-secondary);
+  --button-secondary-text: var(--text-primary);
+  --button-radius: var(--radius-button);
+  --button-padding: var(--space-3) var(--space-6);
+  --button-height: 48px;
+
+  /* Calculator Result */
+  --result-bg: var(--gradient-primary);
+  --result-text: var(--color-white);
+  --result-radius: var(--radius-xl);
+  --result-padding: var(--space-6);
+}
+
+/* ============================================
+   12. UTILITY CLASSES (Optional)
+   ============================================ */
+
+/* Glassmorphism Effect */
+.glass {
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-shadow);
+}
+
+/* Gradient Text */
+.gradient-text {
+  background: var(--gradient-primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Smooth Transitions */
+.smooth-transition {
+  transition: var(--transition-normal);
+}
+
+/* Focus Visible (Accessibility) */
+*:focus-visible {
+  outline: 2px solid var(--border-focus);
+  outline-offset: 2px;
+}
