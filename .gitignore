@@ -1,0 +1,76 @@
+# ============================================
+# Calculator12.com - Git Ignore Rules
+# ============================================
+
+# Dependencies
+node_modules/
+server/node_modules/
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# Environment Variables (NEVER commit secrets)
+.env
+.env.local
+.env.production
+server/.env
+
+# Logs
+*.log
+server/logs/
+logs/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Build outputs (if any in future)
+dist/
+build/
+.next/
+.cache/
+
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+*.swp
+*.swo
+*~
+
+# IDE files
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Testing
+coverage/
+.nyc_output/
+*.test.js.backup
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+
+# Database files (if local DB used)
+*.sqlite
+*.sqlite3
+*.db
+
+# Upload folders (user generated content)
+public/uploads/
+server/uploads/
+
+# Backup files
+*.bak
+*.backup
+*.old
+
+# Translation cache (auto-generated)
+.translation-cache/
+
+# Sensitive data
+*.pem
+*.key
+secrets.json
