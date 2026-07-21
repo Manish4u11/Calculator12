@@ -1,0 +1,389 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BMI Gauge Test - Needle 100% Fixed</title>
+    <style>
+      body {
+        margin: 0;
+        padding: 40px;
+        background: #f9fafb;
+        font-family: "Inter", Arial, Helvetica, sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+      }
+
+      .test-container {
+        background: white;
+        padding: 40px;
+        border-radius: 16px;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+        text-align: center;
+        max-width: 500px;
+        width: 100%;
+      }
+
+      h2 {
+        margin-bottom: 20px;
+        color: #1f2937;
+        font-size: 24px;
+      }
+
+      svg {
+        max-width: 100%;
+        height: auto;
+        overflow: visible;
+      }
+
+      .test-controls {
+        margin-top: 30px;
+        padding: 20px;
+        background: #f3f4f6;
+        border-radius: 12px;
+      }
+
+      .test-controls button {
+        margin: 6px;
+        padding: 10px 18px;
+        background: #8b5cf6;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 14px;
+        font-weight: 600;
+        transition: all 0.2s;
+      }
+
+      .test-controls button:hover {
+        background: #7c3aed;
+        transform: translateY(-2px);
+      }
+
+      .test-info {
+        margin-top: 20px;
+        font-size: 14px;
+        color: #6b7280;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="test-container">
+      <h2>BMI Gauge Chart - Needle Fixed!</h2>
+
+      <!-- SVG Gauge -->
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        xmlns:xlink="http://www.w3.org/1999/xlink"
+        width="320px"
+        height="180px"
+        viewBox="0 0 320 180"
+      >
+        <g
+          transform="translate(20, 20)"
+          style="font-family: &quot;Inter&quot;, Arial, sans-serif"
+        >
+          <defs>
+            <!-- Gradients -->
+            <linearGradient id="grad-under" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#EF4444" />
+              <stop offset="100%" stop-color="#B91C1C" />
+            </linearGradient>
+            <linearGradient
+              id="grad-normal"
+              x1="0%"
+              y1="0%"
+              x2="100%"
+              y2="100%"
+            >
+              <stop offset="0%" stop-color="#10B981" />
+              <stop offset="100%" stop-color="#047857" />
+            </linearGradient>
+            <linearGradient id="grad-over" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#FBBF24" />
+              <stop offset="100%" stop-color="#D97706" />
+            </linearGradient>
+            <linearGradient id="grad-obese" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#F97316" />
+              <stop offset="100%" stop-color="#C2410C" />
+            </linearGradient>
+
+            <!-- Filters -->
+            <filter id="shadow-3d" x="-20%" y="-20%" width="140%" height="140%">
+              <feDropShadow
+                dx="0"
+                dy="4"
+                stdDeviation="4"
+                flood-color="#000000"
+                flood-opacity="0.1"
+              />
+            </filter>
+            <filter
+              id="zone-depth"
+              x="-10%"
+              y="-10%"
+              width="120%"
+              height="120%"
+            >
+              <feDropShadow
+                dx="1"
+                dy="2"
+                stdDeviation="1.5"
+                flood-color="#000000"
+                flood-opacity="0.2"
+              />
+            </filter>
+            <filter id="needle-shadow">
+              <feDropShadow
+                dx="2"
+                dy="4"
+                stdDeviation="3"
+                flood-color="#000000"
+                flood-opacity="0.3"
+              />
+            </filter>
+
+            <!-- Curved Text Paths -->
+            <path
+              id="curvetxt1"
+              d="M-4 140 A140 140, 0, 0, 1, 284 140"
+              style="fill: none"
+            ></path>
+            <path
+              id="curvetxt2"
+              d="M33 43.6 A140 140, 0, 0, 1, 280 140"
+              style="fill: none"
+            ></path>
+            <path
+              id="curvetxt3"
+              d="M95 3 A140 140, 0, 0, 1, 284 140"
+              style="fill: none"
+            ></path>
+            <path
+              id="curvetxt4"
+              d="M235.4 33 A140 140, 0, 0, 1, 284 140"
+              style="fill: none"
+            ></path>
+          </defs>
+
+          <!-- 1. Color Zones -->
+          <path
+            d="M0 140 A140 140, 0, 0, 1, 6.9 96.7 L140 140 Z"
+            fill="url(#grad-under)"
+            filter="url(#zone-depth)"
+          ></path>
+          <path
+            d="M6.9 96.7 A140 140, 0, 0, 1, 12.1 83.1 L140 140 Z"
+            fill="url(#grad-under)"
+            opacity="0.6"
+            filter="url(#zone-depth)"
+          ></path>
+          <path
+            d="M12.1 83.1 A140 140, 0, 0, 1, 22.6 63.8 L140 140 Z"
+            fill="url(#grad-over)"
+            opacity="0.6"
+            filter="url(#zone-depth)"
+          ></path>
+          <path
+            d="M22.6 63.8 A140 140, 0, 0, 1, 96.7 6.9 L140 140 Z"
+            fill="url(#grad-normal)"
+            filter="url(#zone-depth)"
+          ></path>
+          <path
+            d="M96.7 6.9 A140 140, 0, 0, 1, 169.1 3.1 L140 140 Z"
+            fill="url(#grad-over)"
+            filter="url(#zone-depth)"
+          ></path>
+          <path
+            d="M169.1 3.1 A140 140, 0, 0, 1, 233.7 36 L140 140 Z"
+            fill="url(#grad-obese)"
+            opacity="0.6"
+            filter="url(#zone-depth)"
+          ></path>
+          <path
+            d="M233.7 36 A140 140, 0, 0, 1, 273.1 96.7 L140 140 Z"
+            fill="url(#grad-obese)"
+            filter="url(#zone-depth)"
+          ></path>
+          <path
+            d="M273.1 96.7 A140 140, 0, 0, 1, 280 140 L140 140 Z"
+            fill="url(#grad-under)"
+            filter="url(#zone-depth)"
+          ></path>
+
+          <!-- 2. Outer Rim -->
+          <path
+            d="M0 140 A140 140, 0, 0, 1, 280 140"
+            fill="none"
+            stroke="#E5E7EB"
+            stroke-width="2"
+            filter="url(#shadow-3d)"
+          ></path>
+
+          <!-- 3. White Center Circle -->
+          <path d="M45 140 A90 90, 0, 0, 1, 230 140 Z" fill="#ffffff"></path>
+
+          <!-- 4. Scale Numbers -->
+          <g
+            style="
+              paint-order: stroke;
+              stroke: #ffffff;
+              stroke-width: 3px;
+              fill: #6b7280;
+              font-size: 12px;
+              font-weight: 600;
+            "
+          >
+            <text x="25" y="111" transform="rotate(-72, 25, 111)">15</text>
+            <text x="35" y="83" transform="rotate(-57, 35, 83)">18.5</text>
+            <text x="97" y="29" transform="rotate(-18, 97, 29)">25</text>
+            <text x="157" y="20" transform="rotate(12, 157, 20)">30</text>
+            <text x="214" y="45" transform="rotate(42, 214, 45)">35</text>
+            <text x="255" y="95" transform="rotate(72, 255, 95)">40</text>
+          </g>
+
+          <!-- 5. Curved Text Labels -->
+          <g
+            style="
+              font-size: 14px;
+              font-weight: 700;
+              fill: #ffffff;
+              paint-order: stroke;
+              stroke: rgba(233, 13, 13, 0.411);
+              stroke-width: 2.5px;
+              letter-spacing: 0.5px;
+            "
+          >
+            <text>
+              <textPath xlink:href="#curvetxt1" startOffset="1%">
+                Underweight
+              </textPath>
+            </text>
+            <text>
+              <textPath xlink:href="#curvetxt2" startOffset="5%">
+                Normal
+              </textPath>
+            </text>
+            <text>
+              <textPath xlink:href="#curvetxt3" startOffset="15%">
+                Overweight
+              </textPath>
+            </text>
+            <text>
+              <textPath xlink:href="#curvetxt4" startOffset="30%">
+                Obesity
+              </textPath>
+            </text>
+          </g>
+
+          <!-- 6. NEEDLE (Drawn AFTER white circle so it sits on top) -->
+          <!-- Native SVG transform attribute used instead of CSS for 100% reliability -->
+          <g id="needle-group" transform="rotate(0 140 140)">
+            <!-- Needle Line -->
+            <line
+              x1="140"
+              y1="140"
+              x2="140"
+              y2="55"
+              stroke="#1F2937"
+              stroke-width="3"
+              stroke-linecap="round"
+              filter="url(#needle-shadow)"
+            ></line>
+            <!-- Hand-drawn Arrowhead (No marker clipping issues) -->
+            <polygon
+              points="135,65 145,65 140,50"
+              fill="#1F2937"
+              filter="url(#needle-shadow)"
+            ></polygon>
+          </g>
+
+          <!-- 7. Center Pivot Dot (Drawn LAST to cover the needle base perfectly) -->
+          <circle
+            cx="140"
+            cy="140"
+            r="7"
+            fill="#1F2937"
+            filter="url(#shadow-3d)"
+          ></circle>
+          <circle cx="140" cy="140" r="3" fill="#ffffff"></circle>
+
+          <!-- 8. BMI Text Display -->
+          <text
+            x="140"
+            y="110"
+            text-anchor="middle"
+            style="font-size: 32px; font-weight: 800; fill: #1f2937"
+          >
+            <tspan id="bmi-value">23.8</tspan>
+          </text>
+          <text
+            x="140"
+            y="130"
+            text-anchor="middle"
+            style="font-size: 14px; font-weight: 600; fill: #10b981"
+            id="bmi-category"
+          >
+            Normal Weight
+          </text>
+        </g>
+      </svg>
+
+      <!-- Test Controls -->
+      <div class="test-controls">
+        <h3 style="margin-bottom: 15px; font-size: 16px; color: #374151">
+          Test Needle Animation:
+        </h3>
+        <button onclick="testNeedle(17, 'Underweight', '#EF4444')">
+          BMI 17
+        </button>
+        <button onclick="testNeedle(22, 'Normal', '#10B981')">BMI 22</button>
+        <button onclick="testNeedle(27, 'Overweight', '#F59E0B')">
+          BMI 27
+        </button>
+        <button onclick="testNeedle(35, 'Obese', '#EF4444')">BMI 35</button>
+
+        <div class="test-info">
+          <p><strong>Ab check karein:</strong></p>
+          <ul style="text-align: left; display: inline-block; line-height: 1.6">
+            <li>✅ Needle ab saaf dikh rahi hai?</li>
+            <li>✅ Center pivot dot bhi dikh raha hai?</li>
+            <li>✅ Smooth animation ke saath move ho rahi hai?</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      function testNeedle(bmi, category, color) {
+        // Calculate rotation angle: -90 (left, BMI 15) to +90 (right, BMI 40)
+        let angle = -90 + ((bmi - 15) / 25) * 180;
+
+        // Clamp angle between -90 and 90
+        if (angle < -90) angle = -90;
+        if (angle > 90) angle = 90;
+
+        // ✅ 100% Reliable: Using native SVG 'transform' attribute instead of CSS
+        const needleGroup = document.getElementById("needle-group");
+        needleGroup.setAttribute("transform", `rotate(${angle} 140 140)`);
+
+        // Update BMI text and color
+        document.getElementById("bmi-value").textContent = bmi;
+        const categoryText = document.getElementById("bmi-category");
+        categoryText.textContent = category;
+        categoryText.style.fill = color;
+      }
+
+      // Initialize on load
+      window.onload = () => {
+        // Small delay to show the animation from 0 to 23.8
+        setTimeout(() => {
+          testNeedle(23.8, "Normal Weight", "#10B981");
+        }, 300);
+      };
+    </script>
+  </body>
+</html>

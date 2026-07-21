@@ -463,3 +463,168 @@
   border: 1px solid var(--border-primary);
   animation: fadeInUp 0.5s ease-out;
 }
+
+/* ==========================================================================
+   15. ALL CALCULATORS PAGE - Minimalist Modern Design (ISOLATED)
+   ========================================================================== */
+
+/* Sirf All Calculators page ke liye - .all-calculators-page wrapper ke andar */
+
+.all-calculators-page .related-calculators__grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-8);
+  margin-bottom: var(--space-10);
+}
+
+.all-calculators-page .related-category-card {
+  background: var(--color-white);
+  border-radius: var(--radius-xl);
+  padding: var(--space-8);
+  text-align: center;
+  border: 1px solid var(--border-primary);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  transition: all 0.3s var(--ease-in-out);
+}
+
+.all-calculators-page .related-category-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 24px rgba(139, 92, 246, 0.12);
+  border-color: var(--color-purple-200);
+}
+
+.all-calculators-page .related-category-card__icon {
+  width: 100px;
+  height: 100px;
+  margin: 0 auto var(--space-6);
+  border-radius: var(--radius-full);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-white);
+  font-size: var(--text-4xl);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s var(--ease-in-out);
+}
+
+.all-calculators-page
+  .related-category-card:hover
+  .related-category-card__icon {
+  transform: scale(1.1) rotate(3deg);
+}
+
+/* Gradients for Icons */
+.all-calculators-page .icon-finance-card {
+  background: linear-gradient(135deg, #8b5cf6 0%, #06b6d4 100%);
+}
+.all-calculators-page .icon-business-card {
+  background: linear-gradient(135deg, #10b981 0%, #06b6d4 100%);
+}
+.all-calculators-page .icon-math-card {
+  background: linear-gradient(135deg, #06b6d4 0%, #3b82f6 100%);
+}
+.all-calculators-page .icon-geometry-card {
+  background: linear-gradient(135deg, #f59e0b 0%, #ef4444 100%);
+}
+.all-calculators-page .icon-conversion-card {
+  background: linear-gradient(135deg, #10b981 0%, #06b6d4 100%);
+}
+.all-calculators-page .icon-education-card {
+  background: linear-gradient(135deg, #8b5cf6 0%, #ec4899 100%);
+}
+.all-calculators-page .icon-health-card {
+  background: linear-gradient(135deg, #ec4899 0%, #f43f5e 100%);
+}
+.all-calculators-page .icon-date-card {
+  background: linear-gradient(135deg, #f59e0b 0%, #ef4444 100%);
+}
+
+.all-calculators-page .related-category-card__title {
+  font-size: var(--text-xl);
+  font-weight: var(--font-bold);
+  color: var(--text-primary);
+  margin-bottom: var(--space-5);
+  padding-bottom: var(--space-3);
+  border-bottom: 2px solid var(--border-primary);
+}
+
+.all-calculators-page .related-category-card__list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  text-align: left;
+}
+
+.all-calculators-page .related-category-card__list a {
+  display: block;
+  padding: var(--space-2) 0;
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+  text-decoration: none;
+  transition: all 0.2s var(--ease-in-out);
+  border-left: 2px solid transparent;
+  padding-left: var(--space-3);
+}
+
+.all-calculators-page .related-category-card__list a:hover {
+  color: var(--color-purple-600);
+  border-left-color: var(--color-purple-500);
+  padding-left: var(--space-4);
+}
+
+/* Search Box Styling */
+.all-calculators-page .search-box {
+  max-width: 600px;
+  margin: 0 auto var(--space-12);
+  position: relative;
+}
+
+.all-calculators-page .search-box__input {
+  width: 100%;
+  padding: var(--space-4) var(--space-6);
+  padding-left: var(--space-12);
+  border: 2px solid var(--border-primary);
+  border-radius: var(--radius-full);
+  font-size: var(--text-base);
+  background: var(--color-white);
+  transition: all 0.3s var(--ease-in-out);
+}
+
+.all-calculators-page .search-box__input:focus {
+  outline: none;
+  border-color: var(--color-purple-500);
+  box-shadow: 0 0 0 4px rgba(139, 92, 246, 0.1);
+}
+
+.all-calculators-page .search-box__icon {
+  position: absolute;
+  left: var(--space-5);
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-tertiary);
+  font-size: var(--text-lg);
+}
+
+/* Responsive */
+@media (max-width: 1023px) {
+  .all-calculators-page .related-calculators__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 767px) {
+  .all-calculators-page .related-calculators__grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-6);
+  }
+
+  .all-calculators-page .related-category-card__icon {
+    width: 80px;
+    height: 80px;
+    font-size: var(--text-3xl);
+  }
+
+  .all-calculators-page .related-category-card__title {
+    font-size: var(--text-lg);
+  }
+}

@@ -7,7 +7,7 @@ const calculatorsData = [
   {
     category: "Financial Calculators",
     icon: "fa-coins",
-    iconClass: "icon-finance",
+    iconClass: "icon-finance-card", // ✅ -card suffix
     items: [
       "EMI Calculator",
       "Loan Calculator",
@@ -65,7 +65,7 @@ const calculatorsData = [
   {
     category: "Business & Tax Calculators",
     icon: "fa-chart-line",
-    iconClass: "icon-finance",
+    iconClass: "icon-business-card", // ✅ -card suffix
     items: [
       "Profit Calculator",
       "Gross Profit Calculator",
@@ -99,7 +99,7 @@ const calculatorsData = [
   {
     category: "Math Calculators",
     icon: "fa-square-root-alt",
-    iconClass: "icon-math",
+    iconClass: "icon-math-card", // ✅ -card suffix (FIXED!)
     items: [
       "Percentage Calculator",
       "Percentage Increase Calculator",
@@ -147,7 +147,7 @@ const calculatorsData = [
   {
     category: "Geometry Calculators",
     icon: "fa-shapes",
-    iconClass: "icon-math",
+    iconClass: "icon-geometry-card", // ✅ -card suffix
     items: [
       "Geometry Calculator",
       "Area Calculator",
@@ -171,7 +171,7 @@ const calculatorsData = [
   {
     category: "Unit Converters",
     icon: "fa-arrows-rotate",
-    iconClass: "icon-conversion",
+    iconClass: "icon-conversion-card", // ✅ -card suffix
     items: [
       "Length Converter",
       "Weight Converter",
@@ -205,7 +205,7 @@ const calculatorsData = [
   {
     category: "Date & Time Calculators",
     icon: "fa-calendar-check",
-    iconClass: "icon-date",
+    iconClass: "icon-date-card", // ✅ -card suffix
     items: [
       "Age Calculator",
       "Age Difference Calculator",
@@ -233,7 +233,7 @@ const calculatorsData = [
   {
     category: "Health & Fitness Calculators",
     icon: "fa-heart-pulse",
-    iconClass: "icon-health",
+    iconClass: "icon-health-card", // ✅ -card suffix
     items: [
       "BMI Calculator",
       "BMR Calculator",
@@ -269,7 +269,7 @@ const calculatorsData = [
   {
     category: "Pregnancy & Baby",
     icon: "fa-baby",
-    iconClass: "icon-health",
+    iconClass: "icon-health-card", // ✅ -card suffix
     items: [
       "Pregnancy Calculator",
       "Due Date Calculator",
@@ -286,7 +286,7 @@ const calculatorsData = [
   {
     category: "Sports Calculators",
     icon: "fa-running",
-    iconClass: "icon-health",
+    iconClass: "icon-health-card", // ✅ -card suffix
     items: [
       "Running Pace Calculator",
       "Marathon Pace Calculator",
@@ -302,7 +302,7 @@ const calculatorsData = [
   {
     category: "Science Calculators",
     icon: "fa-flask",
-    iconClass: "icon-math",
+    iconClass: "icon-math-card", // ✅ -card suffix
     items: [
       "Force Calculator",
       "Velocity Calculator",
@@ -333,7 +333,7 @@ const calculatorsData = [
   {
     category: "Engineering Calculators",
     icon: "fa-cogs",
-    iconClass: "icon-conversion",
+    iconClass: "icon-conversion-card", // ✅ -card suffix
     items: [
       "Beam Calculator",
       "Structural Load Calculator",
@@ -354,7 +354,7 @@ const calculatorsData = [
   {
     category: "Construction Calculators",
     icon: "fa-hard-hat",
-    iconClass: "icon-finance",
+    iconClass: "icon-finance-card", // ✅ -card suffix
     items: [
       "Concrete Calculator",
       "Cement Calculator",
@@ -378,7 +378,7 @@ const calculatorsData = [
   {
     category: "Education Calculators",
     icon: "fa-graduation-cap",
-    iconClass: "icon-education",
+    iconClass: "icon-education-card", // ✅ -card suffix
     items: [
       "GPA Calculator",
       "CGPA Calculator",
@@ -394,7 +394,7 @@ const calculatorsData = [
   {
     category: "Internet & Technology",
     icon: "fa-wifi",
-    iconClass: "icon-conversion",
+    iconClass: "icon-conversion-card", // ✅ -card suffix
     items: [
       "Internet Speed Calculator",
       "Download Time Calculator",
@@ -411,7 +411,7 @@ const calculatorsData = [
   {
     category: "Developer Tools",
     icon: "fa-code",
-    iconClass: "icon-math",
+    iconClass: "icon-math-card", // ✅ -card suffix
     items: [
       "JSON Formatter",
       "JSON Validator",
@@ -428,7 +428,7 @@ const calculatorsData = [
   {
     category: "AI & Productivity",
     icon: "fa-robot",
-    iconClass: "icon-math",
+    iconClass: "icon-math-card", // ✅ -card suffix
     items: [
       "AI Token Calculator",
       "AI Cost Calculator",
@@ -456,7 +456,7 @@ const calculatorsData = [
   {
     category: "SEO & Marketing",
     icon: "fa-bullhorn",
-    iconClass: "icon-finance",
+    iconClass: "icon-finance-card", // ✅ -card suffix
     items: [
       "CPM Calculator",
       "CPC Calculator",
@@ -471,7 +471,7 @@ const calculatorsData = [
   {
     category: "E-commerce Calculators",
     icon: "fa-shopping-cart",
-    iconClass: "icon-finance",
+    iconClass: "icon-finance-card", // ✅ -card suffix
     items: [
       "Amazon FBA Calculator",
       "Etsy Fee Calculator",
@@ -483,7 +483,7 @@ const calculatorsData = [
   {
     category: "Crypto Calculators",
     icon: "fa-bitcoin",
-    iconClass: "icon-finance",
+    iconClass: "icon-finance-card", // ✅ -card suffix
     items: [
       "Bitcoin Profit Calculator",
       "Crypto Profit Calculator",
@@ -496,7 +496,7 @@ const calculatorsData = [
   {
     category: "Real Estate",
     icon: "fa-home",
-    iconClass: "icon-finance",
+    iconClass: "icon-finance-card", // ✅ -card suffix
     items: [
       "Property Value Calculator",
       "Property Tax Calculator",
@@ -509,7 +509,7 @@ const calculatorsData = [
   {
     category: "Automobile",
     icon: "fa-car",
-    iconClass: "icon-conversion",
+    iconClass: "icon-conversion-card", // ✅ -card suffix
     items: [
       "Mileage Calculator",
       "Fuel Cost Calculator",
@@ -522,7 +522,7 @@ const calculatorsData = [
   {
     category: "Travel",
     icon: "fa-plane",
-    iconClass: "icon-conversion",
+    iconClass: "icon-conversion-card", // ✅ -card suffix
     items: [
       "Trip Cost Calculator",
       "Travel Budget Calculator",
@@ -532,7 +532,7 @@ const calculatorsData = [
   {
     category: "Home Calculators",
     icon: "fa-house-chimney",
-    iconClass: "icon-finance",
+    iconClass: "icon-finance-card", // ✅ -card suffix
     items: [
       "Electricity Bill Calculator",
       "Water Bill Calculator",
@@ -544,7 +544,7 @@ const calculatorsData = [
   {
     category: "Food & Cooking",
     icon: "fa-utensils",
-    iconClass: "icon-health",
+    iconClass: "icon-health-card", // ✅ -card suffix
     items: [
       "Recipe Converter",
       "Cooking Converter",
@@ -556,7 +556,7 @@ const calculatorsData = [
   {
     category: "Pets",
     icon: "fa-paw",
-    iconClass: "icon-health",
+    iconClass: "icon-health-card", // ✅ -card suffix
     items: [
       "Dog Age Calculator",
       "Cat Age Calculator",
@@ -568,7 +568,7 @@ const calculatorsData = [
   {
     category: "Lifestyle & Astrology",
     icon: "fa-star",
-    iconClass: "icon-education",
+    iconClass: "icon-education-card", // ✅ -card suffix
     items: [
       "Love Calculator",
       "Love Percentage Calculator",
@@ -591,7 +591,7 @@ const calculatorsData = [
   {
     category: "Fun Tools",
     icon: "fa-dice",
-    iconClass: "icon-math",
+    iconClass: "icon-math-card", // ✅ -card suffix
     items: [
       "Dice Roller",
       "Coin Flip",
@@ -613,12 +613,11 @@ function renderCalculators(data) {
 
   data.forEach((cat) => {
     const categoryDiv = document.createElement("div");
-    categoryDiv.className = "related-category-simple";
+    categoryDiv.className = "related-category-card"; // ✅ FIXED: simple → card
     categoryDiv.dataset.category = cat.category.toLowerCase();
 
     let listItems = "";
     cat.items.forEach((item) => {
-      // EMI Calculator ko actual link dena, baaki ko '#' (baad me update honge)
       const link =
         item === "EMI Calculator"
           ? "calculators/finance/emi-calculator.html"
@@ -626,12 +625,13 @@ function renderCalculators(data) {
       listItems += `<li><a href="${link}">${item}</a></li>`;
     });
 
+    // ✅ FIXED: All class names updated
     categoryDiv.innerHTML = `
-      <div class="related-category-simple__icon ${cat.iconClass}">
+      <div class="related-category-card__icon ${cat.iconClass}">
         <i class="fas ${cat.icon}"></i>
       </div>
-      <h3 class="related-category-simple__title">${cat.category}</h3>
-      <ul class="related-category-simple__list">
+      <h3 class="related-category-card__title">${cat.category}</h3>
+      <ul class="related-category-card__list">
         ${listItems}
       </ul>
     `;
@@ -649,11 +649,11 @@ function setupSearch() {
 
   searchInput.addEventListener("input", (e) => {
     const searchTerm = e.target.value.toLowerCase().trim();
-    const categories = document.querySelectorAll(".related-category-simple");
+    const categories = document.querySelectorAll(".related-category-card"); // ✅ FIXED
 
     categories.forEach((category) => {
       const links = category.querySelectorAll(
-        ".related-category-simple__list a",
+        ".related-category-card__list a", // ✅ FIXED
       );
       let hasVisibleLink = false;
 
