@@ -1,9 +1,6 @@
 <!doctype html>
 <html lang="en" data-theme="light">
   <head>
-    <!-- ============================================
-       META TAGS & SEO
-       ============================================ -->
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -21,7 +18,6 @@
     />
     <meta name="author" content="Calculator12" />
 
-    <!-- Open Graph -->
     <meta property="og:type" content="website" />
     <meta
       property="og:title"
@@ -32,19 +28,16 @@
       content="Calculate your monthly EMI instantly with our free online tool."
     />
 
-    <!-- Canonical URL -->
     <link
       rel="canonical"
       href="https://calculator12.com/calculators/finance/emi-calculator"
     />
 
-    <!-- Favicon -->
     <link
       rel="icon"
       href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect fill='%238B5CF6' width='100' height='100' rx='20'/><text x='50' y='68' text-anchor='middle' font-family='Arial' font-size='60' font-weight='bold' fill='white'>C</text></svg>"
     />
 
-    <!-- Google Fonts & Font Awesome -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -56,7 +49,6 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
     />
 
-    <!-- CSS Files (Relative Paths for nested folders) -->
     <link rel="stylesheet" href="../../assets/css/variables.css" />
     <link rel="stylesheet" href="../../assets/css/reset.css" />
     <link rel="stylesheet" href="../../assets/css/base.css" />
@@ -65,7 +57,18 @@
     <link rel="stylesheet" href="../../assets/css/components.css" />
     <link rel="stylesheet" href="../../assets/css/pages/calculator.css" />
 
-    <!-- JSON-LD Schema for Calculator (SEO Boost) -->
+    <style>
+      /* EMI Calculator - Button aur Action buttons ke beech proper gap */
+      #emi-inputs-container .calc-action-buttons {
+        margin-top: var(--space-4) !important;
+        padding-top: var(--space-2) !important;
+      }
+
+      #emi-inputs-container #uc-calculate-btn {
+        margin-bottom: 0 !important;
+      }
+    </style>
+
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
@@ -73,21 +76,16 @@
         "name": "EMI Calculator",
         "applicationCategory": "FinanceApplication",
         "operatingSystem": "Web",
-        "offers": {
-          "@type": "Offer",
-          "price": "0",
-          "priceCurrency": "USD"
-        },
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
         "description": "Calculate monthly EMI for home, car, or personal loans instantly."
       }
     </script>
   </head>
 
   <body>
-    <!-- Skip Link -->
     <a href="#main-content" class="skip-link sr-only">Skip to main content</a>
 
-    <!-- Header (Same as Homepage) -->
+    <!-- Header -->
     <header class="header" role="banner">
       <div class="container">
         <div class="header__wrapper">
@@ -132,13 +130,6 @@
                         style="stop-color: #8b5cf6; stop-opacity: 1"
                       />
                     </linearGradient>
-                    <filter id="glow">
-                      <feGaussianBlur stdDeviation="3" result="coloredBlur" />
-                      <feMerge>
-                        <feMergeNode in="coloredBlur" />
-                        <feMergeNode in="SourceGraphic" />
-                      </feMerge>
-                    </filter>
                   </defs>
                   <rect
                     x="10"
@@ -163,7 +154,7 @@
                   <text
                     x="60"
                     y="40"
-                    font-family="Arial, sans-serif"
+                    font-family="Arial"
                     font-size="18"
                     fill="white"
                     text-anchor="middle"
@@ -177,7 +168,6 @@
                     r="10"
                     fill="url(#logoGrad1)"
                     opacity="0.8"
-                    filter="url(#glow)"
                   />
                   <text
                     x="35"
@@ -196,7 +186,6 @@
                     r="10"
                     fill="url(#logoGrad2)"
                     opacity="0.8"
-                    filter="url(#glow)"
                   />
                   <text
                     x="60"
@@ -215,7 +204,6 @@
                     r="10"
                     fill="url(#logoGrad1)"
                     opacity="0.8"
-                    filter="url(#glow)"
                   />
                   <text
                     x="85"
@@ -234,7 +222,6 @@
                     r="10"
                     fill="url(#logoGrad2)"
                     opacity="0.8"
-                    filter="url(#glow)"
                   />
                   <text
                     x="35"
@@ -253,7 +240,6 @@
                     r="10"
                     fill="url(#logoGrad1)"
                     opacity="0.8"
-                    filter="url(#glow)"
                   />
                   <text
                     x="60"
@@ -272,7 +258,6 @@
                     r="10"
                     fill="url(#logoGrad2)"
                     opacity="0.8"
-                    filter="url(#glow)"
                   />
                   <text
                     x="85"
@@ -285,8 +270,6 @@
                   >
                     %
                   </text>
-                  <circle cx="50" cy="35" r="3" fill="#EC4899" opacity="0.6" />
-                  <circle cx="70" cy="35" r="3" fill="#06B6D4" opacity="0.6" />
                 </svg>
               </div>
               <span class="logo-text"
@@ -308,7 +291,9 @@
                 <a href="#" class="nav__link nav__link--active">Finance</a>
               </li>
               <li class="nav__item">
-                <a href="#" class="nav__link">Categories</a>
+                <a href="../../all-calculators.html" class="nav__link"
+                  >Categories</a
+                >
               </li>
               <li class="nav__item">
                 <a href="#" class="nav__link">Popular</a>
@@ -318,6 +303,152 @@
           </nav>
 
           <div class="header__actions">
+            <!-- Language Selector -->
+            <div class="language-selector">
+              <button
+                id="langToggle"
+                class="lang-toggle-btn"
+                aria-expanded="false"
+                aria-haspopup="true"
+              >
+                <span class="lang-flag" id="currentFlag">🇸</span>
+                <span class="lang-name" id="currentLang">EN</span>
+                <span class="lang-arrow">▼</span>
+              </button>
+              <div id="langDropdown" class="lang-dropdown" role="menu">
+                <button
+                  class="lang-option active"
+                  data-lang="en"
+                  data-flag="🇺🇸"
+                  role="menuitem"
+                >
+                  <span class="flag">🇺🇸</span
+                  ><span class="lang-text">English</span
+                  ><span class="lang-native">English</span>
+                </button>
+                <button
+                  class="lang-option"
+                  data-lang="hi"
+                  data-flag="🇮🇳"
+                  role="menuitem"
+                >
+                  <span class="flag">🇮🇳</span
+                  ><span class="lang-text">Hindi</span
+                  ><span class="lang-native">हिन्दी</span>
+                </button>
+                <button
+                  class="lang-option"
+                  data-lang="es"
+                  data-flag="🇪🇸"
+                  role="menuitem"
+                >
+                  <span class="flag">🇪</span
+                  ><span class="lang-text">Spanish</span
+                  ><span class="lang-native">Español</span>
+                </button>
+                <button
+                  class="lang-option"
+                  data-lang="fr"
+                  data-flag="🇷"
+                  role="menuitem"
+                >
+                  <span class="flag">🇫🇷</span
+                  ><span class="lang-text">French</span
+                  ><span class="lang-native">Français</span>
+                </button>
+                <button
+                  class="lang-option"
+                  data-lang="de"
+                  data-flag="🇩🇪"
+                  role="menuitem"
+                >
+                  <span class="flag">🇪</span
+                  ><span class="lang-text">German</span
+                  ><span class="lang-native">Deutsch</span>
+                </button>
+                <button
+                  class="lang-option"
+                  data-lang="pt"
+                  data-flag="🇵🇹"
+                  role="menuitem"
+                >
+                  <span class="flag">🇵</span
+                  ><span class="lang-text">Portuguese</span
+                  ><span class="lang-native">Português</span>
+                </button>
+                <button
+                  class="lang-option"
+                  data-lang="ru"
+                  data-flag="🇷🇺"
+                  role="menuitem"
+                >
+                  <span class="flag">🇷</span
+                  ><span class="lang-text">Russian</span
+                  ><span class="lang-native">Русский</span>
+                </button>
+                <button
+                  class="lang-option"
+                  data-lang="ar"
+                  data-flag="🇸🇦"
+                  role="menuitem"
+                >
+                  <span class="flag">🇸🇦</span
+                  ><span class="lang-text">Arabic</span
+                  ><span class="lang-native">العربية</span>
+                </button>
+                <button
+                  class="lang-option"
+                  data-lang="zh"
+                  data-flag="🇨🇳"
+                  role="menuitem"
+                >
+                  <span class="flag">🇳</span
+                  ><span class="lang-text">Chinese</span
+                  ><span class="lang-native">中文</span>
+                </button>
+                <button
+                  class="lang-option"
+                  data-lang="ja"
+                  data-flag="🇵"
+                  role="menuitem"
+                >
+                  <span class="flag">🇯🇵</span
+                  ><span class="lang-text">Japanese</span
+                  ><span class="lang-native">日本語</span>
+                </button>
+                <button
+                  class="lang-option"
+                  data-lang="ko"
+                  data-flag="🇰🇷"
+                  role="menuitem"
+                >
+                  <span class="flag">🇷</span
+                  ><span class="lang-text">Korean</span
+                  ><span class="lang-native">한국어</span>
+                </button>
+                <button
+                  class="lang-option"
+                  data-lang="vi"
+                  data-flag="🇻🇳"
+                  role="menuitem"
+                >
+                  <span class="flag">🇻🇳</span
+                  ><span class="lang-text">Vietnamese</span
+                  ><span class="lang-native">Tiếng Việt</span>
+                </button>
+                <button
+                  class="lang-option"
+                  data-lang="id"
+                  data-flag="🇮🇩"
+                  role="menuitem"
+                >
+                  <span class="flag">🇮</span
+                  ><span class="lang-text">Indonesian</span
+                  ><span class="lang-native">Bahasa</span>
+                </button>
+              </div>
+            </div>
+
             <button class="theme-toggle" aria-label="Toggle dark mode">
               <i
                 class="fas fa-sun theme-toggle__icon theme-toggle__icon--sun"
@@ -331,7 +462,6 @@
       </div>
     </header>
 
-    <!-- Main Content -->
     <main id="main-content" role="main">
       <div class="container">
         <!-- Breadcrumbs -->
@@ -349,99 +479,44 @@
 
         <!-- Page Header -->
         <div class="page-header">
-          <h1 class="page-header__title">EMI Calculator</h1>
-          <p class="page-header__desc">
+          <h1 class="page-header__title" data-i18n="emi.title">
+            EMI Calculator
+          </h1>
+          <p class="page-header__desc" data-i18n="emi.desc">
             Calculate your monthly Equated Monthly Installment (EMI) for home,
             car, or personal loans instantly.
           </p>
         </div>
 
-        <!-- Calculator UI Section -->
+        <!-- Calculator Section -->
         <section class="calculator-section">
           <div class="calculator-layout">
-            <!-- Left: Inputs -->
+            <!-- LEFT PANEL: Inputs + Calculate Button + Action Buttons ONLY -->
             <div class="calculator-inputs card">
-              <h2 class="calculator-inputs__title">Enter Loan Details</h2>
-
-              <div class="form-group">
-                <label for="loan-amount">Loan Amount (₹)</label>
-                <input
-                  type="number"
-                  id="loan-amount"
-                  placeholder="e.g., 500000"
-                  min="0"
-                />
-              </div>
-
-              <div class="form-group">
-                <label for="interest-rate">Interest Rate (% per annum)</label>
-                <input
-                  type="number"
-                  id="interest-rate"
-                  placeholder="e.g., 8.5"
-                  step="0.01"
-                  min="0"
-                />
-              </div>
-
-              <div class="form-group">
-                <label for="loan-tenure">Loan Tenure</label>
-                <div class="input-group">
-                  <input
-                    type="number"
-                    id="loan-tenure"
-                    placeholder="e.g., 20"
-                    min="0"
-                  />
-                  <select id="tenure-type">
-                    <option value="years">Years</option>
-                    <option value="months">Months</option>
-                  </select>
-                </div>
-              </div>
-
-              <div
-                id="calc-error"
-                class="error-message"
-                style="display: none"
-              ></div>
-
-              <button id="calculate-btn" class="btn btn-primary btn-block">
-                Calculate EMI
-              </button>
+              <h2
+                class="calculator-inputs__title"
+                data-i18n="emi.section.details"
+              >
+                Enter Loan Details
+              </h2>
+              <div id="emi-inputs-container"></div>
             </div>
 
-            <!-- Right: Results -->
+            <!-- RIGHT PANEL: Results + Charts ONLY -->
             <div class="calculator-results card">
-              <h2 class="calculator-results__title">Your Results</h2>
-
-              <div class="result-item result-item--highlight">
-                <span class="result-item__label">Monthly EMI</span>
-                <span class="result-item__value" id="monthly-emi">₹ 0.00</span>
-              </div>
-
-              <div class="result-item">
-                <span class="result-item__label">Total Interest Payable</span>
-                <span class="result-item__value" id="total-interest"
-                  >₹ 0.00</span
-                >
-              </div>
-
-              <div class="result-item">
-                <span class="result-item__label"
-                  >Total Payment (Principal + Interest)</span
-                >
-                <span class="result-item__value" id="total-payment"
-                  >₹ 0.00</span
-                >
-              </div>
+              <h2
+                class="calculator-results__title"
+                data-i18n="emi.section.results"
+              >
+                Your Results
+              </h2>
+              <div id="emi-results-container"></div>
             </div>
           </div>
         </section>
 
         <!-- SEO Content -->
         <section class="calculator-content">
-          <!-- Introduction -->
           <div class="content-block">
             <h2>EMI Calculator - Calculate Your Loan EMI Online Free</h2>
             <p>
@@ -457,373 +532,54 @@
               Understanding your EMI before taking a loan is crucial for
               financial planning. It helps you assess your repayment capacity,
               compare different loan offers, and make informed borrowing
-              decisions. Our advanced EMI calculator supports multiple loan
-              types and provides detailed amortization schedules, making it the
-              most comprehensive loan planning tool available online.
+              decisions.
             </p>
           </div>
 
-          <!-- What is EMI -->
           <div class="content-block">
-            <h2>What is EMI (Equated Monthly Installment)?</h2>
+            <h2>What is EMI?</h2>
             <p>
               <strong>EMI</strong> stands for
               <strong>Equated Monthly Installment</strong> - a fixed amount you
               pay to the lender every month until your loan is fully repaid.
-              Each EMI consists of two components:
-            </p>
-
-            <h3>Principal Component</h3>
-            <p>
-              This is the portion of your EMI that goes towards reducing the
-              original loan amount. In the initial months, this component is
-              smaller, but it gradually increases over the loan tenure.
-            </p>
-
-            <h3>Interest Component</h3>
-            <p>
-              This is the cost of borrowing money, calculated on the outstanding
-              loan balance. In the early stages of your loan, the interest
-              component forms a larger portion of your EMI.
-            </p>
-
-            <p>
-              The beauty of EMI is that while the total amount remains constant
-              throughout the loan tenure, the ratio between principal and
-              interest changes with each payment - a process known as
-              amortization.
             </p>
           </div>
 
-          <!-- How to Use -->
           <div class="content-block">
             <h2>How to Use Our EMI Calculator?</h2>
             <p>
-              Our user-friendly EMI calculator makes loan planning simple and
-              quick. Follow these easy steps:
-            </p>
-
-            <h3>Step 1: Enter Loan Amount</h3>
-            <p>
-              Input the principal loan amount you wish to borrow. This is the
-              total sum you need from the lender, whether it's for buying a
-              house, car, or any other purpose.
-            </p>
-
-            <h3>Step 2: Enter Interest Rate</h3>
-            <p>
-              Provide the annual interest rate offered by your bank or financial
-              institution. You can check current interest rates on the lender's
-              website or loan offer letter.
-            </p>
-
-            <h3>Step 3: Select Loan Tenure</h3>
-            <p>
-              Choose your preferred loan repayment period in years or months.
-              Longer tenures reduce monthly EMIs but increase total interest
-              outgo, while shorter tenures have higher EMIs but lower total
-              interest.
-            </p>
-
-            <h3>Step 4: Calculate EMI</h3>
-            <p>
-              Click the "Calculate EMI" button to instantly see your results.
-              Our calculator will display:
-            </p>
-            <ul>
-              <li>Your monthly EMI amount</li>
-              <li>Total interest payable over the loan tenure</li>
-              <li>Total payment (Principal + Interest)</li>
-              <li>Visual charts showing principal vs interest breakdown</li>
-            </ul>
-
-            <h3>Step 5: Analyze and Plan</h3>
-            <p>
-              Review the detailed amortization schedule to understand how your
-              loan will be repaid over time. Use this information to compare
-              different loan scenarios and choose the best option for your
-              financial situation.
+              Enter loan amount, interest rate, and tenure to calculate your
+              monthly EMI instantly.
             </p>
           </div>
 
-          <!-- EMI Formula -->
           <div class="content-block">
             <h2>EMI Calculation Formula</h2>
-            <p>
-              The EMI is calculated using a mathematical formula that takes into
-              account the principal amount, interest rate, and loan tenure:
-            </p>
-
-            <div
-              style="
-                background: var(--bg-secondary);
-                padding: var(--space-5);
-                border-radius: var(--radius-md);
-                margin: var(--space-4) 0;
-                text-align: center;
-                border-left: 4px solid var(--color-purple-500);
-              "
-            >
+            <div class="formula-box">
+              <code>EMI = P × r × (1 + r)^n / [(1 + r)^n - 1]</code>
               <p
-                style="font-size: var(--text-lg); margin-bottom: var(--space-2)"
-              >
-                <strong>EMI = P × r × (1 + r)^n / [(1 + r)^n - 1]</strong>
-              </p>
-              <p
-                style="font-size: var(--text-sm); color: var(--text-secondary)"
+                style="
+                  margin-top: var(--space-3);
+                  font-size: var(--text-sm);
+                  color: var(--text-secondary);
+                "
               >
                 Where:<br />
                 P = Principal Loan Amount<br />
-                r = Monthly Interest Rate (Annual Rate ÷ 12 ÷ 100)<br />
+                r = Monthly Interest Rate<br />
                 n = Loan Tenure in Months
               </p>
             </div>
-
-            <p>
-              While this formula may seem complex, our EMI calculator handles
-              all the mathematics instantly, providing you with accurate results
-              in seconds.
-            </p>
           </div>
 
-          <!-- Advantages -->
           <div class="content-block">
             <h2>Advantages of Using EMI Calculator</h2>
-
-            <h3>1. Financial Planning Made Easy</h3>
-            <p>
-              Knowing your exact EMI helps you budget effectively and ensures
-              you don't over-borrow. You can assess whether the monthly payment
-              fits comfortably within your income.
-            </p>
-
-            <h3>2. Compare Loan Offers</h3>
-            <p>
-              Different banks offer varying interest rates and tenures. Our
-              calculator allows you to compare multiple scenarios quickly,
-              helping you choose the most cost-effective loan option.
-            </p>
-
-            <h3>3. Save Time and Effort</h3>
-            <p>
-              No need for manual calculations or visiting multiple bank
-              branches. Get instant results online, anytime, anywhere -
-              completely free.
-            </p>
-
-            <h3>4. Understand Total Cost</h3>
-            <p>
-              Beyond just the monthly EMI, the calculator shows you the total
-              interest you'll pay over the loan tenure, giving you a complete
-              picture of the loan's true cost.
-            </p>
-
-            <h3>5. Plan Prepayments</h3>
-            <p>
-              By understanding your amortization schedule, you can identify the
-              best time to make prepayments and reduce your overall interest
-              burden.
-            </p>
-
-            <h3>6. Avoid Loan Rejection</h3>
-            <p>
-              Calculating EMI beforehand helps you apply for a loan amount that
-              matches your repayment capacity, reducing the chances of rejection
-              due to high debt-to-income ratio.
-            </p>
-
-            <h3>7. Multiple Loan Types</h3>
-            <p>
-              Whether it's a home loan, car loan, personal loan, education loan,
-              or business loan - our calculator works for all types of loans
-              with fixed interest rates.
-            </p>
-
-            <h3>8. 100% Accurate Results</h3>
-            <p>
-              Our calculator uses the same formula that banks use, ensuring
-              results that match your lender's calculations exactly.
-            </p>
-          </div>
-
-          <!-- Factors Affecting EMI -->
-          <div class="content-block">
-            <h2>Factors Affecting Your EMI</h2>
-
-            <h3>Loan Amount (Principal)</h3>
-            <p>
-              Higher loan amounts directly increase your EMI. Borrow only what
-              you truly need to keep your monthly obligations manageable.
-            </p>
-
-            <h3>Interest Rate</h3>
-            <p>
-              Even a small difference in interest rates can significantly impact
-              your EMI and total interest outgo. A 0.5% reduction can save you
-              lakhs over the loan tenure.
-            </p>
-
-            <h3>Loan Tenure</h3>
-            <p>
-              Longer tenures reduce monthly EMIs but increase total interest
-              paid. Shorter tenures have higher EMIs but lower overall cost.
-              Find the right balance based on your cash flow.
-            </p>
-
-            <h3>Type of Interest Rate</h3>
-            <p>
-              Floating rates may change over time, affecting your EMI, while
-              fixed rates remain constant throughout the loan tenure.
-            </p>
-
-            <h3>Processing Fees and Charges</h3>
-            <p>
-              While not part of EMI calculation, these upfront costs affect the
-              total cost of borrowing and should be considered when comparing
-              loans.
-            </p>
-          </div>
-
-          <!-- Types of Loans -->
-          <div class="content-block">
-            <h2>Types of Loans You Can Calculate</h2>
-
-            <h3>Home Loan EMI</h3>
-            <p>
-              Plan your dream home purchase with accurate EMI calculations. Home
-              loans typically have longer tenures (up to 30 years) and lower
-              interest rates compared to other loans.
-            </p>
-
-            <h3>Car Loan EMI</h3>
-            <p>
-              Calculate your monthly car loan payments before visiting the
-              showroom. Car loans usually have tenures ranging from 1 to 7
-              years.
-            </p>
-
-            <h3>Personal Loan EMI</h3>
-            <p>
-              Whether for medical emergencies, travel, or debt consolidation,
-              know your exact monthly obligation before applying for a personal
-              loan.
-            </p>
-
-            <h3>Business Loan EMI</h3>
-            <p>
-              Plan your business expansion or working capital needs with precise
-              EMI calculations to maintain healthy cash flow.
-            </p>
-
-            <h3>Education Loan EMI</h3>
-            <p>
-              Plan your child's education or your higher studies by calculating
-              loan repayments in advance.
-            </p>
-          </div>
-
-          <!-- Tips to Reduce EMI -->
-          <div class="content-block">
-            <h2>Tips to Reduce Your EMI Burden</h2>
             <ul>
-              <li>
-                <strong>Increase Down Payment:</strong> Paying more upfront
-                reduces the loan amount and subsequently your EMI.
-              </li>
-              <li>
-                <strong>Negotiate Interest Rates:</strong> A good credit score
-                (750+) can help you negotiate lower interest rates.
-              </li>
-              <li>
-                <strong>Opt for Longer Tenure:</strong> While this increases
-                total interest, it reduces monthly outgo if cash flow is tight.
-              </li>
-              <li>
-                <strong>Make Prepayments:</strong> Use bonuses or savings to
-                make partial prepayments and reduce outstanding principal.
-              </li>
-              <li>
-                <strong>Transfer Balance:</strong> Consider balance transfer to
-                another lender offering lower interest rates.
-              </li>
-              <li>
-                <strong>Improve Credit Score:</strong> Maintain a high CIBIL
-                score to qualify for better interest rates.
-              </li>
+              <li>Financial Planning Made Easy</li>
+              <li>Compare Loan Offers</li>
+              <li>Save Time and Effort</li>
+              <li>Understand Total Cost</li>
             </ul>
-          </div>
-
-          <!-- FAQ -->
-          <div class="content-block">
-            <h2>Frequently Asked Questions</h2>
-
-            <h3>What is a good EMI to income ratio?</h3>
-            <p>
-              Financial experts recommend that your total EMI obligations should
-              not exceed 40-50% of your monthly income. This ensures you have
-              sufficient funds for other expenses and emergencies.
-            </p>
-
-            <h3>Can I pay my EMI before the due date?</h3>
-            <p>
-              Yes, most lenders allow early EMI payments. Some may even offer a
-              small interest rebate for early payments, though this varies by
-              lender.
-            </p>
-
-            <h3>What happens if I miss an EMI payment?</h3>
-            <p>
-              Missing an EMI can negatively impact your credit score, attract
-              penalty charges, and may lead to legal action if defaults
-              continue. Always maintain adequate funds or set up auto-debit to
-              avoid missed payments.
-            </p>
-
-            <h3>Is EMI calculator accurate?</h3>
-            <p>
-              Yes, our EMI calculator uses the standard formula that all banks
-              use. However, actual EMI may vary slightly due to rounding off or
-              specific bank policies.
-            </p>
-
-            <h3>Should I choose floating or fixed interest rate?</h3>
-            <p>
-              Floating rates are generally lower initially but can change with
-              market conditions. Fixed rates provide certainty but are usually
-              0.5-1% higher. Choose based on your risk appetite and market
-              outlook.
-            </p>
-
-            <h3>How can I reduce total interest paid?</h3>
-            <p>
-              Opt for shorter loan tenure, make prepayments whenever possible,
-              choose a loan with lower interest rate, or make larger down
-              payments to reduce the principal amount.
-            </p>
-          </div>
-
-          <!-- Conclusion -->
-          <div class="content-block">
-            <h2>Plan Your Loan Smartly with Our EMI Calculator</h2>
-            <p>
-              Taking a loan is a significant financial decision that impacts
-              your monthly budget and long-term financial health. Our free EMI
-              calculator empowers you with the knowledge to make informed
-              decisions, compare offers, and choose the best loan option for
-              your needs.
-            </p>
-            <p>
-              Don't let loan planning be a guesswork. Use our EMI calculator
-              today, explore different scenarios, and take control of your
-              financial future. Remember, the right loan planning today can lead
-              to a debt-free, prosperous tomorrow!
-            </p>
-            <p>
-              <strong
-                >Start calculating now and take the first step towards smart
-                borrowing!</strong
-              >
-            </p>
           </div>
         </section>
       </div>
@@ -832,43 +588,37 @@
     <!-- Related Calculators Section -->
     <section class="related-calculators">
       <div class="container">
-        <h2 id="related-title" class="section-title">
-          Explore More Calculators
-        </h2>
+        <h2 class="section-title">Explore More Calculators</h2>
 
         <div class="related-calculators__grid">
           <!-- Finance Category -->
           <div class="related-category">
             <h3 class="related-category__title">
-              <i class="fas fa-calculator" aria-hidden="true"></i>
-              Finance Calculators
+              <i class="fas fa-coins"></i> Finance Calculators
             </h3>
             <ul class="related-category__list">
-              <li>
-                <a href="../finance/emi-calculator.html"
-                  >Home Loan EMI Calculator</a
-                >
-              </li>
-              <li><a href="#">Car Loan EMI Calculator</a></li>
-              <li><a href="#">SIP Calculator</a></li>
-              <li><a href="#">PPF Calculator</a></li>
-              <li><a href="#">Income Tax Calculator</a></li>
-              <li><a href="#">GST Calculator</a></li>
+              <li><a href="emi-calculator.html">EMI Calculator</a></li>
+              <li><a href="#">Loan Calculator</a></li>
+              <li><a href="#">Home Loan Calculator</a></li>
+              <li><a href="#">Mortgage Calculator</a></li>
+              <li><a href="#">Personal Loan Calculator</a></li>
+              <li><a href="#">Car Loan Calculator</a></li>
             </ul>
           </div>
 
           <!-- Health Category -->
           <div class="related-category">
             <h3 class="related-category__title">
-              <i class="fas fa-heartbeat" aria-hidden="true"></i>
-              Health & Fitness
+              <i class="fas fa-heart-pulse"></i> Health & Fitness
             </h3>
             <ul class="related-category__list">
-              <li><a href="bmi-calculator.html">BMI Calculator</a></li>
+              <li>
+                <a href="../health/bmi-calculator.html">BMI Calculator</a>
+              </li>
               <li><a href="#">BMR Calculator</a></li>
               <li><a href="#">Body Fat Calculator</a></li>
               <li><a href="#">Calorie Calculator</a></li>
-              <li><a href="#">Pregnancy Due Date Calculator</a></li>
+              <li><a href="#">TDEE Calculator</a></li>
               <li><a href="#">Ideal Weight Calculator</a></li>
             </ul>
           </div>
@@ -876,8 +626,7 @@
           <!-- Math Category -->
           <div class="related-category">
             <h3 class="related-category__title">
-              <i class="fas fa-square-root-alt" aria-hidden="true"></i>
-              Math Calculators
+              <i class="fas fa-square-root-alt"></i> Math Calculators
             </h3>
             <ul class="related-category__list">
               <li><a href="#">Percentage Calculator</a></li>
@@ -892,8 +641,7 @@
           <!-- Unit Converters Category -->
           <div class="related-category">
             <h3 class="related-category__title">
-              <i class="fas fa-exchange-alt" aria-hidden="true"></i>
-              Unit Converters
+              <i class="fas fa-arrows-rotate"></i> Unit Converters
             </h3>
             <ul class="related-category__list">
               <li><a href="#">Currency Converter</a></li>
@@ -901,12 +649,11 @@
               <li><a href="#">Weight Converter</a></li>
               <li><a href="#">Temperature Converter</a></li>
               <li><a href="#">Area Converter</a></li>
-              <li><a href="#">Speed Converter</a></li>
+              <li><a href="#">Volume Converter</a></li>
             </ul>
           </div>
         </div>
 
-        <!-- View All Calculators Button -->
         <div class="related-calculators__footer">
           <a
             href="../../all-calculators.html"
@@ -923,68 +670,330 @@
     <footer class="footer footer-compact" role="contentinfo">
       <div class="container">
         <div class="footer__wrapper footer-compact__wrapper">
-          <!-- Left: Logo & Social -->
           <div class="footer__brand footer-compact__brand">
-            <a href="../../index.html" class="logo-text footer-logo">
-              Calculator<span class="logo-number">12</span>
-            </a>
+            <a href="../../index.html" class="logo-text footer-logo"
+              >Calculator<span class="logo-number">12</span></a
+            >
             <div class="footer__social footer-compact__social">
-              <a href="#" class="footer__social-link" aria-label="Facebook">
-                <i class="fab fa-facebook-f" aria-hidden="true"></i>
-              </a>
-              <a href="#" class="footer__social-link" aria-label="Twitter">
-                <i class="fab fa-twitter" aria-hidden="true"></i>
-              </a>
-              <a href="#" class="footer__social-link" aria-label="Instagram">
-                <i class="fab fa-instagram" aria-hidden="true"></i>
-              </a>
-              <a href="#" class="footer__social-link" aria-label="LinkedIn">
-                <i class="fab fa-linkedin-in" aria-hidden="true"></i>
-              </a>
+              <a href="#" class="footer__social-link" aria-label="Facebook"
+                ><i class="fab fa-facebook-f"></i
+              ></a>
+              <a href="#" class="footer__social-link" aria-label="Twitter"
+                ><i class="fab fa-twitter"></i
+              ></a>
+              <a href="#" class="footer__social-link" aria-label="Instagram"
+                ><i class="fab fa-instagram"></i
+              ></a>
+              <a href="#" class="footer__social-link" aria-label="LinkedIn"
+                ><i class="fab fa-linkedin-in"></i
+              ></a>
             </div>
           </div>
 
-          <!-- Middle: Company Links -->
           <div class="footer__links footer-compact__links">
             <div class="footer__column">
               <h4 class="footer__title">Company</h4>
               <ul class="footer__list">
                 <li><a href="#">About Us</a></li>
                 <li><a href="#">Contact</a></li>
+                <li><a href="#">Careers</a></li>
               </ul>
             </div>
-
             <div class="footer__column">
               <h4 class="footer__title">Legal</h4>
               <ul class="footer__list">
                 <li><a href="#">Privacy Policy</a></li>
                 <li><a href="#">Terms of Service</a></li>
+                <li><a href="#">Cookie Policy</a></li>
               </ul>
             </div>
-
             <div class="footer__column">
               <h4 class="footer__title">Resources</h4>
               <ul class="footer__list">
                 <li><a href="#">FAQ</a></li>
                 <li><a href="#">Sitemap</a></li>
+                <li><a href="#">Blog</a></li>
               </ul>
             </div>
           </div>
         </div>
 
-        <!-- Footer Bottom -->
         <div class="footer__bottom footer-compact__bottom">
-          <p class="footer__copyright">&copy; 2026 Calculator12</p>
+          <p class="footer__copyright">
+            &copy; 2026 Calculator12. All rights reserved.
+          </p>
         </div>
       </div>
     </footer>
 
-    <!-- JavaScript Files -->
+    <!-- Scripts -->
     <script src="../../assets/js/core/theme-switcher.js" defer></script>
-    <script src="../../assets/js/engines/calculator-engine.js" defer></script>
+    <script src="../../engines/translation/i18n.js" defer></script>
+    <script src="../../engines/translation/translations.js" defer></script>
     <script
-      src="../../assets/js/calculators/finance/emi-calculator.js"
+      src="../../assets/js/engines/universal-calculator.js"
       defer
     ></script>
+
+    <!-- Calculator Logic -->
+    <script defer>
+      document.addEventListener("DOMContentLoaded", () => {
+        const emiConfig = {
+          id: "emi-calculator",
+          title: "EMI Calculator",
+          buttonText: "Calculate EMI",
+          inputs: [
+            {
+              id: "loan_amount",
+              type: "number",
+              label: "Loan Amount",
+              i18nKey: "emi.input.loan_amount",
+              placeholder: "e.g., 500000",
+              currency: true,
+              required: true,
+              min: 0,
+            },
+            {
+              id: "interest_rate",
+              type: "number",
+              label: "Interest Rate (% per annum)",
+              i18nKey: "emi.input.interest_rate",
+              placeholder: "e.g., 8.5",
+              suffix: "%",
+              required: true,
+              min: 0,
+              max: 100,
+              step: 0.1,
+            },
+            {
+              id: "loan_tenure",
+              type: "number",
+              label: "Loan Tenure",
+              i18nKey: "emi.input.loan_tenure",
+              placeholder: "e.g., 20",
+              required: true,
+              min: 1,
+            },
+            {
+              id: "tenure_type",
+              type: "select",
+              label: "Tenure Type",
+              i18nKey: "emi.input.tenure_type",
+              options: [
+                { value: "years", label: "Years", i18nKey: "emi.tenure.years" },
+                {
+                  value: "months",
+                  label: "Months",
+                  i18nKey: "emi.tenure.months",
+                },
+              ],
+              defaultValue: "years",
+            },
+          ],
+          results: [
+            {
+              id: "monthly_emi",
+              label: "Monthly EMI",
+              i18nKey: "emi.result.monthly_emi",
+              format: "currency",
+              highlight: true,
+              icon: "fa-rupee-sign",
+            },
+            {
+              id: "total_interest",
+              label: "Total Interest Payable",
+              i18nKey: "emi.result.total_interest",
+              format: "currency",
+            },
+            {
+              id: "total_payment",
+              label: "Total Payment (Principal + Interest)",
+              i18nKey: "emi.result.total_payment",
+              format: "currency",
+            },
+          ],
+          calculate: (values) => {
+            const principal = parseFloat(values.loan_amount) || 0;
+            const annualRate = parseFloat(values.interest_rate) || 0;
+            const tenure = parseFloat(values.loan_tenure) || 0;
+
+            // FIXED: Directly DOM se tenure_type ka value lo
+            const tenureTypeEl = document.getElementById("tenure_type");
+            const tenureType = tenureTypeEl ? tenureTypeEl.value : "years";
+
+            // Ab months calculate karo
+            const months = tenureType === "years" ? tenure * 12 : tenure;
+            const monthlyRate = annualRate / 12 / 100;
+
+            // Debug
+            console.log("🔍 EMI Debug:", {
+              principal,
+              annualRate,
+              tenure,
+              tenureType,
+              months,
+              monthlyRate,
+            });
+
+            let emi = 0;
+            if (monthlyRate > 0 && months > 0) {
+              emi =
+                (principal * monthlyRate * Math.pow(1 + monthlyRate, months)) /
+                (Math.pow(1 + monthlyRate, months) - 1);
+            } else if (months > 0) {
+              emi = principal / months;
+            }
+
+            const totalPayment = emi * months;
+            const totalInterest = totalPayment - principal;
+
+            return {
+              monthly_emi: isNaN(emi) ? 0 : emi,
+              total_interest: isNaN(totalInterest) ? 0 : totalInterest,
+              total_payment: isNaN(totalPayment) ? 0 : totalPayment,
+              chartData: [
+                {
+                  label: "Principal",
+                  value: principal,
+                  color: "#8b5cf6",
+                  i18nKey: "emi.chart.principal",
+                },
+                {
+                  label: "Interest",
+                  value: totalInterest,
+                  color: "#06b6d4",
+                  i18nKey: "emi.chart.interest",
+                },
+              ],
+            };
+          },
+          realTime: true,
+        };
+
+        // LEFT PANEL: Inputs + Button + Actions
+        const leftCalc = new UniversalCalculator("emi-inputs-container", {
+          ...emiConfig,
+          results: [],
+          charts: [],
+          features: {
+            pdfExport: true,
+            shareResults: true,
+            copyToClipboard: true,
+            resetButton: true,
+          },
+        });
+
+        // RIGHT PANEL: Results + Chart (Manual) - NO button, NO actions
+        const rightPanelContainer = document.getElementById(
+          "emi-results-container",
+        );
+
+        // Manually create right panel structure
+        rightPanelContainer.innerHTML = `
+          <div class="calc-results-grid">
+            <div class="result-item result-item--highlight">
+              <div class="result-item__content">
+                <i class="fas fa-rupee-sign result-item__icon"></i>
+                <span class="result-item__label" data-i18n="emi.result.monthly_emi">Monthly EMI</span>
+              </div>
+              <span class="result-item__value" id="res-monthly_emi" aria-live="polite">--</span>
+            </div>
+            <div class="result-item">
+              <span class="result-item__label" data-i18n="emi.result.total_interest">Total Interest Payable</span>
+              <span class="result-item__value" id="res-total_interest" aria-live="polite">--</span>
+            </div>
+            <div class="result-item">
+              <span class="result-item__label" data-i18n="emi.result.total_payment">Total Payment (Principal + Interest)</span>
+              <span class="result-item__value" id="res-total_payment" aria-live="polite">--</span>
+            </div>
+          </div>
+          <div id="emi-chart-area" style="margin-top: var(--space-6);"></div>
+        `;
+
+        // SYNC + Manual Chart Rendering
+        const originalCalculate = leftCalc.calculate.bind(leftCalc);
+        leftCalc.calculate = function () {
+          originalCalculate();
+
+          const results = emiConfig.calculate(this.values);
+
+          // Update right panel results manually
+          document.getElementById("res-monthly_emi").textContent = window.i18n
+            ? window.i18n.formatNumber(results.monthly_emi, {
+                style: "currency",
+                currency: window.i18n.currentCurrency,
+                decimals: 2,
+              })
+            : "$" + results.monthly_emi.toFixed(2);
+
+          document.getElementById("res-total_interest").textContent =
+            window.i18n
+              ? window.i18n.formatNumber(results.total_interest, {
+                  style: "currency",
+                  currency: window.i18n.currentCurrency,
+                  decimals: 2,
+                })
+              : "$" + results.total_interest.toFixed(2);
+
+          document.getElementById("res-total_payment").textContent = window.i18n
+            ? window.i18n.formatNumber(results.total_payment, {
+                style: "currency",
+                currency: window.i18n.currentCurrency,
+                decimals: 2,
+              })
+            : "$" + results.total_payment.toFixed(2);
+
+          // Manually render chart in RIGHT panel
+          const chartContainer = document.getElementById("emi-chart-area");
+          if (chartContainer && results.chartData) {
+            chartContainer.innerHTML = `
+              <div class="chart-container" style="background: var(--bg-tertiary); border-radius: var(--radius-lg); padding: var(--space-5);">
+                <h4 style="text-align: center; margin-bottom: var(--space-4);" data-i18n="emi.chart.title">EMI Breakdown</h4>
+                <div id="chart-emi-breakdown"></div>
+              </div>
+            `;
+
+            const chartElement = document.getElementById("chart-emi-breakdown");
+            leftCalc.renderPieChart(chartElement, {
+              id: "emi-breakdown",
+              type: "pie",
+              data: results.chartData,
+              size: 200,
+            });
+          }
+        };
+
+        // Real-time calculation
+        emiConfig.inputs.forEach((input) => {
+          const element = document.getElementById(input.id);
+          if (element) {
+            element.addEventListener("input", () => {
+              clearTimeout(window.emiCalcTimeout);
+              window.emiCalcTimeout = setTimeout(
+                () => leftCalc.calculate(),
+                150,
+              );
+            });
+            element.addEventListener("change", () => leftCalc.calculate());
+          }
+        });
+
+        // Select element ka value properly capture karo
+        const tenureTypeSelect = document.getElementById("tenure_type");
+        if (tenureTypeSelect) {
+          // Jab bhi select change ho, values object ko update karo
+          tenureTypeSelect.addEventListener("change", function () {
+            console.log("✅ Tenure type changed to:", this.value);
+            if (leftCalc.values) {
+              leftCalc.values.tenure_type = this.value;
+            }
+            setTimeout(() => leftCalc.calculate(), 100);
+          });
+        }
+
+        // Initial calculation
+        setTimeout(() => leftCalc.calculate(), 200);
+      });
+    </script>
   </body>
 </html>

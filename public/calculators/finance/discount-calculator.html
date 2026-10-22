@@ -1,0 +1,1570 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      Discount Calculator - Calculate Savings & Final Price Instantly |
+      Calculator12
+    </title>
+    <meta
+      name="description"
+      content="Instantly calculate your savings, final price, and discount percentage with our free online Discount Calculator. Perfect for shopping, sales, and business pricing."
+    />
+    <meta
+      name="keywords"
+      content="discount calculator, savings calculator, sale calculator, price calculator, offer calculator"
+    />
+    <meta name="author" content="Calculator12" />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect fill='%238B5CF6' width='100' height='100' rx='20'/><text x='50' y='68' text-anchor='middle' font-family='Arial' font-size='60' font-weight='bold' fill='white'>C</text></svg>"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
+    <link rel="stylesheet" href="../../assets/css/variables.css" />
+    <link rel="stylesheet" href="../../assets/css/reset.css" />
+    <link rel="stylesheet" href="../../assets/css/base.css" />
+    <link rel="stylesheet" href="../../assets/css/theme.css" />
+    <link rel="stylesheet" href="../../assets/css/layout.css" />
+    <link rel="stylesheet" href="../../assets/css/components.css" />
+    <link rel="stylesheet" href="../../assets/css/pages/calculator.css" />
+
+    <style>
+      .discount-calculator .input-wrapper {
+        position: relative;
+        display: flex;
+        align-items: center;
+      }
+      .discount-calculator .input-prefix,
+      .discount-calculator .input-suffix {
+        position: absolute;
+        color: var(--text-tertiary);
+        font-weight: var(--font-semibold);
+        pointer-events: none;
+        font-size: var(--text-base);
+      }
+      .discount-calculator .input-prefix {
+        left: var(--space-4);
+      }
+      .discount-calculator .input-suffix {
+        right: var(--space-4);
+      }
+      .discount-calculator .input-wrapper input {
+        padding-left: var(--space-8);
+      }
+      .discount-calculator .input-wrapper.has-suffix input {
+        padding-right: var(--space-8);
+      }
+      .discount-calculator .result-item--green {
+        background: linear-gradient(
+          135deg,
+          rgba(16, 185, 129, 0.1) 0%,
+          rgba(5, 150, 105, 0.1) 100%
+        );
+        border: 2px solid var(--color-success);
+      }
+      .discount-calculator .result-item--green .result-item__value {
+        color: var(--color-success-dark);
+      }
+      .discount-calculator .result-item--orange {
+        background: linear-gradient(
+          135deg,
+          rgba(245, 158, 11, 0.1) 0%,
+          rgba(217, 119, 6, 0.1) 100%
+        );
+        border: 2px solid var(--color-warning);
+      }
+      .discount-calculator .result-item--orange .result-item__value {
+        color: var(--color-warning-dark);
+      }
+      .discount-calculator .chart-container {
+        margin-top: var(--space-6);
+        padding: var(--space-6);
+        background: var(--bg-secondary);
+        border-radius: var(--radius-lg);
+        border: 1px solid var(--border-primary);
+      }
+      .discount-calculator .chart-title {
+        font-size: var(--text-lg);
+        font-weight: var(--font-bold);
+        margin-bottom: var(--space-4);
+        text-align: center;
+        color: var(--text-primary);
+      }
+      .discount-calculator .chart-wrapper {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: var(--space-8);
+        flex-wrap: wrap;
+      }
+      .discount-calculator .pie-chart {
+        width: 200px;
+        height: 200px;
+      }
+      .discount-calculator .chart-legend {
+        display: flex;
+        flex-direction: column;
+        gap: var(--space-3);
+      }
+      .discount-calculator .legend-item {
+        display: flex;
+        align-items: center;
+        gap: var(--space-2);
+        font-size: var(--text-sm);
+      }
+      .discount-calculator .legend-color {
+        width: 16px;
+        height: 16px;
+        border-radius: var(--radius-sm);
+      }
+      .discount-calculator .savings-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: var(--space-2);
+        padding: var(--space-2) var(--space-4);
+        background: linear-gradient(
+          135deg,
+          var(--color-success) 0%,
+          var(--color-success-dark) 100%
+        );
+        color: var(--color-white);
+        border-radius: var(--radius-full);
+        font-size: var(--text-sm);
+        font-weight: var(--font-semibold);
+        margin-top: var(--space-3);
+        box-shadow: var(--shadow-md);
+      }
+      .unit-toggle {
+        display: flex;
+        gap: var(--space-2);
+        margin-bottom: var(--space-4);
+      }
+      .unit-toggle button {
+        padding: var(--space-2) var(--space-4);
+        border: 2px solid var(--border-primary);
+        background: var(--bg-primary);
+        border-radius: var(--radius-md);
+        cursor: pointer;
+        transition: all var(--duration-fast);
+        font-weight: var(--font-medium);
+      }
+      .unit-toggle button.active {
+        background: var(--gradient-primary);
+        color: var(--color-white);
+        border-color: transparent;
+      }
+      .input-hint {
+        color: var(--text-tertiary);
+        font-size: var(--text-xs);
+        margin-top: var(--space-1);
+        display: block;
+      }
+      .language-selector {
+        position: relative;
+        z-index: 1000 !important;
+      }
+      .lang-dropdown.active {
+        display: block;
+      }
+      .lang-dropdown[style*="display: block"],
+      .lang-dropdown.active[style*="display: block"] {
+        display: block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+      }
+      .language-selector {
+        overflow: visible !important;
+      }
+      .lang-option {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 12px 16px;
+        width: 100%;
+        border: none;
+        background: transparent;
+        cursor: pointer;
+        text-align: left;
+        transition: background 0.2s;
+      }
+      .currency-selector-wrapper {
+        margin-bottom: var(--space-4);
+        display: flex;
+        justify-content: flex-end;
+      }
+      .premium-select {
+        padding: 8px 12px;
+        border-radius: 8px;
+        border: 1px solid var(--border-primary);
+        background: var(--bg-secondary);
+        color: var(--text-primary);
+        font-size: 14px;
+        font-weight: 500;
+        cursor: pointer;
+        outline: none;
+        transition: all 0.3s ease;
+      }
+      .premium-select:hover {
+        border-color: var(--color-sea-blue-500);
+        background: var(--bg-tertiary);
+      }
+      .premium-select option {
+        background: var(--bg-primary);
+        color: var(--text-primary);
+      }
+    </style>
+  </head>
+  <body class="discount-calculator">
+    <!-- Header -->
+    <header class="header" role="banner">
+      <div class="container">
+        <div class="header__wrapper">
+          <div class="header__logo">
+            <a
+              href="../../index.html"
+              aria-label="Calculator12 Home"
+              class="logo-wrapper"
+            >
+              <div class="logo-icon">
+                <svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+                  <defs>
+                    <linearGradient
+                      id="logoGrad1"
+                      x1="0%"
+                      y1="0%"
+                      x2="100%"
+                      y2="100%"
+                    >
+                      <stop
+                        offset="0%"
+                        style="stop-color: #8b5cf6; stop-opacity: 1"
+                      />
+                      <stop
+                        offset="100%"
+                        style="stop-color: #06b6d4; stop-opacity: 1"
+                      />
+                    </linearGradient>
+                    <linearGradient
+                      id="logoGrad2"
+                      x1="100%"
+                      y1="0%"
+                      x2="0%"
+                      y2="100%"
+                    >
+                      <stop
+                        offset="0%"
+                        style="stop-color: #ec4899; stop-opacity: 1"
+                      />
+                      <stop
+                        offset="100%"
+                        style="stop-color: #8b5cf6; stop-opacity: 1"
+                      />
+                    </linearGradient>
+                    <filter id="glow">
+                      <feGaussianBlur stdDeviation="3" result="coloredBlur" />
+                      <feMerge>
+                        <feMergeNode in="coloredBlur" />
+                        <feMergeNode in="SourceGraphic" />
+                      </feMerge>
+                    </filter>
+                  </defs>
+                  <rect
+                    x="10"
+                    y="10"
+                    width="100"
+                    height="100"
+                    rx="25"
+                    fill="url(#logoGrad1)"
+                    opacity="0.15"
+                    stroke="url(#logoGrad1)"
+                    stroke-width="3"
+                  />
+                  <rect
+                    x="25"
+                    y="22"
+                    width="70"
+                    height="25"
+                    rx="6"
+                    fill="url(#logoGrad2)"
+                    opacity="0.9"
+                  />
+                  <text
+                    x="60"
+                    y="40"
+                    font-family="Arial, sans-serif"
+                    font-size="18"
+                    fill="white"
+                    text-anchor="middle"
+                    font-weight="bold"
+                  >
+                    =
+                  </text>
+                  <circle
+                    cx="35"
+                    cy="62"
+                    r="10"
+                    fill="url(#logoGrad1)"
+                    opacity="0.8"
+                    filter="url(#glow)"
+                  />
+                  <text
+                    x="35"
+                    y="67"
+                    font-family="Arial"
+                    font-size="14"
+                    fill="white"
+                    text-anchor="middle"
+                    font-weight="bold"
+                  >
+                    +
+                  </text>
+                  <circle
+                    cx="60"
+                    cy="62"
+                    r="10"
+                    fill="url(#logoGrad2)"
+                    opacity="0.8"
+                    filter="url(#glow)"
+                  />
+                  <text
+                    x="60"
+                    y="67"
+                    font-family="Arial"
+                    font-size="14"
+                    fill="white"
+                    text-anchor="middle"
+                    font-weight="bold"
+                  >
+                    −
+                  </text>
+                  <circle
+                    cx="85"
+                    cy="62"
+                    r="10"
+                    fill="url(#logoGrad1)"
+                    opacity="0.8"
+                    filter="url(#glow)"
+                  />
+                  <text
+                    x="85"
+                    y="67"
+                    font-family="Arial"
+                    font-size="14"
+                    fill="white"
+                    text-anchor="middle"
+                    font-weight="bold"
+                  >
+                    ×
+                  </text>
+                  <circle
+                    cx="35"
+                    cy="87"
+                    r="10"
+                    fill="url(#logoGrad2)"
+                    opacity="0.8"
+                    filter="url(#glow)"
+                  />
+                  <text
+                    x="35"
+                    y="92"
+                    font-family="Arial"
+                    font-size="14"
+                    fill="white"
+                    text-anchor="middle"
+                    font-weight="bold"
+                  >
+                    ÷
+                  </text>
+                  <circle
+                    cx="60"
+                    cy="87"
+                    r="10"
+                    fill="url(#logoGrad1)"
+                    opacity="0.8"
+                    filter="url(#glow)"
+                  />
+                  <text
+                    x="60"
+                    y="92"
+                    font-family="Arial"
+                    font-size="14"
+                    fill="white"
+                    text-anchor="middle"
+                    font-weight="bold"
+                  >
+                    √
+                  </text>
+                  <circle
+                    cx="85"
+                    cy="87"
+                    r="10"
+                    fill="url(#logoGrad2)"
+                    opacity="0.8"
+                    filter="url(#glow)"
+                  />
+                  <text
+                    x="85"
+                    y="92"
+                    font-family="Arial"
+                    font-size="14"
+                    fill="white"
+                    text-anchor="middle"
+                    font-weight="bold"
+                  >
+                    %
+                  </text>
+                </svg>
+              </div>
+              <span class="logo-text"
+                >Calculator<span class="logo-number">12</span></span
+              >
+            </a>
+          </div>
+
+          <nav
+            class="header__nav"
+            role="navigation"
+            aria-label="Main navigation"
+          >
+            <ul class="nav__list">
+              <li class="nav__item">
+                <a href="../../index.html" class="nav__link">Home</a>
+              </li>
+              <li class="nav__item">
+                <a href="#" class="nav__link nav__link--active">Finance</a>
+              </li>
+              <li class="nav__item">
+                <a href="../../all-calculators.html" class="nav__link"
+                  >Categories</a
+                >
+              </li>
+              <li class="nav__item">
+                <a href="#" class="nav__link">Popular</a>
+              </li>
+              <li class="nav__item">
+                <a href="#" class="nav__link">About</a>
+              </li>
+            </ul>
+          </nav>
+
+          <div class="header__actions">
+            <!-- Language Selector -->
+            <div class="language-selector">
+              <button
+                id="langToggle"
+                class="lang-toggle-btn"
+                aria-expanded="false"
+                aria-haspopup="true"
+              >
+                <span class="lang-flag" id="currentFlag">US</span>
+                <span class="lang-name" id="currentLang">EN</span>
+                <span class="lang-arrow">▼</span>
+              </button>
+              <div id="langDropdown" class="lang-dropdown" role="menu">
+                <button
+                  class="lang-option active"
+                  data-lang="en"
+                  data-flag="🇺🇸"
+                  role="menuitem"
+                >
+                  <span class="flag">🇺🇸</span
+                  ><span class="lang-text">English</span
+                  ><span class="lang-native">English</span>
+                </button>
+                <button
+                  class="lang-option"
+                  data-lang="hi"
+                  data-flag="🇮🇳"
+                  role="menuitem"
+                >
+                  <span class="flag">🇮🇳</span
+                  ><span class="lang-text">Hindi</span
+                  ><span class="lang-native">हिन्दी</span>
+                </button>
+                <button
+                  class="lang-option"
+                  data-lang="es"
+                  data-flag="🇪🇸"
+                  role="menuitem"
+                >
+                  <span class="flag">🇪🇸</span
+                  ><span class="lang-text">Spanish</span
+                  ><span class="lang-native">Español</span>
+                </button>
+                <button
+                  class="lang-option"
+                  data-lang="fr"
+                  data-flag="🇫🇷"
+                  role="menuitem"
+                >
+                  <span class="flag">🇫🇷</span
+                  ><span class="lang-text">French</span
+                  ><span class="lang-native">Français</span>
+                </button>
+                <button
+                  class="lang-option"
+                  data-lang="de"
+                  data-flag="🇩🇪"
+                  role="menuitem"
+                >
+                  <span class="flag">🇩🇪</span
+                  ><span class="lang-text">German</span
+                  ><span class="lang-native">Deutsch</span>
+                </button>
+                <button
+                  class="lang-option"
+                  data-lang="pt"
+                  data-flag="🇵🇹"
+                  role="menuitem"
+                >
+                  <span class="flag">🇵🇹</span
+                  ><span class="lang-text">Portuguese</span
+                  ><span class="lang-native">Português</span>
+                </button>
+                <button
+                  class="lang-option"
+                  data-lang="ru"
+                  data-flag="🇷🇺"
+                  role="menuitem"
+                >
+                  <span class="flag">🇷🇺</span
+                  ><span class="lang-text">Russian</span
+                  ><span class="lang-native">Русский</span>
+                </button>
+                <button
+                  class="lang-option"
+                  data-lang="ar"
+                  data-flag="🇸🇦"
+                  role="menuitem"
+                >
+                  <span class="flag">🇸🇦</span
+                  ><span class="lang-text">Arabic</span
+                  ><span class="lang-native">العربية</span>
+                </button>
+                <button
+                  class="lang-option"
+                  data-lang="zh"
+                  data-flag="🇨🇳"
+                  role="menuitem"
+                >
+                  <span class="flag">🇨🇳</span
+                  ><span class="lang-text">Chinese</span
+                  ><span class="lang-native">中文</span>
+                </button>
+                <button
+                  class="lang-option"
+                  data-lang="ja"
+                  data-flag="🇯🇵"
+                  role="menuitem"
+                >
+                  <span class="flag">🇯🇵</span
+                  ><span class="lang-text">Japanese</span
+                  ><span class="lang-native">日本語</span>
+                </button>
+                <button
+                  class="lang-option"
+                  data-lang="ko"
+                  data-flag="🇰🇷"
+                  role="menuitem"
+                >
+                  <span class="flag">🇰🇷</span
+                  ><span class="lang-text">Korean</span
+                  ><span class="lang-native">한국어</span>
+                </button>
+                <button
+                  class="lang-option"
+                  data-lang="vi"
+                  data-flag="🇻🇳"
+                  role="menuitem"
+                >
+                  <span class="flag">🇻🇳</span
+                  ><span class="lang-text">Vietnamese</span
+                  ><span class="lang-native">Tiếng Việt</span>
+                </button>
+                <button
+                  class="lang-option"
+                  data-lang="id"
+                  data-flag="🇮🇩"
+                  role="menuitem"
+                >
+                  <span class="flag">🇮🇩</span
+                  ><span class="lang-text">Indonesian</span
+                  ><span class="lang-native">Bahasa</span>
+                </button>
+              </div>
+            </div>
+            <button class="theme-toggle" aria-label="Toggle dark mode">
+              <i
+                class="fas fa-sun theme-toggle__icon theme-toggle__icon--sun"
+              ></i>
+              <i
+                class="fas fa-moon theme-toggle__icon theme-toggle__icon--moon"
+              ></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <main id="main-content" role="main">
+      <div class="container">
+        <!-- Breadcrumbs -->
+        <nav class="breadcrumbs" aria-label="Breadcrumb">
+          <ol class="breadcrumbs__list">
+            <li class="breadcrumbs__item">
+              <a href="../../index.html">Home</a>
+            </li>
+            <li class="breadcrumbs__item"><a href="#">Finance</a></li>
+            <li class="breadcrumbs__item" aria-current="page">
+              Discount Calculator
+            </li>
+          </ol>
+        </nav>
+
+        <!-- Page Header -->
+        <div class="page-header">
+          <h1 class="page-header__title">Discount Calculator</h1>
+          <p class="page-header__desc">
+            Instantly calculate your savings, final price, and discount
+            percentage with our free online tool. Perfect for shopping, sales,
+            and business pricing.
+          </p>
+        </div>
+
+        <!-- Calculator Section -->
+        <section class="calculator-section">
+          <div class="calculator-layout">
+            <!-- Left Panel: Inputs -->
+            <div class="calculator-inputs card">
+              <h2 class="calculator-inputs__title">Enter Details</h2>
+
+              <!-- Currency Selector Dropdown -->
+              <div class="currency-selector-wrapper">
+                <select
+                  id="currency-dropdown"
+                  class="premium-select"
+                  aria-label="Select Currency"
+                >
+                  <option value="USD">$ USD (US Dollar)</option>
+                  <option value="INR">₹ INR (Indian Rupee)</option>
+                  <option value="EUR">€ EUR (Euro)</option>
+                  <option value="GBP">£ GBP (British Pound)</option>
+                  <option value="JPY">¥ JPY (Japanese Yen)</option>
+                  <option value="CNY">¥ CNY (Chinese Yuan)</option>
+                  <option value="KRW">₩ KRW (South Korean Won)</option>
+                  <option value="RUB">₽ RUB (Russian Ruble)</option>
+                  <option value="BRL">R$ BRL (Brazilian Real)</option>
+                  <option value="SAR">SAR (Saudi Riyal)</option>
+                  <option value="VND">₫ VND (Vietnamese Dong)</option>
+                  <option value="IDR">Rp IDR (Indonesian Rupiah)</option>
+                  <option value="AUD">A$ AUD (Australian Dollar)</option>
+                  <option value="CAD">C$ CAD (Canadian Dollar)</option>
+                </select>
+              </div>
+
+              <!-- Original Price -->
+              <div class="form-group">
+                <label for="original-price">Original Price</label>
+                <div class="input-wrapper">
+                  <span class="input-prefix">$</span>
+                  <input
+                    type="number"
+                    id="original-price"
+                    placeholder="Enter original price"
+                    step="0.01"
+                    min="0"
+                  />
+                </div>
+                <span class="input-hint"
+                  >The price before any discount is applied</span
+                >
+              </div>
+
+              <!-- Discount Percentage -->
+              <div class="form-group">
+                <label for="discount-percent">Discount Percentage</label>
+                <div class="input-wrapper has-suffix">
+                  <input
+                    type="number"
+                    id="discount-percent"
+                    placeholder="Enter discount %"
+                    step="0.01"
+                    min="0"
+                    max="100"
+                  />
+                  <span class="input-suffix">%</span>
+                </div>
+                <span class="input-hint"
+                  >Common discounts: 10%, 20%, 25%, 50%, 75%</span
+                >
+              </div>
+
+              <button id="calculate-discount" class="btn btn-primary btn-block">
+                Calculate Discount
+              </button>
+
+              <!-- Action Buttons -->
+              <div
+                class="calc-action-buttons"
+                style="
+                  margin-top: var(--space-4);
+                  display: flex;
+                  gap: var(--space-2);
+                  flex-wrap: wrap;
+                "
+              >
+                <button
+                  id="export-pdf-btn"
+                  class="btn btn-secondary"
+                  style="
+                    white-space: nowrap;
+                    display: inline-flex;
+                    align-items: center;
+                    gap: 6px;
+                    min-width: 130px;
+                    justify-content: center;
+                  "
+                >
+                  <i class="fas fa-file-pdf"></i> Export PDF
+                </button>
+                <button
+                  id="share-btn"
+                  class="btn btn-secondary"
+                  style="
+                    white-space: nowrap;
+                    display: inline-flex;
+                    align-items: center;
+                    gap: 6px;
+                  "
+                >
+                  <i class="fas fa-share-alt"></i> Share
+                </button>
+                <button
+                  id="copy-btn"
+                  class="btn btn-secondary"
+                  style="
+                    white-space: nowrap;
+                    display: inline-flex;
+                    align-items: center;
+                    gap: 6px;
+                  "
+                >
+                  <i class="fas fa-copy"></i> Copy
+                </button>
+                <button
+                  type="button"
+                  id="reset-btn"
+                  class="btn btn-ghost"
+                  style="
+                    white-space: nowrap;
+                    display: inline-flex;
+                    align-items: center;
+                    gap: 6px;
+                  "
+                >
+                  <i class="fas fa-redo"></i> Reset
+                </button>
+              </div>
+
+              <div
+                id="calc-error"
+                class="error-message"
+                style="display: none"
+              ></div>
+            </div>
+
+            <!-- Right Panel: Results -->
+            <div class="calculator-results card">
+              <h2 class="calculator-results__title">Your Results</h2>
+
+              <div class="calc-results-grid">
+                <div
+                  class="result-item result-item--highlight"
+                  style="
+                    background: linear-gradient(
+                      135deg,
+                      #8b5cf6 0%,
+                      #06b6d4 100%
+                    );
+                    border: 2px solid #8b5cf6;
+                    color: white;
+                    padding: 20px;
+                    border-radius: 12px;
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                  "
+                >
+                  <div class="result-item__content">
+                    <i
+                      class="fas fa-tag result-item__icon"
+                      style="font-size: 18px"
+                    ></i>
+                    <span
+                      class="result-item__label"
+                      style="color: rgba(255, 255, 255, 0.95); font-size: 14px"
+                      >Final Price</span
+                    >
+                  </div>
+                  <span
+                    class="result-item__value"
+                    id="res-final-price"
+                    style="
+                      color: white;
+                      font-size: 32px;
+                      font-weight: bold;
+                      font-family: &quot;JetBrains Mono&quot;, monospace;
+                    "
+                    >--</span
+                  >
+                </div>
+
+                <div
+                  class="result-item result-item--green"
+                  style="
+                    background: linear-gradient(
+                      135deg,
+                      rgba(16, 185, 129, 0.1),
+                      rgba(5, 150, 105, 0.1)
+                    );
+                    border: 2px solid #10b981;
+                    padding: 20px;
+                    border-radius: 12px;
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                  "
+                >
+                  <div class="result-item__content">
+                    <i
+                      class="fas fa-piggy-bank result-item__icon"
+                      style="font-size: 18px"
+                    ></i>
+                    <span
+                      class="result-item__label"
+                      style="color: #059669; font-size: 16px"
+                      >You Save</span
+                    >
+                  </div>
+                  <span
+                    class="result-item__value"
+                    id="res-saved-amount"
+                    style="
+                      color: #059669;
+                      font-size: 24px;
+                      font-weight: bold;
+                      font-family: &quot;JetBrains Mono&quot;, monospace;
+                    "
+                    >--</span
+                  >
+                </div>
+
+                <div
+                  class="result-item result-item--orange"
+                  style="
+                    background: linear-gradient(
+                      135deg,
+                      rgba(245, 158, 11, 0.1),
+                      rgba(217, 119, 6, 0.1)
+                    );
+                    border: 2px solid #f59e0b;
+                    padding: 20px;
+                    border-radius: 12px;
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                  "
+                >
+                  <div class="result-item__content">
+                    <i
+                      class="fas fa-percent result-item__icon"
+                      style="font-size: 18px"
+                    ></i>
+                    <span
+                      class="result-item__label"
+                      style="color: #d97706; font-size: 16px"
+                      >Savings Percentage</span
+                    >
+                  </div>
+                  <span
+                    class="result-item__value"
+                    id="res-saved-percent"
+                    style="
+                      color: #d97706;
+                      font-size: 24px;
+                      font-weight: bold;
+                      font-family: &quot;JetBrains Mono&quot;, monospace;
+                    "
+                    >--</span
+                  >
+                </div>
+              </div>
+
+              <!-- Price Breakdown Chart -->
+              <div class="chart-container">
+                <h3 class="chart-title">
+                  <i class="fas fa-chart-pie" style="color: #8b5cf6"></i>
+                  Price Breakdown
+                </h3>
+                <div class="chart-wrapper">
+                  <svg
+                    class="pie-chart"
+                    viewBox="0 0 200 200"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M 100 100 L 100 20 A 80 80 0 0 1 180 100 Z"
+                      fill="#8B5CF6"
+                    />
+                    <path
+                      d="M 100 100 L 180 100 A 80 80 0 1 1 100 20 Z"
+                      fill="#10B981"
+                    />
+                    <circle cx="100" cy="100" r="40" fill="white" />
+                    <text
+                      x="100"
+                      y="95"
+                      text-anchor="middle"
+                      font-size="14"
+                      font-weight="bold"
+                      fill="#1a1a1a"
+                    >
+                      You Save
+                    </text>
+                    <text
+                      x="100"
+                      y="115"
+                      text-anchor="middle"
+                      font-size="16"
+                      font-weight="bold"
+                      fill="#10B981"
+                      id="chart-percent"
+                    >
+                      0%
+                    </text>
+                  </svg>
+                  <div class="chart-legend">
+                    <div class="legend-item">
+                      <div
+                        class="legend-color"
+                        style="background: #8b5cf6"
+                      ></div>
+                      <span
+                        >You Pay: <strong id="legend-pay">$0.00</strong></span
+                      >
+                    </div>
+                    <div class="legend-item">
+                      <div
+                        class="legend-color"
+                        style="background: #10b981"
+                      ></div>
+                      <span
+                        >You Save: <strong id="legend-save">$0.00</strong></span
+                      >
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Savings Badge -->
+              <div
+                class="savings-badge"
+                id="savings-badge"
+                style="display: none"
+              >
+                <i class="fas fa-check-circle"></i>
+                <span id="badge-text">Great Deal! You're saving</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- SEO Content -->
+        <section class="calculator-content">
+          <div class="content-block">
+            <h2>What is a Discount Calculator?</h2>
+            <p>
+              A <strong>Discount Calculator</strong> is an essential online tool
+              that helps you instantly determine the final price of a product
+              after applying a discount, along with the exact amount you save.
+              Whether you're shopping during a festive sale, comparing product
+              offers, or setting prices for your business, our free discount
+              calculator provides accurate results in seconds.
+            </p>
+            <p>
+              In today's competitive market, discounts are everywhere — from
+              Black Friday sales to everyday e-commerce offers. Understanding
+              the real value of a discount helps you make smarter purchasing
+              decisions and avoid marketing tricks. Our advanced calculator goes
+              beyond simple subtraction by providing visual breakdowns, savings
+              percentages, and comparison metrics.
+            </p>
+          </div>
+
+          <div class="content-block">
+            <h2>How to Use Our Discount Calculator?</h2>
+            <p>
+              Using our calculator is incredibly simple and takes just seconds:
+            </p>
+            <h3>Step 1: Enter the Original Price</h3>
+            <p>
+              Input the original price of the product or service before any
+              discount is applied. This is the marked price or MRP (Maximum
+              Retail Price) that you see on the product tag or website.
+            </p>
+            <h3>Step 2: Enter the Discount Percentage</h3>
+            <p>
+              Enter the discount percentage being offered. This could be
+              anything from 5% to 90% depending on the sale or promotion. You
+              can also use our quick preset buttons (10%, 20%, 25%, 50%, 75%)
+              for common discount values.
+            </p>
+            <h3>Step 3: View Instant Results</h3>
+            <p>
+              As soon as you enter the values, our calculator instantly
+              displays:
+            </p>
+            <ul>
+              <li>
+                <strong>Final Price:</strong> The amount you'll actually pay
+                after discount
+              </li>
+              <li>
+                <strong>Amount Saved:</strong> The exact money you're saving
+              </li>
+              <li>
+                <strong>Savings Percentage:</strong> Visual representation of
+                your savings
+              </li>
+              <li>
+                <strong>Pie Chart:</strong> Beautiful visual breakdown of price
+                vs savings
+              </li>
+            </ul>
+          </div>
+
+          <div class="content-block">
+            <h2>Discount Calculation Formula</h2>
+            <p>
+              The mathematics behind discount calculation is straightforward:
+            </p>
+            <div
+              style="
+                background: var(--bg-secondary);
+                padding: var(--space-4);
+                border-radius: var(--radius-md);
+                margin: var(--space-4) 0;
+                text-align: center;
+                font-size: var(--text-lg);
+                font-family: &quot;JetBrains Mono&quot;, monospace;
+              "
+            >
+              <strong
+                >Discount Amount = Original Price × (Discount % ÷ 100)</strong
+              >
+            </div>
+            <div
+              style="
+                background: var(--bg-secondary);
+                padding: var(--space-4);
+                border-radius: var(--radius-md);
+                margin: var(--space-4) 0;
+                text-align: center;
+                font-size: var(--text-lg);
+                font-family: &quot;JetBrains Mono&quot;, monospace;
+              "
+            >
+              <strong>Final Price = Original Price - Discount Amount</strong>
+            </div>
+            <p>
+              For example, if a product costs $1,000 and has a 20% discount:
+            </p>
+            <ul>
+              <li>Discount Amount = $1,000 × (20 ÷ 100) = $200</li>
+              <li>Final Price = $1,000 - $200 = $800</li>
+              <li>You save $200 (20% of the original price)</li>
+            </ul>
+          </div>
+
+          <div class="content-block">
+            <h2>Frequently Asked Questions</h2>
+            <h3>How do I calculate a 20% discount?</h3>
+            <p>
+              Multiply the original price by 0.20 (or 20 ÷ 100) to get the
+              discount amount, then subtract it from the original price. For
+              example, $1,000 × 0.20 = $200 discount, so final price = $800.
+            </p>
+            <h3>Is 50% off really half price?</h3>
+            <p>
+              Yes, 50% off means you pay exactly half of the original price.
+              However, always verify the original price is genuine, as some
+              sellers inflate prices before offering discounts.
+            </p>
+            <h3>Can I use this calculator for business pricing?</h3>
+            <p>
+              Absolutely! Business owners use our calculator to set promotional
+              prices, calculate profit margins after discounts, and plan
+              seasonal sales strategies.
+            </p>
+          </div>
+        </section>
+      </div>
+
+      <!-- Related Calculators Section -->
+      <section class="related-calculators">
+        <div class="container">
+          <h2 id="related-title" class="section-title">
+            Explore More Calculators
+          </h2>
+
+          <div class="related-calculators__grid">
+            <div class="related-category">
+              <h3 class="related-category__title">
+                <i class="fas fa-calculator" aria-hidden="true"></i>
+                Finance Calculators
+              </h3>
+              <ul class="related-category__list">
+                <li>
+                  <a href="../finance/emi-calculator.html"
+                    >Home Loan EMI Calculator</a
+                  >
+                </li>
+                <li><a href="#">Car Loan EMI Calculator</a></li>
+                <li><a href="#">SIP Calculator</a></li>
+                <li><a href="#">PPF Calculator</a></li>
+                <li><a href="#">Income Tax Calculator</a></li>
+                <li><a href="#">GST Calculator</a></li>
+              </ul>
+            </div>
+
+            <div class="related-category">
+              <h3 class="related-category__title">
+                <i class="fas fa-heartbeat" aria-hidden="true"></i>
+                Health & Fitness
+              </h3>
+              <ul class="related-category__list">
+                <li>
+                  <a href="../health/bmi-calculator.html">BMI Calculator</a>
+                </li>
+                <li><a href="#">BMR Calculator</a></li>
+                <li><a href="#">Body Fat Calculator</a></li>
+                <li><a href="#">Calorie Calculator</a></li>
+                <li><a href="#">Pregnancy Due Date Calculator</a></li>
+                <li><a href="#">Ideal Weight Calculator</a></li>
+              </ul>
+            </div>
+
+            <div class="related-category">
+              <h3 class="related-category__title">
+                <i class="fas fa-square-root-alt" aria-hidden="true"></i>
+                Math Calculators
+              </h3>
+              <ul class="related-category__list">
+                <li><a href="#">Percentage Calculator</a></li>
+                <li><a href="#">Simple Interest Calculator</a></li>
+                <li><a href="#">Compound Interest Calculator</a></li>
+                <li><a href="#">Ratio Calculator</a></li>
+                <li><a href="#">Average Calculator</a></li>
+                <li><a href="#">Square Root Calculator</a></li>
+              </ul>
+            </div>
+
+            <div class="related-category">
+              <h3 class="related-category__title">
+                <i class="fas fa-exchange-alt" aria-hidden="true"></i>
+                Unit Converters
+              </h3>
+              <ul class="related-category__list">
+                <li><a href="#">Currency Converter</a></li>
+                <li><a href="#">Length Converter</a></li>
+                <li><a href="#">Weight Converter</a></li>
+                <li><a href="#">Temperature Converter</a></li>
+                <li><a href="#">Area Converter</a></li>
+                <li><a href="#">Speed Converter</a></li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="related-calculators__footer">
+            <a
+              href="../../all-calculators.html"
+              class="btn btn-primary btn-large"
+            >
+              View All Calculators
+              <i class="fas fa-arrow-right" style="margin-left: 8px"></i>
+            </a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer footer-compact" role="contentinfo">
+      <div class="container">
+        <div class="footer__wrapper footer-compact__wrapper">
+          <div class="footer__brand footer-compact__brand">
+            <a href="../../index.html" class="logo-text footer-logo"
+              >Calculator<span class="logo-number">12</span></a
+            >
+            <div class="footer__social footer-compact__social">
+              <a href="#" class="footer__social-link" aria-label="Facebook"
+                ><i class="fab fa-facebook-f"></i
+              ></a>
+              <a href="#" class="footer__social-link" aria-label="Twitter"
+                ><i class="fab fa-twitter"></i
+              ></a>
+              <a href="#" class="footer__social-link" aria-label="Instagram"
+                ><i class="fab fa-instagram"></i
+              ></a>
+              <a href="#" class="footer__social-link" aria-label="LinkedIn"
+                ><i class="fab fa-linkedin-in"></i
+              ></a>
+            </div>
+          </div>
+          <div class="footer__links footer-compact__links">
+            <div class="footer__column">
+              <h4 class="footer__title">Company</h4>
+              <ul class="footer__list">
+                <li><a href="#">About Us</a></li>
+                <li><a href="#">Contact</a></li>
+              </ul>
+            </div>
+            <div class="footer__column">
+              <h4 class="footer__title">Legal</h4>
+              <ul class="footer__list">
+                <li><a href="#">Privacy Policy</a></li>
+                <li><a href="#">Terms of Service</a></li>
+              </ul>
+            </div>
+            <div class="footer__column">
+              <h4 class="footer__title">Resources</h4>
+              <ul class="footer__list">
+                <li><a href="#">FAQ</a></li>
+                <li><a href="#">Sitemap</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="footer__bottom footer-compact__bottom">
+          <p class="footer__copyright">
+            &copy; 2026 Calculator12. All rights reserved.
+          </p>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="../../assets/js/core/theme-switcher.js" defer></script>
+    <script src="../../engines/translation/i18n.js" defer></script>
+    <script src="../../engines/translation/translations.js" defer></script>
+
+    <script>
+      // Discount Calculator Logic with Currency Selector
+      document.addEventListener("DOMContentLoaded", () => {
+        const currencyDropdown = document.getElementById("currency-dropdown");
+        const originalPriceInput = document.getElementById("original-price");
+        const discountPercentInput =
+          document.getElementById("discount-percent");
+        const calculateBtn = document.getElementById("calculate-discount");
+        const currencyPrefix = document.querySelector(".input-prefix");
+
+        // Currency symbols map
+        const currencySymbols = {
+          USD: "$",
+          INR: "₹",
+          EUR: "€",
+          GBP: "£",
+          JPY: "¥",
+          CNY: "¥",
+          KRW: "₩",
+          RUB: "₽",
+          BRL: "R$",
+          SAR: "",
+          VND: "₫",
+          IDR: "Rp",
+          AUD: "A$",
+          CAD: "C$",
+        };
+
+        // Currency change handler
+        currencyDropdown.addEventListener("change", function () {
+          const selectedCurrency = this.value;
+          const symbol = currencySymbols[selectedCurrency] || "$";
+
+          // Update prefix
+          if (currencyPrefix) {
+            currencyPrefix.textContent = symbol;
+          }
+
+          // Recalculate if values exist
+          if (originalPriceInput.value && discountPercentInput.value) {
+            calculateDiscount();
+          }
+        });
+
+        calculateBtn.addEventListener("click", calculateDiscount);
+
+        function calculateDiscount() {
+          const originalPrice = parseFloat(originalPriceInput.value);
+          const discountPercent = parseFloat(discountPercentInput.value);
+          const selectedCurrency = currencyDropdown.value;
+          const symbol = currencySymbols[selectedCurrency] || "$";
+
+          if (!originalPrice || originalPrice <= 0) {
+            document.getElementById("calc-error").style.display = "block";
+            document.getElementById("calc-error").textContent =
+              "Please enter a valid original price greater than 0";
+            return;
+          }
+
+          if (
+            !discountPercent ||
+            discountPercent < 0 ||
+            discountPercent > 100
+          ) {
+            document.getElementById("calc-error").style.display = "block";
+            document.getElementById("calc-error").textContent =
+              "Discount percentage must be between 0 and 100";
+            return;
+          }
+
+          document.getElementById("calc-error").style.display = "none";
+
+          const savedAmount = originalPrice * (discountPercent / 100);
+          const finalPrice = originalPrice - savedAmount;
+
+          document.getElementById("res-final-price").textContent =
+            symbol + finalPrice.toFixed(2);
+          document.getElementById("res-saved-amount").textContent =
+            symbol + savedAmount.toFixed(2);
+          document.getElementById("res-saved-percent").textContent =
+            discountPercent.toFixed(2) + "%";
+
+          // Update chart
+          document.getElementById("chart-percent").textContent =
+            discountPercent.toFixed(0) + "%";
+          document.getElementById("legend-pay").textContent =
+            symbol + finalPrice.toFixed(2);
+          document.getElementById("legend-save").textContent =
+            symbol + savedAmount.toFixed(2);
+
+          // Show savings badge
+          const badge = document.getElementById("savings-badge");
+          const badgeText = document.getElementById("badge-text");
+          badge.style.display = "inline-flex";
+          badgeText.textContent = `Great Deal! You're saving ${symbol}${savedAmount.toFixed(2)}`;
+        }
+      });
+
+      // Action Buttons Functionality
+      document.addEventListener("DOMContentLoaded", () => {
+        const exportPdfBtn = document.getElementById("export-pdf-btn");
+        if (exportPdfBtn) {
+          exportPdfBtn.addEventListener("click", () => window.print());
+        }
+
+        const shareBtn = document.getElementById("share-btn");
+        if (shareBtn) {
+          shareBtn.addEventListener("click", () => {
+            const finalPrice =
+              document.getElementById("res-final-price")?.textContent || "--";
+            const savedAmount =
+              document.getElementById("res-saved-amount")?.textContent || "--";
+            const shareText = `Discount Calculator Results\n\nFinal Price: ${finalPrice}\nYou Save: ${savedAmount}\n\nCalculated using Calculator12`;
+
+            if (navigator.share) {
+              navigator
+                .share({
+                  title: "Discount Calculator Results",
+                  text: shareText,
+                  url: window.location.href,
+                })
+                .catch((err) => console.log("Share failed:", err));
+            } else {
+              navigator.clipboard
+                .writeText(shareText)
+                .then(() => alert("Results copied to clipboard!"));
+            }
+          });
+        }
+
+        const copyBtn = document.getElementById("copy-btn");
+        if (copyBtn) {
+          copyBtn.addEventListener("click", () => {
+            const finalPrice =
+              document.getElementById("res-final-price")?.textContent || "--";
+            const savedAmount =
+              document.getElementById("res-saved-amount")?.textContent || "--";
+            const savedPercent =
+              document.getElementById("res-saved-percent")?.textContent || "--";
+            const originalPrice =
+              document.getElementById("original-price")?.value || "--";
+            const discountPercent =
+              document.getElementById("discount-percent")?.value || "--";
+
+            const copyText = `Discount Calculator Results\n\nOriginal Price: $${originalPrice}\nDiscount: ${discountPercent}%\nFinal Price: ${finalPrice}\nYou Save: ${savedAmount}\nSavings: ${savedPercent}\n\nCalculated using Calculator12`;
+
+            navigator.clipboard
+              .writeText(copyText)
+              .then(() => {
+                const originalText = copyBtn.innerHTML;
+                copyBtn.innerHTML = '<i class="fas fa-check"></i> Copied!';
+                setTimeout(() => {
+                  copyBtn.innerHTML = originalText;
+                }, 2000);
+              })
+              .catch((err) => alert("Failed to copy: " + err));
+          });
+        }
+
+        const resetBtn = document.getElementById("reset-btn");
+        if (resetBtn) {
+          resetBtn.addEventListener("click", function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            console.log("🔄 Reset button clicked!");
+
+            // Clear all number inputs
+            document
+              .querySelectorAll('input[type="number"]')
+              .forEach((input) => {
+                input.value = "";
+              });
+
+            // Reset all result displays
+            const finalPriceEl = document.getElementById("res-final-price");
+            const savedAmountEl = document.getElementById("res-saved-amount");
+            const savedPercentEl = document.getElementById("res-saved-percent");
+
+            if (finalPriceEl) finalPriceEl.textContent = "--";
+            if (savedAmountEl) savedAmountEl.textContent = "--";
+            if (savedPercentEl) savedPercentEl.textContent = "--";
+
+            // Reset chart
+            const chartPercent = document.getElementById("chart-percent");
+            const legendPay = document.getElementById("legend-pay");
+            const legendSave = document.getElementById("legend-save");
+
+            if (chartPercent) chartPercent.textContent = "0%";
+            if (legendPay) legendPay.textContent = "$0.00";
+            if (legendSave) legendSave.textContent = "$0.00";
+
+            // Hide savings badge
+            const savingsBadge = document.getElementById("savings-badge");
+            if (savingsBadge) savingsBadge.style.display = "none";
+
+            // Hide error message
+            const calcError = document.getElementById("calc-error");
+            if (calcError) calcError.style.display = "none";
+
+            console.log("✅ Calculator reset successfully!");
+          });
+        }
+      });
+
+      // Language Selector - Same as BMI Calculator
+      (function () {
+        if (document.readyState === "loading") {
+          document.addEventListener("DOMContentLoaded", initLanguageSelector);
+        } else {
+          initLanguageSelector();
+        }
+
+        function initLanguageSelector() {
+          const langToggle = document.getElementById("langToggle");
+          const langDropdown = document.getElementById("langDropdown");
+
+          if (!langToggle || !langDropdown) {
+            console.error("Language elements not found");
+            return;
+          }
+
+          console.log("✅ Language Selector Ready");
+
+          langToggle.style.cursor = "pointer";
+          langToggle.style.zIndex = "9999";
+
+          langToggle.replaceWith(langToggle.cloneNode(true));
+          const newLangToggle = document.getElementById("langToggle");
+
+          newLangToggle.addEventListener("click", function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            console.log("Button clicked!");
+
+            const isExpanded = this.getAttribute("aria-expanded") === "true";
+            this.setAttribute("aria-expanded", !isExpanded);
+
+            if (langDropdown.classList.contains("active")) {
+              langDropdown.classList.remove("active");
+              langDropdown.style.display = "none";
+              const arrow = langToggle.querySelector(".lang-arrow");
+              if (arrow) arrow.textContent = "▼";
+              console.log("🔴 Dropdown closed");
+            } else {
+              langDropdown.classList.add("active");
+              langDropdown.style.display = "block";
+              const arrow = langToggle.querySelector(".lang-arrow");
+              if (arrow) arrow.textContent = "▲";
+              console.log("🟢 Dropdown opened");
+            }
+          });
+
+          const options = langDropdown.querySelectorAll(".lang-option");
+          options.forEach((opt) => {
+            opt.addEventListener("click", function (e) {
+              e.preventDefault();
+              e.stopPropagation();
+
+              const lang = this.dataset.lang;
+              const flag = this.dataset.flag;
+
+              console.log("Selected:", lang);
+
+              options.forEach((o) => o.classList.remove("active"));
+              this.classList.add("active");
+
+              document.getElementById("currentFlag").textContent = flag;
+              document.getElementById("currentLang").textContent =
+                lang.toUpperCase();
+
+              langDropdown.style.display = "none";
+              langDropdown.classList.remove("active");
+              newLangToggle.setAttribute("aria-expanded", "false");
+
+              if (window.i18n && window.i18n.setLanguage) {
+                window.i18n.setLanguage(lang);
+              }
+
+              localStorage.setItem("preferredLanguage", lang);
+            });
+          });
+
+          document.addEventListener("click", function (e) {
+            if (
+              !langToggle.contains(e.target) &&
+              !langDropdown.contains(e.target)
+            ) {
+              langDropdown.classList.remove("active");
+              langDropdown.style.display = "none";
+              langToggle.setAttribute("aria-expanded", "false");
+              const arrow = langToggle.querySelector(".lang-arrow");
+              if (arrow) arrow.textContent = "▼";
+            }
+          });
+        }
+      })();
+    </script>
+  </body>
+</html>

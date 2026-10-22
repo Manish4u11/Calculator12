@@ -135,6 +135,44 @@
         display: block;
       }
     </style>
+
+    <style>
+      /* Language Selector Styles - FIXED (pointer-events removed) */
+      .language-selector {
+        position: relative;
+        z-index: 1000 !important;
+      }
+
+      .lang-dropdown.active {
+        display: block;
+      }
+
+      /* FORCE dropdown ko dikhane ke liye */
+      .lang-dropdown[style*="display: block"],
+      .lang-dropdown.active[style*="display: block"] {
+        display: block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+      }
+
+      /* Agar parent hidden hai toh usko bhi override karo */
+      .language-selector {
+        overflow: visible !important;
+      }
+
+      .lang-option {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 12px 16px;
+        width: 100%;
+        border: none;
+        background: transparent;
+        cursor: pointer;
+        text-align: left;
+        transition: background 0.2s;
+      }
+    </style>
   </head>
   <body>
     <!-- Header -->
@@ -368,6 +406,151 @@
           </nav>
 
           <div class="header__actions">
+            <!-- Language Selector -->
+            <div class="language-selector">
+              <button
+                id="langToggle"
+                class="lang-toggle-btn"
+                aria-expanded="false"
+                aria-haspopup="true"
+              >
+                <span class="lang-flag" id="currentFlag">US</span>
+                <span class="lang-name" id="currentLang">EN</span>
+                <span class="lang-arrow">▼</span>
+              </button>
+              <div id="langDropdown" class="lang-dropdown" role="menu">
+                <button
+                  class="lang-option active"
+                  data-lang="en"
+                  data-flag="🇺🇸"
+                  role="menuitem"
+                >
+                  <span class="flag">🇺🇸</span
+                  ><span class="lang-text">English</span
+                  ><span class="lang-native">English</span>
+                </button>
+                <button
+                  class="lang-option"
+                  data-lang="hi"
+                  data-flag="🇮🇳"
+                  role="menuitem"
+                >
+                  <span class="flag">🇮🇳</span
+                  ><span class="lang-text">Hindi</span
+                  ><span class="lang-native">हिन्दी</span>
+                </button>
+                <button
+                  class="lang-option"
+                  data-lang="es"
+                  data-flag="🇪🇸"
+                  role="menuitem"
+                >
+                  <span class="flag">🇪🇸</span
+                  ><span class="lang-text">Spanish</span
+                  ><span class="lang-native">Español</span>
+                </button>
+                <button
+                  class="lang-option"
+                  data-lang="fr"
+                  data-flag="🇫🇷"
+                  role="menuitem"
+                >
+                  <span class="flag">🇫🇷</span
+                  ><span class="lang-text">French</span
+                  ><span class="lang-native">Français</span>
+                </button>
+                <button
+                  class="lang-option"
+                  data-lang="de"
+                  data-flag="🇩🇪"
+                  role="menuitem"
+                >
+                  <span class="flag">🇩🇪</span
+                  ><span class="lang-text">German</span
+                  ><span class="lang-native">Deutsch</span>
+                </button>
+                <button
+                  class="lang-option"
+                  data-lang="pt"
+                  data-flag="🇵🇹"
+                  role="menuitem"
+                >
+                  <span class="flag">🇵🇹</span
+                  ><span class="lang-text">Portuguese</span
+                  ><span class="lang-native">Português</span>
+                </button>
+                <button
+                  class="lang-option"
+                  data-lang="ru"
+                  data-flag="🇷🇺"
+                  role="menuitem"
+                >
+                  <span class="flag">🇷🇺</span
+                  ><span class="lang-text">Russian</span
+                  ><span class="lang-native">Русский</span>
+                </button>
+                <button
+                  class="lang-option"
+                  data-lang="ar"
+                  data-flag="🇸🇦"
+                  role="menuitem"
+                >
+                  <span class="flag">🇸🇦</span
+                  ><span class="lang-text">Arabic</span
+                  ><span class="lang-native">العربية</span>
+                </button>
+                <button
+                  class="lang-option"
+                  data-lang="zh"
+                  data-flag="🇨🇳"
+                  role="menuitem"
+                >
+                  <span class="flag">🇨🇳</span
+                  ><span class="lang-text">Chinese</span
+                  ><span class="lang-native">中文</span>
+                </button>
+                <button
+                  class="lang-option"
+                  data-lang="ja"
+                  data-flag="🇯🇵"
+                  role="menuitem"
+                >
+                  <span class="flag">🇯🇵</span
+                  ><span class="lang-text">Japanese</span
+                  ><span class="lang-native">日本語</span>
+                </button>
+                <button
+                  class="lang-option"
+                  data-lang="ko"
+                  data-flag="🇰🇷"
+                  role="menuitem"
+                >
+                  <span class="flag">🇰🇷</span
+                  ><span class="lang-text">Korean</span
+                  ><span class="lang-native">한국어</span>
+                </button>
+                <button
+                  class="lang-option"
+                  data-lang="vi"
+                  data-flag="🇻🇳"
+                  role="menuitem"
+                >
+                  <span class="flag">🇻🇳</span
+                  ><span class="lang-text">Vietnamese</span
+                  ><span class="lang-native">Tiếng Việt</span>
+                </button>
+                <button
+                  class="lang-option"
+                  data-lang="id"
+                  data-flag="🇮🇩"
+                  role="menuitem"
+                >
+                  <span class="flag">🇮🇩</span
+                  ><span class="lang-text">Indonesian</span
+                  ><span class="lang-native">Bahasa</span>
+                </button>
+              </div>
+            </div>
             <button class="theme-toggle" aria-label="Toggle dark mode">
               <i
                 class="fas fa-sun theme-toggle__icon theme-toggle__icon--sun"
@@ -519,6 +702,68 @@
                 Calculate BMI
               </button>
 
+              <!-- Action Buttons -->
+              <div
+                class="calc-action-buttons"
+                style="
+                  margin-top: var(--space-4);
+                  display: flex;
+                  gap: var(--space-2);
+                  flex-wrap: wrap;
+                "
+              >
+                <button
+                  id="export-pdf-btn"
+                  class="btn btn-secondary"
+                  style="
+                    white-space: nowrap;
+                    display: inline-flex;
+                    align-items: center;
+                    gap: 6px;
+                    min-width: 130px;
+                    justify-content: center;
+                  "
+                >
+                  <i class="fas fa-file-pdf"></i> Export PDF
+                </button>
+                <button
+                  id="share-btn"
+                  class="btn btn-secondary"
+                  style="
+                    white-space: nowrap;
+                    display: inline-flex;
+                    align-items: center;
+                    gap: 6px;
+                  "
+                >
+                  <i class="fas fa-share-alt"></i> Share
+                </button>
+                <button
+                  id="copy-btn"
+                  class="btn btn-secondary"
+                  style="
+                    white-space: nowrap;
+                    display: inline-flex;
+                    align-items: center;
+                    gap: 6px;
+                  "
+                >
+                  <i class="fas fa-copy"></i> Copy
+                </button>
+                <button
+                  id="reset-btn"
+                  class="btn btn-ghost"
+                  style="
+                    white-space: nowrap;
+                    display: inline-flex;
+                    align-items: center;
+                    gap: 6px;
+                  "
+                >
+                  <i class="fas fa-redo"></i> Reset
+                </button>
+              </div>
+
               <div
                 id="calc-error"
                 class="error-message"
@@ -546,7 +791,6 @@
                       style="font-family: &quot;Inter&quot;, Arial, sans-serif"
                     >
                       <defs>
-                        <!-- Gradients -->
                         <linearGradient
                           id="grad-under"
                           x1="0%"
@@ -587,8 +831,6 @@
                           <stop offset="0%" stop-color="#F97316" />
                           <stop offset="100%" stop-color="#C2410C" />
                         </linearGradient>
-
-                        <!-- Filters -->
                         <filter
                           id="shadow-3d"
                           x="-20%"
@@ -628,8 +870,6 @@
                             flood-opacity="0.3"
                           />
                         </filter>
-
-                        <!-- Curved Text Paths -->
                         <path
                           id="curvetxt1"
                           d="M-4 140 A140 140, 0, 0, 1, 284 140"
@@ -652,7 +892,7 @@
                         ></path>
                       </defs>
 
-                      <!-- 1. Color Zones -->
+                      <!-- Color Zones -->
                       <path
                         d="M0 140 A140 140, 0, 0, 1, 6.9 96.7 L140 140 Z"
                         fill="url(#grad-under)"
@@ -697,7 +937,7 @@
                         filter="url(#zone-depth)"
                       ></path>
 
-                      <!-- 2. Outer Rim -->
+                      <!-- Outer Rim -->
                       <path
                         d="M0 140 A140 140, 0, 0, 1, 280 140"
                         fill="none"
@@ -706,13 +946,13 @@
                         filter="url(#shadow-3d)"
                       ></path>
 
-                      <!-- 3. White Center Circle -->
+                      <!-- White Center Circle -->
                       <path
                         d="M45 140 A90 90, 0, 0, 1, 230 140 Z"
                         fill="#ffffff"
                       ></path>
 
-                      <!-- 4. Scale Numbers -->
+                      <!-- Scale Numbers -->
                       <g
                         style="
                           paint-order: stroke;
@@ -743,7 +983,7 @@
                         </text>
                       </g>
 
-                      <!-- 5. Curved Text Labels -->
+                      <!-- Curved Text Labels -->
                       <g
                         style="
                           font-size: 14px;
@@ -777,7 +1017,7 @@
                         </text>
                       </g>
 
-                      <!-- 6. NEEDLE -->
+                      <!-- NEEDLE -->
                       <g id="needle-group" transform="rotate(0 140 140)">
                         <line
                           x1="140"
@@ -796,7 +1036,7 @@
                         ></polygon>
                       </g>
 
-                      <!-- 7. Center Pivot Dot -->
+                      <!-- Center Pivot Dot -->
                       <circle
                         cx="140"
                         cy="140"
@@ -806,7 +1046,7 @@
                       ></circle>
                       <circle cx="140" cy="140" r="3" fill="#ffffff"></circle>
 
-                      <!-- 8. BMI Text Display -->
+                      <!-- BMI Text Display -->
                       <text
                         x="140"
                         y="110"
@@ -828,7 +1068,7 @@
                   </svg>
                 </div>
 
-                <!-- Input Summary (User's Entered Details) -->
+                <!-- Input Summary -->
                 <div
                   class="input-summary"
                   id="input-summary"
@@ -979,7 +1219,6 @@
 
         <!-- SEO Content -->
         <section class="calculator-content">
-          <!-- Introduction -->
           <div class="content-block">
             <h2>What is BMI Calculator?</h2>
             <p>
@@ -990,161 +1229,66 @@
               provide instant results, helping you understand your health status
               and take proactive steps towards better wellness.
             </p>
-            <p>
-              Body Mass Index is a simple yet effective screening method used by
-              healthcare professionals worldwide to categorize weight status and
-              identify potential health risks associated with being underweight,
-              normal weight, overweight, or obese.
-            </p>
           </div>
 
-          <!-- How to Use -->
           <div class="content-block">
             <h2>How to Use Our BMI Calculator?</h2>
             <p>
               Using our advanced BMI calculator is quick and straightforward.
               Follow these simple steps:
             </p>
-
             <h3>Step 1: Enter Your Weight</h3>
             <p>
               Input your current weight in your preferred unit - kilograms (kg),
-              pounds (lbs), or stones. Our calculator supports multiple
-              measurement systems for global users.
+              pounds (lbs), or stones.
             </p>
-
             <h3>Step 2: Enter Your Height</h3>
             <p>
               Provide your height measurement. You can choose from centimeters
               (cm), feet and inches, or meters based on your convenience.
             </p>
-
             <h3>Step 3: Add Age and Gender</h3>
             <p>
               Enter your age and select your gender. This information helps
-              provide more personalized health insights and accurate healthy
-              weight ranges.
+              provide more personalized health insights.
             </p>
-
             <h3>Step 4: Calculate Your BMI</h3>
             <p>
               Click the "Calculate BMI" button to instantly see your results.
               Our visual gauge chart will display your BMI score along with your
-              weight category, making it easy to understand your health status
-              at a glance.
+              weight category.
             </p>
-
-            <h3>Step 5: Review Your Results</h3>
-            <p>The calculator provides:</p>
-            <ul>
-              <li>Your exact BMI score</li>
-              <li>Weight category classification</li>
-              <li>Healthy weight range for your height</li>
-              <li>Visual representation on an interactive gauge</li>
-            </ul>
           </div>
 
-          <!-- Understanding BMI -->
           <div class="content-block">
             <h2>Understanding BMI Categories</h2>
             <p>
               The World Health Organization (WHO) has established standard BMI
               categories to help classify weight status:
             </p>
-
-            <h3>Underweight (BMI < 18.5)</h3>
+            <h3>Underweight (BMI &lt; 18.5)</h3>
             <p>
-              If your BMI falls below 18.5, you may be underweight. This could
-              indicate malnutrition, underlying health conditions, or
-              insufficient calorie intake. Consult a healthcare provider to
-              develop a healthy weight gain plan.
+              If your BMI falls below 18.5, you may be underweight. Consult a
+              healthcare provider to develop a healthy weight gain plan.
             </p>
-
             <h3>Normal Weight (BMI 18.5 - 24.9)</h3>
             <p>
               A BMI between 18.5 and 24.9 indicates a healthy weight range.
-              People in this category typically have a lower risk of
-              weight-related health problems. Maintain your weight through
-              balanced nutrition and regular physical activity.
+              Maintain your weight through balanced nutrition and regular
+              physical activity.
             </p>
-
             <h3>Overweight (BMI 25 - 29.9)</h3>
             <p>
-              A BMI of 25 to 29.9 suggests you're overweight. This increases
-              your risk of cardiovascular disease, diabetes, and other health
-              conditions. Consider adopting healthier eating habits and
-              increasing physical activity.
+              A BMI of 25 to 29.9 suggests you're overweight. Consider adopting
+              healthier eating habits and increasing physical activity.
             </p>
-
             <h3>Obese (BMI ≥ 30)</h3>
             <p>
-              A BMI of 30 or higher indicates obesity, which significantly
-              increases the risk of serious health conditions including heart
-              disease, stroke, type 2 diabetes, and certain cancers. Seek
-              medical advice for a comprehensive weight management plan.
+              A BMI of 30 or higher indicates obesity. Seek medical advice for a
+              comprehensive weight management plan.
             </p>
           </div>
 
-          <!-- Advantages -->
-          <div class="content-block">
-            <h2>Advantages of Using BMI Calculator</h2>
-
-            <h3>1. Quick Health Assessment</h3>
-            <p>
-              Our BMI calculator provides instant results, allowing you to
-              quickly assess your weight status without complex calculations or
-              medical appointments.
-            </p>
-
-            <h3>2. Free and Accessible</h3>
-            <p>
-              This tool is completely free to use and available online 24/7. No
-              registration or personal information required - just calculate
-              your BMI anytime, anywhere.
-            </p>
-
-            <h3>3. Multiple Unit Support</h3>
-            <p>
-              Whether you prefer metric (kg, cm) or imperial (lbs, feet/inches)
-              measurements, our calculator accommodates all units, making it
-              perfect for international users.
-            </p>
-
-            <h3>4. Visual Results</h3>
-            <p>
-              The interactive gauge chart provides a clear visual representation
-              of your BMI score, making it easy to understand where you stand on
-              the weight spectrum.
-            </p>
-
-            <h3>5. Personalized Healthy Weight Range</h3>
-            <p>
-              Beyond just your BMI score, the calculator shows the ideal weight
-              range for your specific height, giving you a target to work
-              towards.
-            </p>
-
-            <h3>6. Age and Gender Consideration</h3>
-            <p>
-              By factoring in your age and gender, the calculator provides more
-              relevant health insights tailored to your demographic.
-            </p>
-
-            <h3>7. Health Risk Awareness</h3>
-            <p>
-              Understanding your BMI category helps you recognize potential
-              health risks early and take preventive measures before serious
-              conditions develop.
-            </p>
-
-            <h3>8. Track Your Progress</h3>
-            <p>
-              Regular BMI calculations help you monitor weight loss or gain
-              progress, keeping you motivated on your health journey.
-            </p>
-          </div>
-
-          <!-- BMI Formula -->
           <div class="content-block">
             <h2>BMI Formula and Calculation</h2>
             <p>The BMI formula is straightforward:</p>
@@ -1158,20 +1302,7 @@
                 font-size: var(--text-lg);
               "
             >
-              <strong>BMI = weight (kg) height² (m²)</strong>
-            </div>
-            <p>For imperial measurements:</p>
-            <div
-              style="
-                background: var(--bg-secondary);
-                padding: var(--space-4);
-                border-radius: var(--radius-md);
-                margin: var(--space-4) 0;
-                text-align: center;
-                font-size: var(--text-lg);
-              "
-            >
-              <strong>BMI = (weight (lbs) ÷ height² (in²)) × 703</strong>
+              <strong>BMI = weight (kg) / height² (m²)</strong>
             </div>
             <p>
               Our calculator automatically handles all conversions and
@@ -1179,93 +1310,19 @@
             </p>
           </div>
 
-          <!-- Limitations -->
-          <div class="content-block">
-            <h2>Important Considerations</h2>
-            <p>
-              While BMI is a useful screening tool, it has certain limitations:
-            </p>
-            <ul>
-              <li>
-                <strong>Muscle Mass:</strong> BMI doesn't distinguish between
-                muscle and fat. Athletes and bodybuilders may have high BMI
-                despite being healthy.
-              </li>
-              <li>
-                <strong>Age Factors:</strong> BMI interpretation varies for
-                children, teens, and elderly individuals.
-              </li>
-              <li>
-                <strong>Ethnicity:</strong> Different ethnic groups may have
-                varying health risks at the same BMI level.
-              </li>
-              <li>
-                <strong>Pregnancy:</strong> BMI is not applicable during
-                pregnancy.
-              </li>
-            </ul>
-            <p>
-              Always consult healthcare professionals for comprehensive health
-              assessments beyond BMI.
-            </p>
-          </div>
-
-          <!-- FAQ -->
           <div class="content-block">
             <h2>Frequently Asked Questions</h2>
-
             <h3>What is a healthy BMI range?</h3>
             <p>
               A healthy BMI range is between 18.5 and 24.9 for most adults.
               However, individual health goals may vary based on factors like
               age, muscle mass, and overall health.
             </p>
-
             <h3>Is BMI accurate for everyone?</h3>
             <p>
               BMI is a general screening tool and may not be accurate for
               athletes, elderly individuals, pregnant women, or those with high
-              muscle mass. It should be used alongside other health assessments.
-            </p>
-
-            <h3>How often should I calculate my BMI?</h3>
-            <p>
-              If you're actively managing your weight, calculating BMI monthly
-              can help track progress. For general health monitoring, checking
-              every 3-6 months is sufficient.
-            </p>
-
-            <h3>Can BMI predict health problems?</h3>
-            <p>
-              BMI indicates potential health risks but doesn't diagnose
-              conditions. High or low BMI suggests you should consult a
-              healthcare provider for comprehensive evaluation.
-            </p>
-
-            <h3>What should I do if my BMI is outside the normal range?</h3>
-            <p>
-              If your BMI indicates underweight, overweight, or obesity, consult
-              a healthcare professional or registered dietitian to develop a
-              personalized plan for achieving a healthier weight.
-            </p>
-          </div>
-
-          <!-- Conclusion -->
-          <div class="content-block">
-            <h2>Start Your Health Journey Today</h2>
-            <p>
-              Our free BMI calculator is your first step towards better health
-              awareness. By understanding your body mass index, you can make
-              informed decisions about your diet, exercise, and overall
-              lifestyle. Remember, maintaining a healthy weight is not just
-              about appearance—it's about reducing health risks and improving
-              your quality of life.
-            </p>
-            <p>
-              Use our calculator regularly, track your progress, and take
-              proactive steps towards achieving and maintaining a healthy
-              weight. Your journey to better health starts with knowing where
-              you stand today!
+              muscle mass.
             </p>
           </div>
         </section>
@@ -1291,11 +1348,25 @@
                     >Home Loan EMI Calculator</a
                   >
                 </li>
-                <li><a href="#">Car Loan EMI Calculator</a></li>
-                <li><a href="#">SIP Calculator</a></li>
-                <li><a href="#">PPF Calculator</a></li>
-                <li><a href="#">Income Tax Calculator</a></li>
-                <li><a href="#">GST Calculator</a></li>
+                <li>
+                  <a href="../finance/simple-interest-calculator.html"
+                    >Simple Interest Calculator</a
+                  >
+                </li>
+                <li>
+                  <a href="../finance/sip-calculator.html">SIP Calculator</a>
+                </li>
+                <li>
+                  <a href="../finance/ppf-calculator.html">PPF Calculator</a>
+                </li>
+                <li>
+                  <a href="../finance/income-tax-calculator.html"
+                    >Income Tax Calculator</a
+                  >
+                </li>
+                <li>
+                  <a href="../finance/gst-calculator.html">GST Calculator</a>
+                </li>
               </ul>
             </div>
 
@@ -1419,10 +1490,12 @@
 
     <!-- Scripts -->
     <script src="../../assets/js/core/theme-switcher.js" defer></script>
+    <script src="../../engines/translation/i18n.js" defer></script>
+    <script src="../../engines/translation/translations.js" defer></script>
+
     <script>
       // BMI Calculator Logic
       document.addEventListener("DOMContentLoaded", () => {
-        // Unit Toggles
         const weightUnitButtons = document.querySelectorAll(
           ".unit-toggle:first-of-type button",
         );
@@ -1431,7 +1504,6 @@
         let weightUnit = "kg";
         let heightUnit = "cm";
 
-        // Weight Unit Toggle
         weightUnitButtons.forEach((btn) => {
           btn.addEventListener("click", () => {
             weightUnitButtons.forEach((b) => b.classList.remove("active"));
@@ -1440,7 +1512,6 @@
           });
         });
 
-        // Gender Toggle
         const genderButtons = document.querySelectorAll(
           ".unit-toggle:nth-of-type(2) button",
         );
@@ -1455,19 +1526,16 @@
           });
         });
 
-        // Height Unit Toggle
         heightUnitButtons.forEach((btn) => {
           btn.addEventListener("click", () => {
             heightUnitButtons.forEach((b) => b.classList.remove("active"));
             btn.classList.add("active");
             heightUnit = btn.dataset.unit;
 
-            // Hide all height inputs first
             document.getElementById("height-input-cm").style.display = "none";
             document.getElementById("height-input-ftin").style.display = "none";
             document.getElementById("height-input-m").style.display = "none";
 
-            // Show selected height input
             if (heightUnit === "cm") {
               document.getElementById("height-input-cm").style.display =
                 "block";
@@ -1480,7 +1548,6 @@
           });
         });
 
-        // Calculate BMI
         document
           .getElementById("calculate-bmi")
           .addEventListener("click", calculateBMI);
@@ -1490,14 +1557,12 @@
           const age = parseInt(document.getElementById("age").value);
           let heightCm = 0;
 
-          // Convert weight to kg
           if (weightUnit === "lbs") {
             weight = weight * 0.453592;
           } else if (weightUnit === "stones") {
             weight = weight * 6.35029;
           }
 
-          // Convert height to cm
           if (heightUnit === "cm") {
             heightCm = parseFloat(document.getElementById("height-cm").value);
           } else if (heightUnit === "ftin") {
@@ -1511,7 +1576,6 @@
               parseFloat(document.getElementById("height-m").value) * 100;
           }
 
-          // Validation
           if (!weight || !heightCm || weight <= 0 || heightCm <= 0) {
             document.getElementById("calc-error").style.display = "block";
             document.getElementById("calc-error").textContent =
@@ -1528,57 +1592,68 @@
 
           document.getElementById("calc-error").style.display = "none";
 
-          // Calculate BMI
           const heightM = heightCm / 100;
           const bmi = weight / (heightM * heightM);
           const bmiRounded = Math.round(bmi * 100) / 100;
 
-          // Determine category and needle rotation
+          // Determine category and needle rotation - CORRECTED
           let category = "";
-          let angle = -90;
           let categoryColor = "#10B981";
 
+          // Gauge chart: 15 se 40 BMI (total 25 units)
+          // Angle range: -90° se +90° (total 180°)
+          // Continuous formula: angle = -90 + ((bmi - 15) / 25) * 180
+
+          let angle = -90 + ((bmi - 15) / 25) * 180;
+
+          // Category determine karo
           if (bmi < 18.5) {
             category = "Underweight";
-            angle = -90 + ((bmi - 15) / 3.5) * 45;
             categoryColor = "#EF4444";
           } else if (bmi < 25) {
             category = "Normal Weight";
-            angle = -45 + ((bmi - 18.5) / 6.5) * 45;
             categoryColor = "#10B981";
           } else if (bmi < 30) {
             category = "Overweight";
-            angle = 0 + ((bmi - 25) / 5) * 45;
             categoryColor = "#F59E0B";
           } else if (bmi < 35) {
             category = "Obese";
-            angle = 45 + ((bmi - 30) / 5) * 45;
             categoryColor = "#EF4444";
           } else {
             category = "Extremely Obese";
-            angle = 90;
             categoryColor = "#DC2626";
           }
 
-          // Clamp angle
+          // Clamp angle between -90 and 90
           if (angle < -90) angle = -90;
           if (angle > 90) angle = 90;
 
-          // Update needle rotation using native SVG transform
-          const needleGroup = document.getElementById("needle-group");
-          needleGroup.setAttribute("transform", `rotate(${angle} 140 140)`);
+          // Debug: Console mein angle dikhao
+          console.log(
+            `BMI: ${bmi.toFixed(2)}, Angle: ${angle.toFixed(2)}°, Category: ${category}`,
+          );
 
-          // Update BMI display
+          // Update needle rotation - FIXED with animation
+          const needleGroup = document.getElementById("needle-group");
+          if (needleGroup) {
+            // Smooth rotation ke liye CSS transition add karo
+            needleGroup.style.transition = "transform 0.5s ease-in-out";
+
+            // Force reflow
+            needleGroup.getBoundingClientRect();
+
+            // Actual angle set karo
+            needleGroup.setAttribute("transform", `rotate(${angle} 140 140)`);
+          }
+
           document.getElementById("bmi-value").textContent = bmiRounded;
           const categoryText = document.getElementById("bmi-category");
           categoryText.textContent = category;
           categoryText.style.fill = categoryColor;
 
-          // Calculate healthy weight range
           let minHealthyWeight = 18.5 * (heightM * heightM);
           let maxHealthyWeight = 24.9 * (heightM * heightM);
 
-          // Adjust for age
           if (age > 65) {
             maxHealthyWeight = 27 * (heightM * heightM);
           }
@@ -1600,11 +1675,10 @@
           document.getElementById("healthy-range-text").innerHTML =
             `For your height: <strong>${minWeightDisplay.toFixed(1)} - ${maxWeightDisplay.toFixed(1)} ${weightUnitDisplay}</strong>`;
           document.getElementById("healthy-range").style.display = "block";
-          // Update Input Summary (AFTER weightUnitDisplay is defined)
+
           document.getElementById("summary-weight").textContent =
             `${weight.toFixed(1)} ${weightUnitDisplay}`;
 
-          // Height ko user ke input unit me dikhayein
           let heightDisplay = "";
           if (heightUnit === "cm") {
             heightDisplay = `${heightCm.toFixed(1)} cm`;
@@ -1624,6 +1698,221 @@
           document.getElementById("input-summary").style.display = "block";
         }
       });
+
+      // Action Buttons Functionality
+      document.addEventListener("DOMContentLoaded", () => {
+        const exportPdfBtn = document.getElementById("export-pdf-btn");
+        if (exportPdfBtn) {
+          exportPdfBtn.addEventListener("click", () => window.print());
+        }
+
+        const shareBtn = document.getElementById("share-btn");
+        if (shareBtn) {
+          shareBtn.addEventListener("click", () => {
+            const bmiValue =
+              document.getElementById("bmi-value")?.textContent || "--";
+            const bmiCategory =
+              document.getElementById("bmi-category")?.textContent || "--";
+            const shareText = `My BMI: ${bmiValue} (${bmiCategory}) - Calculated using Calculator12`;
+
+            if (navigator.share) {
+              navigator
+                .share({
+                  title: "BMI Calculator Results",
+                  text: shareText,
+                  url: window.location.href,
+                })
+                .catch((err) => console.log("Share failed:", err));
+            } else {
+              navigator.clipboard
+                .writeText(shareText)
+                .then(() => alert("Results copied to clipboard!"));
+            }
+          });
+        }
+
+        const copyBtn = document.getElementById("copy-btn");
+        if (copyBtn) {
+          copyBtn.addEventListener("click", () => {
+            const bmiValue =
+              document.getElementById("bmi-value")?.textContent || "--";
+            const bmiCategory =
+              document.getElementById("bmi-category")?.textContent || "--";
+            const weight = document.getElementById("weight")?.value || "--";
+            const copyText = `BMI Calculator Results\n\nBMI: ${bmiValue}\nCategory: ${bmiCategory}\nWeight: ${weight}\n\nCalculated using Calculator12`;
+
+            navigator.clipboard
+              .writeText(copyText)
+              .then(() => {
+                const originalText = copyBtn.innerHTML;
+                copyBtn.innerHTML = '<i class="fas fa-check"></i> Copied!';
+                setTimeout(() => {
+                  copyBtn.innerHTML = originalText;
+                }, 2000);
+              })
+              .catch((err) => alert("Failed to copy: " + err));
+          });
+        }
+
+        const resetBtn = document.getElementById("reset-btn");
+        if (resetBtn) {
+          resetBtn.addEventListener("click", () => {
+            document
+              .querySelectorAll('input[type="number"]')
+              .forEach((input) => {
+                input.value = "";
+              });
+
+            const weightUnitBtns = document.querySelectorAll(
+              ".unit-toggle:first-of-type button",
+            );
+            if (weightUnitBtns.length > 0) {
+              weightUnitBtns.forEach((btn) => btn.classList.remove("active"));
+              weightUnitBtns[0].classList.add("active");
+            }
+
+            const heightUnitBtns = document.querySelectorAll(
+              "#height-unit-toggle button",
+            );
+            if (heightUnitBtns.length > 0) {
+              heightUnitBtns.forEach((btn) => btn.classList.remove("active"));
+              heightUnitBtns[0].classList.add("active");
+              document.getElementById("height-input-cm").style.display =
+                "block";
+              document.getElementById("height-input-ftin").style.display =
+                "none";
+              document.getElementById("height-input-m").style.display = "none";
+            }
+
+            const genderBtns = document.querySelectorAll(
+              ".unit-toggle:nth-of-type(2) button",
+            );
+            if (genderBtns.length > 0) {
+              genderBtns.forEach((btn) => btn.classList.remove("active"));
+              genderBtns[0].classList.add("active");
+            }
+
+            document.getElementById("bmi-value").textContent = "--";
+            document.getElementById("bmi-category").textContent =
+              "Enter details";
+            document.getElementById("calc-error").style.display = "none";
+            document.getElementById("input-summary").style.display = "none";
+            document.getElementById("healthy-range").style.display = "none";
+
+            // Reset needle to starting position
+            const needleGroup = document.getElementById("needle-group");
+            if (needleGroup) {
+              needleGroup.style.transition = "transform 0.5s ease-in-out";
+              needleGroup.getBoundingClientRect();
+              needleGroup.setAttribute("transform", "rotate(0 140 140)");
+            }
+          });
+        }
+      });
+
+      // Language Selector - 100% Working Fix
+      (function () {
+        // Wait for DOM to be fully ready
+        if (document.readyState === "loading") {
+          document.addEventListener("DOMContentLoaded", initLanguageSelector);
+        } else {
+          initLanguageSelector();
+        }
+
+        function initLanguageSelector() {
+          const langToggle = document.getElementById("langToggle");
+          const langDropdown = document.getElementById("langDropdown");
+
+          if (!langToggle || !langDropdown) {
+            console.error("Language elements not found");
+            return;
+          }
+
+          console.log("✅ Language Selector Ready");
+
+          // Make button clickable
+          langToggle.style.cursor = "pointer";
+          langToggle.style.zIndex = "9999";
+
+          // Remove any existing listeners
+          langToggle.replaceWith(langToggle.cloneNode(true));
+          const newLangToggle = document.getElementById("langToggle");
+
+          // Add click listener
+          newLangToggle.addEventListener("click", function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            console.log("Button clicked!");
+
+            const isExpanded = this.getAttribute("aria-expanded") === "true";
+            this.setAttribute("aria-expanded", !isExpanded);
+
+            // Toggle dropdown
+            if (langDropdown.classList.contains("active")) {
+              langDropdown.classList.remove("active");
+              langDropdown.style.display = "none";
+              // Arrow ko neeche ki taraf karo jab dropdown band ho
+              const arrow = langToggle.querySelector(".lang-arrow");
+              if (arrow) arrow.textContent = "▼";
+              console.log("🔴 Dropdown closed");
+            } else {
+              langDropdown.classList.add("active");
+              langDropdown.style.display = "block";
+              // Arrow ko upar ki taraf karo jab dropdown khule
+              const arrow = langToggle.querySelector(".lang-arrow");
+              if (arrow) arrow.textContent = "▲";
+              console.log("🟢 Dropdown opened");
+            }
+          });
+
+          // Language options
+          const options = langDropdown.querySelectorAll(".lang-option");
+          options.forEach((opt) => {
+            opt.addEventListener("click", function (e) {
+              e.preventDefault();
+              e.stopPropagation();
+
+              const lang = this.dataset.lang;
+              const flag = this.dataset.flag;
+
+              console.log("Selected:", lang);
+
+              options.forEach((o) => o.classList.remove("active"));
+              this.classList.add("active");
+
+              document.getElementById("currentFlag").textContent = flag;
+              document.getElementById("currentLang").textContent =
+                lang.toUpperCase();
+
+              langDropdown.style.display = "none";
+              langDropdown.classList.remove("active");
+              newLangToggle.setAttribute("aria-expanded", "false");
+
+              if (window.i18n && window.i18n.setLanguage) {
+                window.i18n.setLanguage(lang);
+              }
+
+              localStorage.setItem("preferredLanguage", lang);
+            });
+          });
+
+          // Close dropdown when clicking outside
+          document.addEventListener("click", function (e) {
+            if (
+              !langToggle.contains(e.target) &&
+              !langDropdown.contains(e.target)
+            ) {
+              langDropdown.classList.remove("active");
+              langDropdown.style.display = "none";
+              langToggle.setAttribute("aria-expanded", "false");
+              // Arrow ko neeche karo
+              const arrow = langToggle.querySelector(".lang-arrow");
+              if (arrow) arrow.textContent = "▼";
+            }
+          });
+        }
+      })();
     </script>
   </body>
 </html>

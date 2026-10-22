@@ -35,6 +35,78 @@
     <link rel="stylesheet" href="assets/css/layout.css" />
     <link rel="stylesheet" href="assets/css/components.css" />
     <link rel="stylesheet" href="assets/css/pages/calculator.css" />
+    <style>
+      /* Language Dropdown Styles */
+      .language-selector {
+        position: relative;
+        z-index: 1000 !important;
+      }
+      .language-selector__btn {
+        display: flex !important;
+        align-items: center !important;
+        gap: 6px !important;
+        padding: 8px 16px !important;
+        background: transparent !important;
+        border: 1px solid transparent !important;
+        border-radius: 20px !important;
+        cursor: pointer !important;
+        transition: all 0.2s ease !important;
+      }
+      .language-selector__btn:hover {
+        background: white !important;
+        border-color: #8b5cf6 !important;
+        box-shadow:
+          0 0 0 3px rgba(139, 92, 246, 0.15),
+          0 4px 12px rgba(139, 92, 246, 0.2) !important;
+      }
+      .lang-dropdown {
+        position: absolute;
+        top: 100%;
+        right: 0;
+        margin-top: 8px;
+        background: white;
+        border: 1px solid #e5e7eb;
+        border-radius: 12px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        max-height: 400px;
+        overflow-y: auto;
+        z-index: 1002 !important;
+        display: none;
+        min-width: 200px;
+      }
+      .lang-dropdown.active {
+        display: block !important;
+      }
+      .lang-option {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 12px 16px;
+        width: 100%;
+        border: none;
+        background: transparent;
+        cursor: pointer;
+        text-align: left;
+        transition: background 0.2s;
+      }
+      .lang-option:hover {
+        background: rgba(139, 92, 246, 0.1);
+      }
+      .lang-option.active {
+        background: rgba(139, 92, 246, 0.2);
+        font-weight: 600;
+      }
+      .lang-option .flag {
+        font-size: 20px;
+      }
+      .lang-option .lang-text {
+        flex: 1;
+      }
+      .lang-option .lang-native {
+        color: #6b7280;
+        font-size: 12px;
+      }
+    </style>
   </head>
 
   <body>
@@ -271,6 +343,158 @@
           </nav>
 
           <div class="header__actions">
+            <!-- Language Selector with Dropdown -->
+            <div class="language-selector">
+              <button
+                id="langToggle"
+                class="btn btn-ghost language-selector__btn"
+                aria-label="Change language"
+                aria-expanded="false"
+                aria-haspopup="true"
+              >
+                <i class="fas fa-globe" aria-hidden="true"></i>
+                <span class="language-selector__current" id="currentLang"
+                  >EN</span
+                >
+                <span
+                  class="lang-arrow"
+                  style="margin-left: 4px; font-size: 10px"
+                  >▼</span
+                >
+              </button>
+              <div id="langDropdown" class="lang-dropdown" role="menu">
+                <button
+                  class="lang-option active"
+                  data-lang="en"
+                  data-flag="🇺🇸"
+                  role="menuitem"
+                >
+                  <span class="flag">🇺🇸</span
+                  ><span class="lang-text">English</span
+                  ><span class="lang-native">English</span>
+                </button>
+                <button
+                  class="lang-option"
+                  data-lang="hi"
+                  data-flag="🇮🇳"
+                  role="menuitem"
+                >
+                  <span class="flag">🇮🇳</span
+                  ><span class="lang-text">Hindi</span
+                  ><span class="lang-native">हिन्दी</span>
+                </button>
+                <button
+                  class="lang-option"
+                  data-lang="es"
+                  data-flag="🇪🇸"
+                  role="menuitem"
+                >
+                  <span class="flag">🇪🇸</span
+                  ><span class="lang-text">Spanish</span
+                  ><span class="lang-native">Español</span>
+                </button>
+                <button
+                  class="lang-option"
+                  data-lang="fr"
+                  data-flag="🇫🇷"
+                  role="menuitem"
+                >
+                  <span class="flag">🇫🇷</span
+                  ><span class="lang-text">French</span
+                  ><span class="lang-native">Français</span>
+                </button>
+                <button
+                  class="lang-option"
+                  data-lang="de"
+                  data-flag="🇩🇪"
+                  role="menuitem"
+                >
+                  <span class="flag">🇩🇪</span
+                  ><span class="lang-text">German</span
+                  ><span class="lang-native">Deutsch</span>
+                </button>
+                <button
+                  class="lang-option"
+                  data-lang="pt"
+                  data-flag="🇵🇹"
+                  role="menuitem"
+                >
+                  <span class="flag">🇵🇹</span
+                  ><span class="lang-text">Portuguese</span
+                  ><span class="lang-native">Português</span>
+                </button>
+                <button
+                  class="lang-option"
+                  data-lang="ru"
+                  data-flag="🇷🇺"
+                  role="menuitem"
+                >
+                  <span class="flag">🇷🇺</span
+                  ><span class="lang-text">Russian</span
+                  ><span class="lang-native">Русский</span>
+                </button>
+                <button
+                  class="lang-option"
+                  data-lang="ar"
+                  data-flag="🇸🇦"
+                  role="menuitem"
+                >
+                  <span class="flag">🇸🇦</span
+                  ><span class="lang-text">Arabic</span
+                  ><span class="lang-native">العربية</span>
+                </button>
+                <button
+                  class="lang-option"
+                  data-lang="zh"
+                  data-flag="🇨🇳"
+                  role="menuitem"
+                >
+                  <span class="flag">🇨🇳</span
+                  ><span class="lang-text">Chinese</span
+                  ><span class="lang-native">中文</span>
+                </button>
+                <button
+                  class="lang-option"
+                  data-lang="ja"
+                  data-flag="🇯🇵"
+                  role="menuitem"
+                >
+                  <span class="flag">🇯🇵</span
+                  ><span class="lang-text">Japanese</span
+                  ><span class="lang-native">日本語</span>
+                </button>
+                <button
+                  class="lang-option"
+                  data-lang="ko"
+                  data-flag="🇰🇷"
+                  role="menuitem"
+                >
+                  <span class="flag">🇰🇷</span
+                  ><span class="lang-text">Korean</span
+                  ><span class="lang-native">한국어</span>
+                </button>
+                <button
+                  class="lang-option"
+                  data-lang="vi"
+                  data-flag="🇻🇳"
+                  role="menuitem"
+                >
+                  <span class="flag">🇻🇳</span
+                  ><span class="lang-text">Vietnamese</span
+                  ><span class="lang-native">Tiếng Việt</span>
+                </button>
+                <button
+                  class="lang-option"
+                  data-lang="id"
+                  data-flag="🇮🇩"
+                  role="menuitem"
+                >
+                  <span class="flag">🇮🇩</span
+                  ><span class="lang-text">Indonesian</span
+                  ><span class="lang-native">Bahasa</span>
+                </button>
+              </div>
+            </div>
             <button class="theme-toggle" aria-label="Toggle dark mode">
               <i
                 class="fas fa-sun theme-toggle__icon theme-toggle__icon--sun"
@@ -395,5 +619,77 @@
     <!-- JavaScript Files -->
     <script src="assets/js/core/theme-switcher.js" defer></script>
     <script src="assets/js/pages/all-calculators.js" defer></script>
+    <script>
+      // Bulletproof Language Dropdown Script
+      document.addEventListener(
+        "click",
+        function (e) {
+          const langToggle = document.getElementById("langToggle");
+          const langDropdown = document.getElementById("langDropdown");
+          const currentLang = document.getElementById("currentLang");
+
+          if (!langToggle || !langDropdown) return;
+
+          // 1. Jab Language Button par click ho (Open/Close)
+          if (langToggle.contains(e.target)) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            const isOpen = langDropdown.classList.contains("active");
+            if (isOpen) {
+              langDropdown.classList.remove("active");
+              langDropdown.style.display = "none";
+              langToggle.querySelector(".lang-arrow").textContent = "▼";
+              langToggle.setAttribute("aria-expanded", "false");
+            } else {
+              langDropdown.classList.add("active");
+              langDropdown.style.display = "block";
+              langToggle.querySelector(".lang-arrow").textContent = "▲";
+              langToggle.setAttribute("aria-expanded", "true");
+            }
+            return;
+          }
+
+          // 2. Jab koi Language Option select kiya jaye
+          const langOption = e.target.closest(".lang-option");
+          if (langOption && langDropdown.contains(langOption)) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            const lang = langOption.dataset.lang;
+
+            langDropdown
+              .querySelectorAll(".lang-option")
+              .forEach((opt) => opt.classList.remove("active"));
+            langOption.classList.add("active");
+
+            if (currentLang) currentLang.textContent = lang.toUpperCase();
+
+            langDropdown.classList.remove("active");
+            langDropdown.style.display = "none";
+            langToggle.setAttribute("aria-expanded", "false");
+            langToggle.querySelector(".lang-arrow").textContent = "▼";
+
+            if (window.i18n && window.i18n.setLanguage) {
+              window.i18n.setLanguage(lang);
+            }
+            localStorage.setItem("preferredLanguage", lang);
+            return;
+          }
+
+          // 3. Jab dropdown ke bahar kahin aur click ho (Close)
+          if (
+            !langToggle.contains(e.target) &&
+            !langDropdown.contains(e.target)
+          ) {
+            langDropdown.classList.remove("active");
+            langDropdown.style.display = "none";
+            langToggle.querySelector(".lang-arrow").textContent = "▼";
+            langToggle.setAttribute("aria-expanded", "false");
+          }
+        },
+        true,
+      );
+    </script>
   </body>
 </html>

@@ -1,0 +1,680 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Popular Calculators & Categories | Calculator12</title>
+    <meta
+      name="description"
+      content="Explore the most popular calculators and browse all available categories on Calculator12."
+    />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect fill='%238B5CF6' width='100' height='100' rx='20'/><text x='50' y='68' text-anchor='middle' font-family='Arial' font-size='60' font-weight='bold' fill='white'>C</text></svg>"
+    />
+
+    <!-- Fonts & Icons -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Poppins:wght@600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
+
+    <!-- Project CSS -->
+    <link rel="stylesheet" href="assets/css/variables.css" />
+    <link rel="stylesheet" href="assets/css/reset.css" />
+    <link rel="stylesheet" href="assets/css/base.css" />
+    <link rel="stylesheet" href="assets/css/theme.css" />
+    <link rel="stylesheet" href="assets/css/layout.css" />
+    <link rel="stylesheet" href="assets/css/components.css" />
+    <link rel="stylesheet" href="assets/css/pages/calculator.css" />
+
+    <!-- Specific Styles for Popular Page -->
+    <style>
+      /* Popular Calculators Grid - 3 Columns */
+      .popular-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: var(--space-6, 2rem);
+        margin-bottom: var(--space-12, 5rem);
+      }
+
+      .popular-card {
+        background: var(--bg-primary, #ffffff);
+        border: 1px solid var(--border-primary, #e5e7eb);
+        border-radius: var(--radius-lg, 12px);
+        padding: var(--space-6, 2rem);
+        text-decoration: none;
+        color: var(--text-primary, #1f2937);
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+        gap: var(--space-4, 1.25rem);
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
+        min-height: 90px;
+      }
+
+      .popular-card:hover {
+        transform: translateY(-4px);
+        box-shadow: var(--shadow-lg, 0 10px 15px -3px rgba(0, 0, 0, 0.1));
+        border-color: var(--color-purple-500, #8b5cf6);
+      }
+
+      .popular-card-icon {
+        width: 56px;
+        height: 56px;
+        background: linear-gradient(135deg, #8b5cf6 0%, #06b6d4 100%);
+        border-radius: var(--radius-md, 8px);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 24px;
+        flex-shrink: 0;
+      }
+
+      .popular-card-title {
+        font-weight: 600;
+        font-size: var(--text-lg, 1.125rem);
+        line-height: 1.4;
+      }
+
+      /* Categories List */
+      .categories-list {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: var(--space-3, 1rem);
+        margin-bottom: var(--space-12, 5rem);
+      }
+
+      .category-list-item {
+        display: flex;
+        align-items: center;
+        gap: var(--space-3, 1rem);
+        padding: var(--space-4, 1.25rem);
+        background: var(--bg-secondary, #f9fafb);
+        border: 1px solid var(--border-primary, #e5e7eb);
+        border-radius: var(--radius-md, 8px);
+        text-decoration: none;
+        color: var(--text-secondary, #374151);
+        font-weight: 500;
+        transition: all 0.2s ease;
+      }
+
+      .category-list-item:hover {
+        background: var(--bg-primary, #ffffff);
+        border-color: var(--color-purple-500, #8b5cf6);
+        box-shadow: var(--shadow-md, 0 4px 6px -1px rgba(0, 0, 0, 0.1));
+        color: var(--color-purple-600, #7c3aed);
+        transform: translateX(4px);
+      }
+
+      .category-list-item i {
+        color: var(--color-purple-500, #8b5cf6);
+        font-size: 18px;
+        width: 24px;
+        text-align: center;
+      }
+
+      .category-list-item:hover i {
+        color: var(--color-purple-600, #7c3aed);
+      }
+
+      /* Section Styles */
+      .page-section {
+        margin-bottom: var(--space-12, 5rem);
+      }
+      .section-header {
+        margin-bottom: var(--space-6, 2rem);
+        display: flex;
+        align-items: center;
+        gap: var(--space-2, 0.5rem);
+      }
+      .section-header h2 {
+        font-size: var(--text-2xl, 1.5rem);
+        font-weight: 700;
+        color: var(--text-primary, #1f2937);
+        margin: 0;
+      }
+
+      /* Responsive Design */
+      @media (max-width: 1024px) {
+        .popular-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+
+      @media (max-width: 640px) {
+        .popular-grid {
+          grid-template-columns: 1fr;
+        }
+        .categories-list {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Header with CORRECT Logo (Same as index.html, bmi-calculator.html, etc.) -->
+    <header class="header" role="banner">
+      <div class="container">
+        <div class="header__wrapper">
+          <div class="header__logo">
+            <a
+              href="index.html"
+              aria-label="Calculator12 Home"
+              class="logo-wrapper"
+            >
+              <div class="logo-icon">
+                <svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+                  <defs>
+                    <linearGradient
+                      id="logoGrad1"
+                      x1="0%"
+                      y1="0%"
+                      x2="100%"
+                      y2="100%"
+                    >
+                      <stop
+                        offset="0%"
+                        style="stop-color: #8b5cf6; stop-opacity: 1"
+                      />
+                      <stop
+                        offset="100%"
+                        style="stop-color: #06b6d4; stop-opacity: 1"
+                      />
+                    </linearGradient>
+                    <linearGradient
+                      id="logoGrad2"
+                      x1="100%"
+                      y1="0%"
+                      x2="0%"
+                      y2="100%"
+                    >
+                      <stop
+                        offset="0%"
+                        style="stop-color: #ec4899; stop-opacity: 1"
+                      />
+                      <stop
+                        offset="100%"
+                        style="stop-color: #8b5cf6; stop-opacity: 1"
+                      />
+                    </linearGradient>
+                    <filter id="glow">
+                      <feGaussianBlur stdDeviation="3" result="coloredBlur" />
+                      <feMerge>
+                        <feMergeNode in="coloredBlur" />
+                        <feMergeNode in="SourceGraphic" />
+                      </feMerge>
+                    </filter>
+                  </defs>
+                  <rect
+                    x="10"
+                    y="10"
+                    width="100"
+                    height="100"
+                    rx="25"
+                    fill="url(#logoGrad1)"
+                    opacity="0.15"
+                    stroke="url(#logoGrad1)"
+                    stroke-width="3"
+                  />
+                  <rect
+                    x="25"
+                    y="22"
+                    width="70"
+                    height="25"
+                    rx="6"
+                    fill="url(#logoGrad2)"
+                    opacity="0.9"
+                  />
+                  <text
+                    x="60"
+                    y="40"
+                    font-family="Arial, sans-serif"
+                    font-size="18"
+                    fill="white"
+                    text-anchor="middle"
+                    font-weight="bold"
+                  >
+                    =
+                  </text>
+                  <circle
+                    cx="35"
+                    cy="62"
+                    r="10"
+                    fill="url(#logoGrad1)"
+                    opacity="0.8"
+                    filter="url(#glow)"
+                  />
+                  <text
+                    x="35"
+                    y="67"
+                    font-family="Arial"
+                    font-size="14"
+                    fill="white"
+                    text-anchor="middle"
+                    font-weight="bold"
+                  >
+                    +
+                  </text>
+                  <circle
+                    cx="60"
+                    cy="62"
+                    r="10"
+                    fill="url(#logoGrad2)"
+                    opacity="0.8"
+                    filter="url(#glow)"
+                  />
+                  <text
+                    x="60"
+                    y="67"
+                    font-family="Arial"
+                    font-size="14"
+                    fill="white"
+                    text-anchor="middle"
+                    font-weight="bold"
+                  >
+                    −
+                  </text>
+                  <circle
+                    cx="85"
+                    cy="62"
+                    r="10"
+                    fill="url(#logoGrad1)"
+                    opacity="0.8"
+                    filter="url(#glow)"
+                  />
+                  <text
+                    x="85"
+                    y="67"
+                    font-family="Arial"
+                    font-size="14"
+                    fill="white"
+                    text-anchor="middle"
+                    font-weight="bold"
+                  >
+                    ×
+                  </text>
+                  <circle
+                    cx="35"
+                    cy="87"
+                    r="10"
+                    fill="url(#logoGrad2)"
+                    opacity="0.8"
+                    filter="url(#glow)"
+                  />
+                  <text
+                    x="35"
+                    y="92"
+                    font-family="Arial"
+                    font-size="14"
+                    fill="white"
+                    text-anchor="middle"
+                    font-weight="bold"
+                  >
+                    ÷
+                  </text>
+                  <circle
+                    cx="60"
+                    cy="87"
+                    r="10"
+                    fill="url(#logoGrad1)"
+                    opacity="0.8"
+                    filter="url(#glow)"
+                  />
+                  <text
+                    x="60"
+                    y="92"
+                    font-family="Arial"
+                    font-size="14"
+                    fill="white"
+                    text-anchor="middle"
+                    font-weight="bold"
+                  >
+                    √
+                  </text>
+                  <circle
+                    cx="85"
+                    cy="87"
+                    r="10"
+                    fill="url(#logoGrad2)"
+                    opacity="0.8"
+                    filter="url(#glow)"
+                  />
+                  <text
+                    x="85"
+                    y="92"
+                    font-family="Arial"
+                    font-size="14"
+                    fill="white"
+                    text-anchor="middle"
+                    font-weight="bold"
+                  >
+                    %
+                  </text>
+                </svg>
+              </div>
+              <span class="logo-text"
+                >Calculator<span class="logo-number">12</span></span
+              >
+            </a>
+          </div>
+          <nav
+            class="header__nav"
+            role="navigation"
+            aria-label="Main navigation"
+          >
+            <ul class="nav__list">
+              <li class="nav__item">
+                <a href="index.html" class="nav__link">Home</a>
+              </li>
+              <li class="nav__item">
+                <a href="all-calculators.html" class="nav__link"
+                  >All Calculators</a
+                >
+              </li>
+              <li class="nav__item">
+                <a href="all-calculators.html" class="nav__link">Categories</a>
+              </li>
+              <li class="nav__item">
+                <a href="popular.html" class="nav__link nav__link--active"
+                  >Popular</a
+                >
+              </li>
+              <li class="nav__item">
+                <a href="about.html" class="nav__link">About</a>
+              </li>
+            </ul>
+          </nav>
+          <div class="header__actions">
+            <div class="language-selector">
+              <button
+                id="langToggle"
+                class="lang-toggle-btn"
+                aria-expanded="false"
+                aria-haspopup="true"
+              >
+                <span class="lang-flag" id="currentFlag">US</span>
+                <span class="lang-name" id="currentLang">EN</span>
+                <span class="lang-arrow">▼</span>
+              </button>
+            </div>
+            <button class="theme-toggle" aria-label="Toggle dark mode">
+              <i
+                class="fas fa-sun theme-toggle__icon theme-toggle__icon--sun"
+              ></i>
+              <i
+                class="fas fa-moon theme-toggle__icon theme-toggle__icon--moon"
+              ></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main id="main-content" role="main">
+      <div class="container">
+        <!-- Breadcrumbs -->
+        <nav class="breadcrumbs" aria-label="Breadcrumb">
+          <ol class="breadcrumbs__list">
+            <li class="breadcrumbs__item"><a href="index.html">Home</a></li>
+            <li class="breadcrumbs__item" aria-current="page">Popular</li>
+          </ol>
+        </nav>
+
+        <!-- Page Header -->
+        <div class="page-header">
+          <h1 class="page-header__title">Popular Calculators</h1>
+          <p class="page-header__desc">
+            Our most used tools and complete category list.
+          </p>
+        </div>
+
+        <!-- Section 1: Popular Calculators (3 per row) -->
+        <section class="page-section">
+          <div class="section-header">
+            <h2>
+              <i class="fas fa-fire" style="color: #f59e0b"></i> Most Popular
+              Tools
+            </h2>
+          </div>
+          <div class="popular-grid">
+            <a
+              href="calculators/health/bmi-calculator.html"
+              class="popular-card"
+            >
+              <div class="popular-card-icon">
+                <i class="fas fa-heart-pulse"></i>
+              </div>
+              <span class="popular-card-title">BMI Calculator</span>
+            </a>
+            <a
+              href="calculators/finance/discount-calculator.html"
+              class="popular-card"
+            >
+              <div class="popular-card-icon"><i class="fas fa-tags"></i></div>
+              <span class="popular-card-title">Discount Calculator</span>
+            </a>
+            <a
+              href="calculators/finance/emi-calculator.html"
+              class="popular-card"
+            >
+              <div class="popular-card-icon"><i class="fas fa-coins"></i></div>
+              <span class="popular-card-title">EMI Calculator</span>
+            </a>
+            <a href="#" class="popular-card">
+              <div class="popular-card-icon">
+                <i class="fas fa-percent"></i>
+              </div>
+              <span class="popular-card-title">Percentage Calculator</span>
+            </a>
+            <a href="#" class="popular-card">
+              <div class="popular-card-icon">
+                <i class="fas fa-calendar-day"></i>
+              </div>
+              <span class="popular-card-title">Age Calculator</span>
+            </a>
+            <a href="#" class="popular-card">
+              <div class="popular-card-icon">
+                <i class="fas fa-chart-line"></i>
+              </div>
+              <span class="popular-card-title">SIP Calculator</span>
+            </a>
+            <a href="#" class="popular-card">
+              <div class="popular-card-icon">
+                <i class="fas fa-file-invoice-dollar"></i>
+              </div>
+              <span class="popular-card-title">GST Calculator</span>
+            </a>
+            <a href="#" class="popular-card">
+              <div class="popular-card-icon">
+                <i class="fas fa-apple-alt"></i>
+              </div>
+              <span class="popular-card-title">Calorie Calculator</span>
+            </a>
+            <a href="#" class="popular-card">
+              <div class="popular-card-icon">
+                <i class="fas fa-ruler-combined"></i>
+              </div>
+              <span class="popular-card-title">Length Converter</span>
+            </a>
+            <a href="#" class="popular-card">
+              <div class="popular-card-icon">
+                <i class="fas fa-temperature-high"></i>
+              </div>
+              <span class="popular-card-title">Temperature Converter</span>
+            </a>
+            <a href="#" class="popular-card">
+              <div class="popular-card-icon">
+                <i class="fas fa-exchange-alt"></i>
+              </div>
+              <span class="popular-card-title">Currency Converter</span>
+            </a>
+            <a href="#" class="popular-card">
+              <div class="popular-card-icon">
+                <i class="fas fa-calculator"></i>
+              </div>
+              <span class="popular-card-title">Simple Interest Calculator</span>
+            </a>
+          </div>
+        </section>
+
+        <!-- Section 2: All Categories (List Format - All 27) -->
+        <section class="page-section" id="categories">
+          <div class="section-header">
+            <h2>
+              <i class="fas fa-folder-open" style="color: #8b5cf6"></i> Browse
+              by Category
+            </h2>
+          </div>
+          <div class="categories-list">
+            <a href="all-calculators.html" class="category-list-item"
+              ><i class="fas fa-coins"></i> Financial Calculators</a
+            >
+            <a href="all-calculators.html" class="category-list-item"
+              ><i class="fas fa-chart-line"></i> Business & Tax Calculators</a
+            >
+            <a href="all-calculators.html" class="category-list-item"
+              ><i class="fas fa-square-root-alt"></i> Math Calculators</a
+            >
+            <a href="all-calculators.html" class="category-list-item"
+              ><i class="fas fa-shapes"></i> Geometry Calculators</a
+            >
+            <a href="all-calculators.html" class="category-list-item"
+              ><i class="fas fa-arrows-rotate"></i> Unit Converters</a
+            >
+            <a href="all-calculators.html" class="category-list-item"
+              ><i class="fas fa-calendar-check"></i> Date & Time Calculators</a
+            >
+            <a href="all-calculators.html" class="category-list-item"
+              ><i class="fas fa-heart-pulse"></i> Health & Fitness
+              Calculators</a
+            >
+            <a href="all-calculators.html" class="category-list-item"
+              ><i class="fas fa-baby"></i> Pregnancy & Baby</a
+            >
+            <a href="all-calculators.html" class="category-list-item"
+              ><i class="fas fa-running"></i> Sports Calculators</a
+            >
+            <a href="all-calculators.html" class="category-list-item"
+              ><i class="fas fa-flask"></i> Science Calculators</a
+            >
+            <a href="all-calculators.html" class="category-list-item"
+              ><i class="fas fa-cogs"></i> Engineering Calculators</a
+            >
+            <a href="all-calculators.html" class="category-list-item"
+              ><i class="fas fa-hard-hat"></i> Construction Calculators</a
+            >
+            <a href="all-calculators.html" class="category-list-item"
+              ><i class="fas fa-graduation-cap"></i> Education Calculators</a
+            >
+            <a href="all-calculators.html" class="category-list-item"
+              ><i class="fas fa-wifi"></i> Internet & Technology</a
+            >
+            <a href="all-calculators.html" class="category-list-item"
+              ><i class="fas fa-code"></i> Developer Tools</a
+            >
+            <a href="all-calculators.html" class="category-list-item"
+              ><i class="fas fa-robot"></i> AI & Productivity</a
+            >
+            <a href="all-calculators.html" class="category-list-item"
+              ><i class="fas fa-bullhorn"></i> SEO & Marketing</a
+            >
+            <a href="all-calculators.html" class="category-list-item"
+              ><i class="fas fa-shopping-cart"></i> E-commerce Calculators</a
+            >
+            <a href="all-calculators.html" class="category-list-item"
+              ><i class="fas fa-bitcoin"></i> Crypto Calculators</a
+            >
+            <a href="all-calculators.html" class="category-list-item"
+              ><i class="fas fa-home"></i> Real Estate</a
+            >
+            <a href="all-calculators.html" class="category-list-item"
+              ><i class="fas fa-car"></i> Automobile</a
+            >
+            <a href="all-calculators.html" class="category-list-item"
+              ><i class="fas fa-plane"></i> Travel</a
+            >
+            <a href="all-calculators.html" class="category-list-item"
+              ><i class="fas fa-house-chimney"></i> Home Calculators</a
+            >
+            <a href="all-calculators.html" class="category-list-item"
+              ><i class="fas fa-utensils"></i> Food & Cooking</a
+            >
+            <a href="all-calculators.html" class="category-list-item"
+              ><i class="fas fa-paw"></i> Pets</a
+            >
+            <a href="all-calculators.html" class="category-list-item"
+              ><i class="fas fa-star"></i> Lifestyle & Astrology</a
+            >
+            <a href="all-calculators.html" class="category-list-item"
+              ><i class="fas fa-dice"></i> Fun Tools</a
+            >
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer footer-compact" role="contentinfo">
+      <div class="container">
+        <div class="footer__wrapper footer-compact__wrapper">
+          <div class="footer__brand footer-compact__brand">
+            <a href="index.html" class="logo-text footer-logo"
+              >Calculator<span class="logo-number">12</span></a
+            >
+            <div class="footer__social footer-compact__social">
+              <a href="#" class="footer__social-link" aria-label="Facebook"
+                ><i class="fab fa-facebook-f"></i
+              ></a>
+              <a href="#" class="footer__social-link" aria-label="Twitter"
+                ><i class="fab fa-twitter"></i
+              ></a>
+              <a href="#" class="footer__social-link" aria-label="Instagram"
+                ><i class="fab fa-instagram"></i
+              ></a>
+              <a href="#" class="footer__social-link" aria-label="LinkedIn"
+                ><i class="fab fa-linkedin-in"></i
+              ></a>
+            </div>
+          </div>
+          <div class="footer__links footer-compact__links">
+            <div class="footer__column">
+              <h4 class="footer__title">Company</h4>
+              <ul class="footer__list">
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="contact.html">Contact</a></li>
+              </ul>
+            </div>
+            <div class="footer__column">
+              <h4 class="footer__title">Legal</h4>
+              <ul class="footer__list">
+                <li><a href="privacy-policy.html">Privacy Policy</a></li>
+                <li><a href="terms-of-service.html">Terms of Service</a></li>
+              </ul>
+            </div>
+            <div class="footer__column">
+              <h4 class="footer__title">Resources</h4>
+              <ul class="footer__list">
+                <li><a href="faq.html">FAQ</a></li>
+                <li><a href="sitemap.html">Sitemap</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="footer__bottom footer-compact__bottom">
+          <p class="footer__copyright">
+            &copy; 2026 Calculator12. All rights reserved.
+          </p>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Theme Switcher Script -->
+    <script src="assets/js/core/theme-switcher.js" defer></script>
+  </body>
+</html>

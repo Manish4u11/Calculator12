@@ -102,6 +102,105 @@
     <link rel="stylesheet" href="assets/css/layout.css" />
     <link rel="stylesheet" href="assets/css/components.css" />
     <link rel="stylesheet" href="assets/css/pages/home.css" />
+    <style>
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        scroll-padding-top: 100px; /* Header ki height ke hisaab se adjust karein */
+      }
+      .language-selector {
+        position: relative;
+        z-index: 1000 !important;
+      }
+      .language-selector__btn {
+        display: flex !important;
+        align-items: center !important;
+        gap: 6px !important;
+        padding: 8px 16px !important;
+        background: transparent !important;
+        border: 1px solid transparent !important;
+        border-radius: 20px !important;
+        cursor: pointer !important;
+        transition: all 0.2s ease !important;
+      }
+      .language-selector__btn:hover {
+        background: white !important;
+        border-color: #8b5cf6 !important;
+        box-shadow:
+          0 0 0 3px rgba(139, 92, 246, 0.15),
+          0 4px 12px rgba(139, 92, 246, 0.2) !important;
+      }
+      .lang-dropdown {
+        position: absolute;
+        top: 100%;
+        right: 0;
+        margin-top: 8px;
+        background: white;
+        border: 1px solid #e5e7eb;
+        border-radius: 12px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        max-height: 400px;
+        overflow-y: auto;
+        z-index: 1002 !important;
+        display: none;
+        min-width: 200px;
+      }
+      .lang-dropdown.active {
+        display: block !important;
+      }
+      .lang-option {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 12px 16px;
+        width: 100%;
+        border: none;
+        background: transparent;
+        cursor: pointer;
+        text-align: left;
+        transition: background 0.2s;
+      }
+      .lang-option:hover {
+        background: rgba(139, 92, 246, 0.1);
+      }
+      .lang-option.active {
+        background: rgba(139, 92, 246, 0.2);
+        font-weight: 600;
+      }
+      .lang-option .flag {
+        font-size: 20px;
+      }
+      .lang-option .lang-text {
+        flex: 1;
+      }
+      .lang-option .lang-native {
+        color: #6b7280;
+        font-size: 12px;
+      }
+      /* FAQ Accordion Styles */
+      .faq-item__content {
+        max-height: 0;
+        overflow: hidden;
+        transition:
+          max-height 0.3s ease,
+          padding 0.3s ease;
+        padding: 0 16px;
+      }
+
+      .faq-item.active .faq-item__content {
+        max-height: 300px;
+        padding: 0 16px 16px;
+      }
+
+      .faq-item__icon {
+        transition: transform 0.3s ease;
+      }
+
+      .faq-item.active .faq-item__icon {
+        transform: rotate(180deg);
+      }
+    </style>
 
     <!-- Schema.org JSON-LD Markup -->
     <script type="application/ld+json">
@@ -368,43 +467,180 @@
           >
             <ul class="nav__list">
               <li class="nav__item">
-                <a href="/" class="nav__link nav__link--active">Home</a>
+                <a href="index.html" class="nav__link">Home</a>
               </li>
               <li class="nav__item">
-                <a href="/calculators" class="nav__link">All Calculators</a>
+                <a href="all-calculators.html" class="nav__link"
+                  >All Calculators</a
+                >
               </li>
               <li class="nav__item">
-                <a href="/categories" class="nav__link">Categories</a>
+                <a href="popular.html#categories" class="nav__link"
+                  >Categories</a
+                >
               </li>
               <li class="nav__item">
-                <a href="/popular" class="nav__link">Popular</a>
+                <a href="popular.html#popular" class="nav__link">Popular</a>
               </li>
               <li class="nav__item">
-                <a href="/about" class="nav__link">About</a>
+                <a href="about.html" class="nav__link">About</a>
               </li>
             </ul>
           </nav>
 
           <!-- Header Actions -->
           <div class="header__actions">
-            <!-- Search Button -->
-            <button
-              class="btn btn-ghost header__search-btn"
-              aria-label="Search calculators"
-            >
-              <i class="fas fa-search" aria-hidden="true"></i>
-            </button>
-
-            <!-- Language Selector -->
+            <!-- Language Selector with Dropdown -->
             <div class="language-selector">
               <button
+                id="langToggle"
                 class="btn btn-ghost language-selector__btn"
                 aria-label="Change language"
                 aria-expanded="false"
+                aria-haspopup="true"
               >
                 <i class="fas fa-globe" aria-hidden="true"></i>
-                <span class="language-selector__current">EN</span>
+                <span class="language-selector__current" id="currentLang"
+                  >EN</span
+                >
+                <span
+                  class="lang-arrow"
+                  style="margin-left: 4px; font-size: 10px"
+                  >▼</span
+                >
               </button>
+              <div id="langDropdown" class="lang-dropdown" role="menu">
+                <button
+                  class="lang-option active"
+                  data-lang="en"
+                  data-flag="🇺🇸"
+                  role="menuitem"
+                >
+                  <span class="flag">🇺🇸</span
+                  ><span class="lang-text">English</span
+                  ><span class="lang-native">English</span>
+                </button>
+                <button
+                  class="lang-option"
+                  data-lang="hi"
+                  data-flag="🇮🇳"
+                  role="menuitem"
+                >
+                  <span class="flag">🇮🇳</span
+                  ><span class="lang-text">Hindi</span
+                  ><span class="lang-native">हिन्दी</span>
+                </button>
+                <button
+                  class="lang-option"
+                  data-lang="es"
+                  data-flag="🇪🇸"
+                  role="menuitem"
+                >
+                  <span class="flag">🇪🇸</span
+                  ><span class="lang-text">Spanish</span
+                  ><span class="lang-native">Español</span>
+                </button>
+                <button
+                  class="lang-option"
+                  data-lang="fr"
+                  data-flag="🇫🇷"
+                  role="menuitem"
+                >
+                  <span class="flag">🇫🇷</span
+                  ><span class="lang-text">French</span
+                  ><span class="lang-native">Français</span>
+                </button>
+                <button
+                  class="lang-option"
+                  data-lang="de"
+                  data-flag="🇩🇪"
+                  role="menuitem"
+                >
+                  <span class="flag">🇩🇪</span
+                  ><span class="lang-text">German</span
+                  ><span class="lang-native">Deutsch</span>
+                </button>
+                <button
+                  class="lang-option"
+                  data-lang="pt"
+                  data-flag="🇵🇹"
+                  role="menuitem"
+                >
+                  <span class="flag">🇵🇹</span
+                  ><span class="lang-text">Portuguese</span
+                  ><span class="lang-native">Português</span>
+                </button>
+                <button
+                  class="lang-option"
+                  data-lang="ru"
+                  data-flag="🇷🇺"
+                  role="menuitem"
+                >
+                  <span class="flag">🇷🇺</span
+                  ><span class="lang-text">Russian</span
+                  ><span class="lang-native">Русский</span>
+                </button>
+                <button
+                  class="lang-option"
+                  data-lang="ar"
+                  data-flag="🇸🇦"
+                  role="menuitem"
+                >
+                  <span class="flag">🇸🇦</span
+                  ><span class="lang-text">Arabic</span
+                  ><span class="lang-native">العربية</span>
+                </button>
+                <button
+                  class="lang-option"
+                  data-lang="zh"
+                  data-flag="🇨🇳"
+                  role="menuitem"
+                >
+                  <span class="flag">🇨🇳</span
+                  ><span class="lang-text">Chinese</span
+                  ><span class="lang-native">中文</span>
+                </button>
+                <button
+                  class="lang-option"
+                  data-lang="ja"
+                  data-flag="🇯🇵"
+                  role="menuitem"
+                >
+                  <span class="flag">🇯🇵</span
+                  ><span class="lang-text">Japanese</span
+                  ><span class="lang-native">日本語</span>
+                </button>
+                <button
+                  class="lang-option"
+                  data-lang="ko"
+                  data-flag="🇰🇷"
+                  role="menuitem"
+                >
+                  <span class="flag">🇰🇷</span
+                  ><span class="lang-text">Korean</span
+                  ><span class="lang-native">한국어</span>
+                </button>
+                <button
+                  class="lang-option"
+                  data-lang="vi"
+                  data-flag="🇻🇳"
+                  role="menuitem"
+                >
+                  <span class="flag">🇻🇳</span
+                  ><span class="lang-text">Vietnamese</span
+                  ><span class="lang-native">Tiếng Việt</span>
+                </button>
+                <button
+                  class="lang-option"
+                  data-lang="id"
+                  data-flag="🇮🇩"
+                  role="menuitem"
+                >
+                  <span class="flag">🇮🇩</span
+                  ><span class="lang-text">Indonesian</span
+                  ><span class="lang-native">Bahasa</span>
+                </button>
+              </div>
             </div>
 
             <!-- Theme Toggle -->
@@ -497,7 +733,11 @@
       </section>
 
       <!-- Popular Categories -->
-      <section class="categories" aria-labelledby="categories-title">
+      <section
+        id="categories"
+        class="categories"
+        aria-labelledby="categories-title"
+      >
         <div class="container">
           <h2 id="categories-title" class="section-title">
             Popular Categories
@@ -553,10 +793,29 @@
             </a>
           </div>
         </div>
+        <!-- View All Calculators Button -->
+        <div style="text-align: center; margin-top: 40px">
+          <a
+            href="all-calculators.html"
+            class="btn btn-primary"
+            style="
+              padding: 16px 40px;
+              font-size: 18px;
+              font-weight: 600;
+              text-decoration: none;
+              display: inline-block;
+              transition: all 0.3s ease;
+            "
+          >
+            <i class="fas fa-th-large" style="margin-right: 8px"></i>
+            MORE CALCULATORS
+            <i class="fas fa-arrow-right" style="margin-left: 8px"></i>
+          </a>
+        </div>
       </section>
 
       <!-- Featured Calculators -->
-      <section class="featured" aria-labelledby="featured-title">
+      <section id="popular" class="featured" aria-labelledby="featured-title">
         <div class="container">
           <h2 id="featured-title" class="section-title">
             Featured Calculators
@@ -701,6 +960,7 @@
             Why Choose Calculator12?
           </h2>
           <div class="why-choose__grid">
+            <!-- 1. Lightning Fast -->
             <div class="feature-card">
               <div class="feature-card__icon">
                 <i class="fas fa-bolt" aria-hidden="true"></i>
@@ -712,6 +972,7 @@
               </p>
             </div>
 
+            <!-- 2. 100% Accurate -->
             <div class="feature-card">
               <div class="feature-card__icon">
                 <i class="fas fa-shield-alt" aria-hidden="true"></i>
@@ -723,6 +984,7 @@
               </p>
             </div>
 
+            <!-- 3. 100+ Languages -->
             <div class="feature-card">
               <div class="feature-card__icon">
                 <i class="fas fa-globe" aria-hidden="true"></i>
@@ -734,6 +996,7 @@
               </p>
             </div>
 
+            <!-- 4. Mobile Friendly -->
             <div class="feature-card">
               <div class="feature-card__icon">
                 <i class="fas fa-mobile-alt" aria-hidden="true"></i>
@@ -741,27 +1004,6 @@
               <h3 class="feature-card__title">Mobile Friendly</h3>
               <p class="feature-card__desc">
                 Perfectly optimized for smartphones, tablets, and desktops.
-              </p>
-            </div>
-
-            <div class="feature-card">
-              <div class="feature-card__icon">
-                <i class="fas fa-lock" aria-hidden="true"></i>
-              </div>
-              <h3 class="feature-card__title">Privacy First</h3>
-              <p class="feature-card__desc">
-                Your data stays on your device. We don't store or track your
-                calculations.
-              </p>
-            </div>
-
-            <div class="feature-card">
-              <div class="feature-card__icon">
-                <i class="fas fa-graduation-cap" aria-hidden="true"></i>
-              </div>
-              <h3 class="feature-card__title">Easy to Use</h3>
-              <p class="feature-card__desc">
-                Simple interface with step-by-step explanations and examples.
               </p>
             </div>
           </div>
@@ -981,6 +1223,51 @@
           </div>
         </div>
       </section>
+      <!-- About Us Section -->
+      <section
+        id="about"
+        class="about section"
+        aria-labelledby="about-title"
+        style="padding: 80px 0; background: var(--bg-secondary, #f9fafb)"
+      >
+        <div class="container">
+          <h2
+            id="about-title"
+            class="section-title"
+            style="text-align: center; margin-bottom: 40px"
+          >
+            About Calculator12
+          </h2>
+          <div
+            style="
+              max-width: 800px;
+              margin: 0 auto;
+              text-align: center;
+              line-height: 1.8;
+              color: var(--text-secondary, #4b5563);
+            "
+          >
+            <p style="font-size: 18px; margin-bottom: 20px">
+              <strong>Calculator12</strong> is your one-stop destination for
+              over 500+ free, accurate, and easy-to-use online calculators.
+              Whether you need to calculate your home loan EMI, check your BMI,
+              convert units, or solve complex math problems, we've got you
+              covered.
+            </p>
+            <p style="font-size: 18px; margin-bottom: 20px">
+              Our mission is to make complex calculations simple and accessible
+              to everyone, everywhere. That's why we support over 100+ languages
+              and ensure our tools work perfectly on any device, from desktops
+              to smartphones.
+            </p>
+            <p style="font-size: 18px">
+              We believe in <strong>Privacy First</strong>. Your data never
+              leaves your device, and we never track your calculations. Just
+              pure, instant, and secure results!
+            </p>
+          </div>
+        </div>
+      </section>
     </main>
 
     <!-- ============================================
@@ -1074,17 +1361,437 @@
     <script src="assets/js/core/theme-switcher.js" defer></script>
     <script src="assets/js/core/search.js" defer></script>
     <script src="assets/js/core/navigation.js" defer></script>
-
-    <!-- Engine JS -->
-    <script src="../engines/translation/i18n.js" defer></script>
-    <script src="../engines/layout/header.js" defer></script>
-    <script src="../engines/seo/schema.js" defer></script>
-    <script
-      src="../public/assets/js/engines/calculator-engine.js"
-      defer
-    ></script>
+    <!-- Engine JS (Corrected Paths) -->
+    <script src="engines/translation/i18n.js" defer></script>
+    <script src="assets/js/engines/calculator-engine.js" defer></script>
+    <!-- Note: schema.js removed because file does not exist -->
 
     <!-- Page-specific JS -->
     <script src="assets/js/pages/home.js" defer></script>
+    <script>
+      // Bulletproof Event Delegation (Capture Phase)
+      // 'true' flag ensures this runs BEFORE header.js or any other script can block it
+      document.addEventListener(
+        "click",
+        function (e) {
+          const langToggle = document.getElementById("langToggle");
+          const langDropdown = document.getElementById("langDropdown");
+          const currentLang = document.getElementById("currentLang");
+
+          // Agar elements nahi mile, toh chupchap return kardo
+          if (!langToggle || !langDropdown) return;
+
+          // 1. Jab Language Button par click ho (Open/Close)
+          if (langToggle.contains(e.target)) {
+            e.preventDefault();
+            e.stopPropagation(); // Doosre scripts ko click rokne se bachao
+
+            const isOpen = langDropdown.classList.contains("active");
+            if (isOpen) {
+              langDropdown.classList.remove("active");
+              langDropdown.style.display = "none";
+              langToggle.querySelector(".lang-arrow").textContent = "▼";
+              langToggle.setAttribute("aria-expanded", "false");
+            } else {
+              langDropdown.classList.add("active");
+              langDropdown.style.display = "block";
+              langToggle.querySelector(".lang-arrow").textContent = "▲";
+              langToggle.setAttribute("aria-expanded", "true");
+            }
+            return;
+          }
+
+          // 2. Jab koi Language Option select kiya jaye
+          const langOption = e.target.closest(".lang-option");
+          if (langOption && langDropdown.contains(langOption)) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            const lang = langOption.dataset.lang;
+
+            // Active class update karo
+            langDropdown
+              .querySelectorAll(".lang-option")
+              .forEach((opt) => opt.classList.remove("active"));
+            langOption.classList.add("active");
+
+            // Button text update karo
+            if (currentLang) currentLang.textContent = lang.toUpperCase();
+
+            // Dropdown band karo
+            langDropdown.classList.remove("active");
+            langDropdown.style.display = "none";
+            langToggle.setAttribute("aria-expanded", "false");
+            langToggle.querySelector(".lang-arrow").textContent = "▼";
+
+            // Language change karo (agar i18n available hai)
+            if (window.i18n && window.i18n.setLanguage) {
+              window.i18n.setLanguage(lang);
+            }
+            localStorage.setItem("preferredLanguage", lang);
+            return;
+          }
+
+          // 3. Jab dropdown ke bahar kahin aur click ho (Close)
+          if (
+            !langToggle.contains(e.target) &&
+            !langDropdown.contains(e.target)
+          ) {
+            langDropdown.classList.remove("active");
+            langDropdown.style.display = "none";
+            langToggle.querySelector(".lang-arrow").textContent = "▼";
+            langToggle.setAttribute("aria-expanded", "false");
+          }
+        },
+        true,
+      ); // <-- Yeh 'true' sabse important hai! Yeh capture phase enable karta hai.
+    </script>
+    <!-- Homepage Functionality Script -->
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        console.log("✅ Homepage fully loaded and ready!");
+
+        // ============================================
+        // 1. SEARCH FUNCTIONALITY
+        // ============================================
+        const searchInput = document.querySelector(".search-box__input");
+        const searchBtn = document.querySelector(".search-box__btn");
+        const headerSearchBtn = document.querySelector(".header__search-btn");
+
+        // Search button click
+        if (searchBtn && searchInput) {
+          searchBtn.addEventListener("click", () => {
+            const query = searchInput.value.trim();
+            if (query) {
+              console.log("🔍 Searching for:", query);
+              // Redirect to search page or all calculators with query
+              window.location.href = `/calculators?search=${encodeURIComponent(query)}`;
+            } else {
+              searchInput.focus();
+              searchInput.style.borderColor = "#ef4444";
+              setTimeout(() => {
+                searchInput.style.borderColor = "";
+              }, 2000);
+            }
+          });
+
+          // Enter key press
+          searchInput.addEventListener("keypress", (e) => {
+            if (e.key === "Enter") {
+              searchBtn.click();
+            }
+          });
+        }
+
+        // ============================================
+        // 2. FAQ ACCORDION FUNCTIONALITY
+        // ============================================
+        const faqItems = document.querySelectorAll(".faq-item");
+
+        faqItems.forEach((item) => {
+          const header = item.querySelector(".faq-item__header");
+          const icon = item.querySelector(".faq-item__icon");
+
+          if (header) {
+            header.addEventListener("click", () => {
+              const isExpanded =
+                header.getAttribute("aria-expanded") === "true";
+
+              // Close all other items
+              faqItems.forEach((otherItem) => {
+                if (otherItem !== item) {
+                  const otherHeader =
+                    otherItem.querySelector(".faq-item__header");
+                  const otherIcon = otherItem.querySelector(".faq-item__icon");
+                  if (otherHeader) {
+                    otherHeader.setAttribute("aria-expanded", "false");
+                    otherItem.classList.remove("active");
+                    if (otherIcon) otherIcon.style.transform = "rotate(0deg)";
+                  }
+                }
+              });
+
+              // Toggle current item
+              header.setAttribute("aria-expanded", !isExpanded);
+              item.classList.toggle("active");
+
+              // Rotate icon
+              if (icon) {
+                icon.style.transform = isExpanded
+                  ? "rotate(0deg)"
+                  : "rotate(180deg)";
+                icon.style.transition = "transform 0.3s ease";
+              }
+            });
+          }
+        });
+
+        // ============================================
+        // 3. NEWSLETTER FORM SUBMISSION
+        // ============================================
+        const newsletterForm = document.querySelector(".newsletter__form");
+
+        if (newsletterForm) {
+          newsletterForm.addEventListener("submit", (e) => {
+            e.preventDefault();
+            const emailInput =
+              newsletterForm.querySelector(".newsletter__input");
+            const email = emailInput.value.trim();
+
+            if (email && isValidEmail(email)) {
+              // Show success message
+              showNotification("✅ Thank you for subscribing!", "success");
+              emailInput.value = "";
+
+              // Here you would normally send to backend
+              console.log("Newsletter subscription:", email);
+            } else {
+              showNotification(
+                "❌ Please enter a valid email address",
+                "error",
+              );
+              emailInput.focus();
+            }
+          });
+        }
+
+        // Email validation helper
+        function isValidEmail(email) {
+          return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+        }
+
+        // ============================================
+        // 4. SMOOTH SCROLLING FOR ANCHOR LINKS
+        // ============================================
+        document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+          anchor.addEventListener("click", function (e) {
+            const href = this.getAttribute("href");
+            if (href !== "#") {
+              e.preventDefault();
+              const target = document.querySelector(href);
+              if (target) {
+                target.scrollIntoView({
+                  behavior: "smooth",
+                  block: "start",
+                });
+              }
+            }
+          });
+        });
+
+        // ============================================
+        // 5. CATEGORY CARDS HOVER EFFECT
+        // ============================================
+        const categoryCards = document.querySelectorAll(".category-card");
+
+        categoryCards.forEach((card) => {
+          card.addEventListener("mouseenter", function () {
+            this.style.transform = "translateY(-8px)";
+            this.style.transition = "transform 0.3s ease";
+          });
+
+          card.addEventListener("mouseleave", function () {
+            this.style.transform = "translateY(0)";
+          });
+        });
+
+        // ============================================
+        // 6. CALCULATOR CARDS INTERACTIONS
+        // ============================================
+        const calcCards = document.querySelectorAll(
+          ".calculator-card, .trending-card",
+        );
+
+        calcCards.forEach((card) => {
+          card.addEventListener("mouseenter", function () {
+            this.style.transform = "translateY(-4px)";
+            this.style.transition = "transform 0.3s ease";
+          });
+
+          card.addEventListener("mouseleave", function () {
+            this.style.transform = "translateY(0)";
+          });
+        });
+
+        // ============================================
+        // 7. STATS COUNTER ANIMATION
+        // ============================================
+        const stats = document.querySelectorAll(".stat__number");
+
+        const animateStats = () => {
+          stats.forEach((stat) => {
+            const text = stat.textContent;
+            const hasPlus = text.includes("+");
+            const hasM = text.includes("M");
+
+            // Simple animation on load
+            stat.style.opacity = "0";
+            stat.style.transform = "translateY(20px)";
+
+            setTimeout(() => {
+              stat.style.transition = "all 0.6s ease";
+              stat.style.opacity = "1";
+              stat.style.transform = "translateY(0)";
+            }, 300);
+          });
+        };
+
+        // Trigger animation when stats are visible
+        const statsObserver = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                animateStats();
+                statsObserver.unobserve(entry.target);
+              }
+            });
+          },
+          { threshold: 0.5 },
+        );
+
+        const statsSection = document.querySelector(".hero__stats");
+        if (statsSection) {
+          statsObserver.observe(statsSection);
+        }
+
+        // ============================================
+        // 8. NOTIFICATION SYSTEM
+        // ============================================
+        function showNotification(message, type = "info") {
+          // Remove existing notifications
+          const existingNotif = document.querySelector(".notification");
+          if (existingNotif) {
+            existingNotif.remove();
+          }
+
+          const notification = document.createElement("div");
+          notification.className = `notification notification--${type}`;
+          notification.textContent = message;
+          notification.style.cssText = `
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 16px 24px;
+            border-radius: 8px;
+            color: white;
+            font-weight: 600;
+            z-index: 10000;
+            animation: slideIn 0.3s ease;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            background: ${type === "success" ? "#10b981" : type === "error" ? "#ef4444" : "#8b5cf6"};
+          `;
+
+          document.body.appendChild(notification);
+
+          // Auto remove after 3 seconds
+          setTimeout(() => {
+            notification.style.animation = "slideOut 0.3s ease";
+            setTimeout(() => notification.remove(), 300);
+          }, 3000);
+        }
+
+        // Add animation styles
+        const style = document.createElement("style");
+        style.textContent = `
+          @keyframes slideIn {
+            from {
+              transform: translateX(400px);
+              opacity: 0;
+            }
+            to {
+              transform: translateX(0);
+              opacity: 1;
+            }
+          }
+          @keyframes slideOut {
+            from {
+              transform: translateX(0);
+              opacity: 1;
+            }
+            to {
+              transform: translateX(400px);
+              opacity: 0;
+            }
+          }
+          .faq-item.active .faq-item__content {
+            max-height: 200px;
+            padding: 16px;
+          }
+          .faq-item__content {
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.3s ease;
+          }
+        `;
+        document.head.appendChild(style);
+
+        // ============================================
+        // 9. SCROLL-BASED HEADER EFFECT
+        // ============================================
+        const header = document.querySelector(".header");
+
+        if (header) {
+          window.addEventListener("scroll", () => {
+            if (window.scrollY > 100) {
+              header.classList.add("header--scrolled");
+            } else {
+              header.classList.remove("header--scrolled");
+            }
+          });
+        }
+
+        // ============================================
+        // 10. LAZY LOADING FOR IMAGES (if any)
+        // ============================================
+        const images = document.querySelectorAll("img[data-src]");
+
+        const imageObserver = new IntersectionObserver((entries, observer) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              const img = entry.target;
+              img.src = img.dataset.src;
+              img.classList.add("loaded");
+              observer.unobserve(img);
+            }
+          });
+        });
+
+        images.forEach((img) => imageObserver.observe(img));
+
+        console.log("✅ All homepage features initialized successfully!");
+      });
+      // FAQ Accordion Functionality
+      document.addEventListener("DOMContentLoaded", () => {
+        const faqItems = document.querySelectorAll(".faq-item");
+
+        faqItems.forEach((item) => {
+          const header = item.querySelector(".faq-item__header");
+
+          if (header) {
+            header.addEventListener("click", () => {
+              const isActive = item.classList.contains("active");
+
+              // Close all items
+              faqItems.forEach((otherItem) => {
+                otherItem.classList.remove("active");
+                const otherHeader =
+                  otherItem.querySelector(".faq-item__header");
+                if (otherHeader) {
+                  otherHeader.setAttribute("aria-expanded", "false");
+                }
+              });
+
+              // Toggle current item
+              if (!isActive) {
+                item.classList.add("active");
+                header.setAttribute("aria-expanded", "true");
+              } else {
+                header.setAttribute("aria-expanded", "false");
+              }
+            });
+          }
+        });
+      });
+    </script>
   </body>
 </html>

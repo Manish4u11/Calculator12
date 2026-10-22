@@ -1,17 +1,15 @@
 {
   "name": "calculator12",
   "version": "1.0.0",
-  "description": "Calculator12.com - World's largest multilingual calculator platform with 500+ calculators, 100+ languages, and enterprise-grade SEO architecture.",
-  "main": "server/server.js",
+  "description": "Calculator12.com - Enterprise-grade static calculator platform with multi-language SEO architecture.",
+  "main": "public/index.html",
   "scripts": {
-    "start": "node server/server.js",
-    "dev": "nodemon server/server.js",
-    "build:css": "echo 'CSS is already optimized - no build step needed'",
-    "build:js": "echo 'JS is already optimized - no build step needed'",
-    "build": "npm run build:css && npm run build:js",
-    "lint": "echo 'Linting not configured yet'",
-    "test": "echo 'Tests not configured yet'",
-    "validate": "node scripts/validate-calculators.js"
+    "translate": "node build/auto-translate.js",
+    "build": "npm run translate && node build/generate-calculators.js",
+    "start": "npx serve public -p 3000",
+    "clean": "rimraf public/calculators/**/*.html",
+    "format": "prettier --write \"**/*.{js,html,json,css}\"",
+    "lint": "echo 'Linting will be configured in Phase 2'"
   },
   "keywords": [
     "calculator",
@@ -21,7 +19,8 @@
     "conversion",
     "multilingual",
     "seo",
-    "glassmorphism"
+    "glassmorphism",
+    "static-site"
   ],
   "author": "Calculator12 Team",
   "license": "UNLICENSED",
@@ -30,18 +29,9 @@
     "node": ">=18.0.0",
     "npm": ">=9.0.0"
   },
-  "dependencies": {
-    "express": "^4.19.2",
-    "cors": "^2.8.5",
-    "helmet": "^7.1.0",
-    "compression": "^1.7.4",
-    "express-rate-limit": "^7.4.0",
-    "dotenv": "^16.4.5",
-    "morgan": "^1.10.0",
-    "express-validator": "^7.2.0",
-    "winston": "^3.14.2"
-  },
   "devDependencies": {
-    "nodemon": "^3.1.4"
+    "prettier": "^3.2.5",
+    "rimraf": "^5.0.5",
+    "serve": "^14.2.3"
   }
 }
