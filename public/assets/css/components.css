@@ -225,11 +225,13 @@
 }
 
 /* ============================================
-   6. LANGUAGE SELECTOR
+   6. LANGUAGE SELECTOR (Fixed & Bulletproof)
    ============================================ */
 
 .language-selector {
-  position: relative;
+  position: relative !important;
+  z-index: 1000 !important; /* Dropdown को बाकी elements के ऊपर रखता है */
+  overflow: visible !important; /* Dropdown के कटने (clip) को रोकता है */
 }
 
 .language-selector__btn {
@@ -242,6 +244,218 @@
 
 .language-selector__current {
   font-weight: var(--font-semibold);
+}
+
+/* ============================================
+   6. PREMIUM LANGUAGE SELECTOR (Global Standard)
+   ============================================ */
+
+.language-selector {
+  position: relative;
+  z-index: 1000 !important; /* Ensure it stays above other elements */
+  overflow: visible !important;
+}
+
+.language-selector__btn {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-2) var(--space-3);
+  font-size: var(--text-sm);
+}
+
+.language-selector__current {
+  font-weight: var(--font-semibold);
+}
+
+/* Toggle Button (Premium Style) */
+.lang-toggle-btn {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-2) var(--space-4);
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  transition: all var(--duration-fast) var(--ease-in-out);
+  font-size: var(--text-sm);
+  font-weight: var(--font-medium);
+  color: var(--text-primary);
+  min-width: 140px;
+  justify-content: space-between;
+}
+
+.lang-toggle-btn:hover {
+  background: var(--glass-bg-hover);
+  border-color: var(--color-purple-400);
+  box-shadow: var(--shadow-md), var(--shadow-glow-purple);
+  transform: translateY(-1px);
+}
+
+.lang-toggle-btn[aria-expanded="true"] {
+  border-color: var(--color-purple-500);
+  box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.1);
+}
+
+/* Flag, Name, Arrow */
+.lang-flag {
+  font-size: var(--text-lg);
+  line-height: 1;
+}
+
+.lang-name {
+  flex: 1;
+  text-align: left;
+  font-weight: var(--font-medium);
+  color: var(--text-primary);
+}
+
+.lang-arrow {
+  font-size: var(--text-xs);
+  color: var(--text-tertiary);
+  transition: transform var(--duration-fast) var(--ease-in-out);
+}
+
+.lang-toggle-btn[aria-expanded="true"] .lang-arrow {
+  transform: rotate(180deg);
+}
+
+/* Dropdown Menu (Premium Glassmorphism) */
+.lang-dropdown {
+  position: absolute;
+  top: calc(100% + var(--space-2));
+  right: 0;
+  min-width: 220px;
+  background: var(--glass-bg);
+  backdrop-filter: blur(calc(var(--glass-blur) * 1.5));
+  -webkit-backdrop-filter: blur(calc(var(--glass-blur) * 1.5));
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-xl), var(--shadow-glow-purple);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-10px) scale(0.95);
+  transition: all var(--duration-fast) var(--ease-out);
+  max-height: 400px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  z-index: 1002 !important;
+}
+
+/* ✅ Show dropdown when active or show class is added */
+.lang-dropdown.active,
+.lang-dropdown.show,
+.lang-dropdown[style*="display: block"] {
+  opacity: 1 !important;
+  visibility: visible !important;
+  transform: translateY(0) scale(1) !important;
+}
+
+/* Scrollbar Styling */
+.lang-dropdown::-webkit-scrollbar {
+  width: 6px;
+}
+
+.lang-dropdown::-webkit-scrollbar-track {
+  background: var(--bg-secondary);
+  border-radius: var(--radius-full);
+}
+
+.lang-dropdown::-webkit-scrollbar-thumb {
+  background: var(--color-purple-300);
+  border-radius: var(--radius-full);
+}
+
+.lang-dropdown::-webkit-scrollbar-thumb:hover {
+  background: var(--color-purple-500);
+}
+
+/* Language Options */
+.lang-option {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-3) var(--space-4);
+  cursor: pointer;
+  transition: all var(--duration-fast) var(--ease-in-out);
+  border: none;
+  background: transparent;
+  width: 100%;
+  text-align: left;
+  color: var(--text-primary);
+  font-family: var(--font-primary);
+  font-size: var(--text-sm);
+}
+
+.lang-option:first-child {
+  border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+}
+
+.lang-option:last-child {
+  border-radius: 0 0 var(--radius-xl) var(--radius-xl);
+}
+
+.lang-option:hover {
+  background: linear-gradient(
+    135deg,
+    rgba(139, 92, 246, 0.1) 0%,
+    rgba(6, 182, 212, 0.1) 100%
+  );
+  padding-left: var(--space-5);
+}
+
+.lang-option.active {
+  background: linear-gradient(
+    135deg,
+    rgba(139, 92, 246, 0.2) 0%,
+    rgba(6, 182, 212, 0.2) 100%
+  );
+  border-left: 3px solid var(--color-purple-500);
+}
+
+.lang-option .flag {
+  font-size: var(--text-xl);
+  flex-shrink: 0;
+}
+
+.lang-option .lang-text {
+  flex: 1;
+  font-size: var(--text-sm);
+  font-weight: var(--font-medium);
+  color: var(--text-primary);
+}
+
+.lang-option .lang-native {
+  font-size: var(--text-xs);
+  color: var(--text-tertiary);
+  font-weight: var(--font-regular);
+}
+
+.lang-option.active .lang-native {
+  color: var(--color-purple-600);
+  font-weight: var(--font-semibold);
+}
+
+/* Mobile Responsive */
+@media (max-width: 767px) {
+  .lang-dropdown {
+    right: -10px;
+    left: -10px;
+    min-width: auto;
+    border-radius: var(--radius-lg);
+  }
+
+  .lang-toggle-btn {
+    min-width: 120px;
+    padding: var(--space-2) var(--space-3);
+  }
+
+  .lang-name {
+    display: none; /* Mobile par sirf flag dikhayein */
+  }
 }
 
 /* ============================================
@@ -420,5 +634,268 @@ textarea {
 
   .stat__number {
     font-size: var(--text-3xl);
+  }
+}
+
+/* ============================================
+   11. FOOTER (Compact Layout)
+   ============================================ */
+
+.footer {
+  background: var(--bg-primary);
+  border-top: 1px solid var(--border-primary);
+  padding: var(--space-8) 0 var(--space-4);
+  margin-top: var(--space-12);
+}
+
+.footer__wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: var(--space-8);
+}
+
+.footer__brand {
+  flex: 1;
+  min-width: 250px;
+  margin-bottom: var(--space-4);
+}
+
+.footer-logo {
+  font-size: var(--text-2xl);
+  font-weight: var(--font-bold);
+  color: var(--text-primary);
+  text-decoration: none;
+  display: inline-block;
+  margin-bottom: var(--space-4);
+}
+
+.footer-logo .logo-number {
+  color: var(--color-purple-500);
+}
+
+.footer__social {
+  display: flex;
+  gap: var(--space-3);
+}
+
+.footer__social-link {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg-secondary);
+  border-radius: var(--radius-full);
+  color: var(--text-secondary);
+  text-decoration: none;
+  transition: all var(--duration-fast) var(--ease-in-out);
+}
+
+.footer__social-link:hover {
+  background: var(--color-purple-500);
+  color: var(--color-white);
+  transform: translateY(-2px);
+}
+
+.footer__col {
+  flex: 1;
+  min-width: 150px;
+}
+
+.footer__title {
+  font-size: var(--text-sm);
+  font-weight: var(--font-bold);
+  color: var(--text-primary);
+  margin-bottom: var(--space-4);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.footer__links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.footer__links a {
+  color: var(--text-secondary);
+  text-decoration: none;
+  font-size: var(--text-sm);
+  transition: color var(--duration-fast) var(--ease-in-out);
+}
+
+.footer__links a:hover {
+  color: var(--color-purple-500);
+}
+
+.footer__bottom {
+  margin-top: var(--space-8);
+  padding-top: var(--space-4);
+  border-top: 1px solid var(--border-primary);
+  text-align: center;
+}
+
+.footer__copyright {
+  color: var(--text-tertiary);
+  font-size: var(--text-xs);
+  margin: 0;
+}
+
+/* Responsive adjustments for Footer */
+@media (max-width: 767px) {
+  .footer__wrapper {
+    flex-direction: column;
+    gap: var(--space-6);
+  }
+
+  .footer__brand {
+    text-align: center;
+    width: 100%;
+  }
+
+  .footer__social {
+    justify-content: center;
+  }
+
+  .footer__col {
+    width: 100%;
+    text-align: center;
+  }
+}
+
+/* =========================================
+   Header Navigation Font Size Update
+   ========================================= */
+.header__nav .nav__link {
+  font-size: 17px !important; /* पहले से थोड़ा बड़ा (आप 18px भी कर सकते हैं) */
+  font-weight: 600 !important; /* थोड़ा bold ताकि साफ़ दिखे */
+  letter-spacing: 0.3px;
+}
+
+/* Hover करने पर थोड़ा और prominent दिखे */
+.header__nav .nav__link:hover {
+  font-size: 17px !important;
+}
+
+/* Active link के लिए */
+.header__nav .nav__link.nav__link--active {
+  font-size: 17px !important;
+  font-weight: 700 !important;
+}
+
+/* =========================================
+   Mobile Navigation Fix
+   ========================================= */
+
+/* Default: Desktop पर nav दिखे */
+.header__nav {
+  display: flex !important;
+}
+
+/* Mobile पर nav hide हो, लेकिन hamburger दिखे */
+@media (max-width: 768px) {
+  .header__nav {
+    display: none !important;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: white;
+    padding: 20px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    z-index: 999;
+  }
+
+  /* Jab hamburger click हो तो nav show हो */
+  .header__nav.show {
+    display: flex !important;
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .header__nav .nav__list {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .header__nav .nav__item {
+    width: 100%;
+  }
+
+  .header__nav .nav__link {
+    display: block;
+    padding: 12px 16px;
+    font-size: 16px;
+    border-bottom: 1px solid #f3f4f6;
+  }
+
+  /* Hamburger Button को Mobile पर दिखना चाहिए */
+  .mobile-menu-toggle {
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background: transparent;
+    border: 2px solid #e5e7eb;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-left: 10px;
+  }
+
+  /* Hamburger Icon Lines */
+  .mobile-menu-toggle .hamburger {
+    display: block;
+    width: 22px;
+    height: 2px;
+    background: #1f2937;
+    position: relative;
+    transition: all 0.3s ease;
+  }
+
+  .mobile-menu-toggle .hamburger::before,
+  .mobile-menu-toggle .hamburger::after {
+    content: "";
+    position: absolute;
+    width: 22px;
+    height: 2px;
+    background: #1f2937;
+    left: 0;
+    transition: all 0.3s ease;
+  }
+
+  .mobile-menu-toggle .hamburger::before {
+    top: -7px;
+  }
+
+  .mobile-menu-toggle .hamburger::after {
+    top: 7px;
+  }
+
+  /* Active state - X icon */
+  .mobile-menu-toggle.active .hamburger {
+    background: transparent;
+  }
+
+  .mobile-menu-toggle.active .hamburger::before {
+    top: 0;
+    transform: rotate(45deg);
+  }
+
+  .mobile-menu-toggle.active .hamburger::after {
+    top: 0;
+    transform: rotate(-45deg);
+  }
+}
+
+/* Desktop पर hamburger hide हो */
+@media (min-width: 769px) {
+  .mobile-menu-toggle {
+    display: none !important;
   }
 }

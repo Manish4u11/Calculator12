@@ -5,6 +5,7 @@ Calculator12.com - Global i18n & Language Selector Engine
 
 class I18nEngine {
   constructor() {
+    // ✅ FIX 1: Removed trailing spaces so setLanguage() works perfectly
     this.supportedLangs = [
       "en",
       "hi",
@@ -24,9 +25,8 @@ class I18nEngine {
     // 1. Language Detection: URL > LocalStorage > Browser
     const urlMatch = window.location.pathname.match(/-([a-z]{2})(?:\.html)?$/);
     const langFromUrl = urlMatch ? urlMatch[1] : null;
-
-    // ✅ FIX: .trim() lagaya taaki purane cache mein spaces se bug na aaye
     const storedLang = localStorage.getItem("c12_lang");
+
     this.currentLang =
       langFromUrl ||
       (storedLang ? storedLang.trim() : null) ||
@@ -35,7 +35,6 @@ class I18nEngine {
     console.log(
       `✅ Language detected: ${this.currentLang} (from URL: ${langFromUrl})`,
     );
-
     localStorage.setItem("c12_lang", this.currentLang);
 
     // 2. Currency Map (Language ke hisaab se default currency)
@@ -56,10 +55,9 @@ class I18nEngine {
     };
 
     // 2b. Regional Defaults Map (Global Parameters for Units & Formats)
-    // Har language ke liye default units aur formats define kiye gaye hain.
     this.regionalDefaults = {
       en: {
-        weight: "lbs", // US/UK default (Stone ko engine logic mein handle karenge)
+        weight: "lbs",
         height: "ft/in",
         temp: "F",
         distance: "mi",
@@ -67,15 +65,15 @@ class I18nEngine {
         dateFormat: "MM/DD/YYYY",
       },
       hi: {
-        weight: "kg", // India mein kg standard hai, lekin height aksar ft/in mein boli jati hai
-        height: "ft/in", // ✅ Aapki requirement ke hisaab se India ke liye ft/in
+        weight: "kg",
+        height: "ft/in",
         temp: "C",
         distance: "km",
         volume: "L",
         dateFormat: "DD/MM/YYYY",
       },
       zh: {
-        weight: "jin", // ✅ China: 1 kg = 2 Jin (Engine mein conversion rate 2.0 set hoga)
+        weight: "jin",
         height: "cm",
         temp: "C",
         distance: "km",
@@ -166,11 +164,9 @@ class I18nEngine {
 
     // 3. Auto-Currency: Language ke hisaab se set karo
     this.currentCurrency = this.currencyMap[this.currentLang] || "USD";
-
     console.log(
       `💰 Currency set to: ${this.currentCurrency} for language: ${this.currentLang}`,
     );
-
     localStorage.setItem("c12_currency", this.currentCurrency);
     localStorage.removeItem("c12_currency_manual");
 
@@ -186,6 +182,10 @@ class I18nEngine {
     ) {
       this.translations = window.CalculatorTranslations;
       this.init();
+
+      // ✅ FIX: Currency UI को update करें (dropdown aur symbol)
+      setTimeout(() => this.updateCurrencyUI(), 100);
+
       console.log(
         `✅ i18n Engine Ready. Language: ${this.currentLang}, Currency: ${this.currentCurrency}`,
       );
@@ -205,10 +205,25 @@ class I18nEngine {
   }
 
   applyTranslations() {
+    // 1. Normal text translation (Buttons, Labels, Headings)
     document.querySelectorAll("[data-i18n]").forEach((el) => {
       const key = el.getAttribute("data-i18n");
       const translation = this.t(key);
       if (translation) el.textContent = translation;
+    });
+
+    // 2. HTML block translation (SEO Content, Paragraphs with tags)
+    document.querySelectorAll("[data-i18n-html]").forEach((el) => {
+      const key = el.getAttribute("data-i18n-html");
+      const translation = this.t(key);
+      if (translation) el.innerHTML = translation;
+    });
+
+    // 3. ✅ NEW: Placeholder translation (Search, Newsletter inputs)
+    document.querySelectorAll("[data-i18n-placeholder]").forEach((el) => {
+      const key = el.getAttribute("data-i18n-placeholder");
+      const translation = this.t(key);
+      if (translation) el.setAttribute("placeholder", translation);
     });
   }
 
@@ -224,20 +239,16 @@ class I18nEngine {
   }
 
   t(key) {
-    // 1. Basic validation: Agar key hi nahi hai, toh empty string return karo
     if (!key || typeof key !== "string") return "";
     if (!this.translations || typeof this.translations !== "object") return key;
 
-    // 2. Try current language (aur check karo ki value empty string toh nahi hai)
     const currentLangTranslation = this.translations[this.currentLang]?.[key];
     if (currentLangTranslation && currentLangTranslation.trim() !== "") {
       return currentLangTranslation;
     }
 
-    // 3. Fallback to English
     const enTranslation = this.translations["en"]?.[key];
     if (enTranslation && enTranslation.trim() !== "") {
-      // Developer ko alert karo (sirf localhost par) taaki wo missing translation fix kar sake
       if (
         window.location.hostname === "localhost" ||
         window.location.hostname === "127.0.0.1"
@@ -249,7 +260,6 @@ class I18nEngine {
       return enTranslation;
     }
 
-    // 4. Ultimate Fallback: Return the key itself (UI break nahi hogi, aur developer ko key ka naam dikhega)
     if (
       window.location.hostname === "localhost" ||
       window.location.hostname === "127.0.0.1"
@@ -263,7 +273,6 @@ class I18nEngine {
 
   formatNumber(value, options = {}) {
     const { style = "decimal", decimals = 2 } = options;
-
     const localeMap = {
       en: "en-US",
       hi: "en-IN",
@@ -279,7 +288,6 @@ class I18nEngine {
       vi: "vi-VN",
       id: "id-ID",
     };
-
     const locale = localeMap[this.currentLang] || "en-US";
     const currency = options.currency || this.currentCurrency || "USD";
 
@@ -296,12 +304,13 @@ class I18nEngine {
 
     this.currentLang = lang;
     localStorage.setItem("c12_lang", lang);
-
-    // Language change = Currency auto change
     this.currentCurrency = this.currencyMap[lang] || "USD";
     localStorage.setItem("c12_currency", this.currentCurrency);
 
     this.init();
+
+    // ✅ FIX: Currency UI को तुरंत update करें
+    setTimeout(() => this.updateCurrencyUI(), 50);
   }
 
   setCurrency(currency) {
@@ -312,20 +321,63 @@ class I18nEngine {
       new CustomEvent("currencyChanged", { detail: { currency } }),
     );
   }
+
+  updateCurrencyUI() {
+    // 1. Currency dropdown को update करें
+    const currencyDropdown = document.getElementById("currency-dropdown");
+    if (currencyDropdown) {
+      currencyDropdown.value = this.currentCurrency;
+    }
+
+    // 2. Input prefix (currency symbol) को update करें
+    const symbols = {
+      USD: "$",
+      INR: "₹",
+      EUR: "€",
+      GBP: "£",
+      JPY: "¥",
+      AUD: "A$",
+      CAD: "C$",
+      BRL: "R$",
+      RUB: "₽",
+      SAR: "﷼",
+      CNY: "¥",
+      KRW: "₩",
+      VND: "₫",
+      IDR: "Rp",
+    };
+
+    const prefixEls = document.querySelectorAll(".input-prefix");
+    prefixEls.forEach((el) => {
+      el.textContent = symbols[this.currentCurrency] || "$";
+    });
+
+    console.log(
+      `💰 Currency UI updated to: ${this.currentCurrency} (${symbols[this.currentCurrency] || "$"})`,
+    );
+  }
 }
 
 class LanguageSelector {
   constructor() {
+    this.waitForHeader();
+  }
+
+  waitForHeader() {
     this.toggleBtn = document.getElementById("langToggle");
+    if (!this.toggleBtn) {
+      setTimeout(() => this.waitForHeader(), 100);
+      return;
+    }
+    this.init();
+  }
+
+  init() {
     this.dropdown = document.getElementById("langDropdown");
     this.currentFlag = document.getElementById("currentFlag");
     this.currentLangText = document.getElementById("currentLang");
     this.options = document.querySelectorAll(".lang-option");
 
-    if (this.toggleBtn) this.init();
-  }
-
-  init() {
     this.toggleBtn.addEventListener("click", (e) => {
       e.stopPropagation();
       this.toggle();
@@ -347,7 +399,8 @@ class LanguageSelector {
       });
     });
 
-    this.loadSavedLanguage();
+    // ✅ FIX 2: Delay slightly to ensure components-loader has fully injected the header DOM
+    setTimeout(() => this.loadSavedLanguage(), 150);
   }
 
   toggle() {
@@ -377,37 +430,12 @@ class LanguageSelector {
 
     localStorage.setItem("c12_lang", lang);
 
-    // URL Redirect Logic
-    const path = window.location.pathname;
-    const match = path.match(/^(.*?\/)([^\/]+?)(?:-([a-z]{2}))?(\.html)?$/);
-
-    if (match) {
-      const dir = match[1];
-      const baseName = match[2];
-      const ext = match[4] || "";
-
-      let newFileName = baseName;
-      if (lang !== "en") {
-        newFileName += `-${lang}`;
-      }
-      newFileName += ext;
-
-      const newUrl = `${dir}${newFileName}`;
-
-      if (newUrl !== path) {
-        window.location.href = newUrl;
-        return;
-      }
-    }
-
     if (window.i18n) {
       window.i18n.setLanguage(lang);
-
       const currencyDropdown = document.getElementById("currency-dropdown");
       if (currencyDropdown) {
         currencyDropdown.value = window.i18n.currentCurrency;
         this.updateInputPrefix(window.i18n.currentCurrency);
-        if (window.engine) window.engine.calculate();
       }
     }
 
@@ -432,27 +460,30 @@ class LanguageSelector {
       VND: "₫",
       IDR: "Rp",
     };
-
-    // ✅ FIX: querySelectorAll se saare prefixes update honge
     const prefixEls = document.querySelectorAll(".input-prefix");
     prefixEls.forEach((el) => {
       el.textContent = symbols[currency] || "$";
     });
   }
 
+  // ✅ FIX 3: Re-fetch elements right before updating to avoid detached DOM node issues
   loadSavedLanguage() {
+    this.currentFlag = document.getElementById("currentFlag");
+    this.currentLangText = document.getElementById("currentLang");
+    this.options = document.querySelectorAll(".lang-option");
+
     const savedLang = localStorage.getItem("c12_lang") || "en";
     const option = document.querySelector(
       `.lang-option[data-lang="${savedLang}"]`,
     );
 
-    if (option) {
-      if (this.currentFlag) this.currentFlag.textContent = option.dataset.flag;
-      if (this.currentLangText)
-        this.currentLangText.textContent = savedLang.toUpperCase();
+    if (option && this.currentFlag && this.currentLangText) {
+      this.currentFlag.textContent = option.dataset.flag;
+      this.currentLangText.textContent = savedLang.toUpperCase();
       this.options.forEach((opt) =>
         opt.classList.toggle("active", opt.dataset.lang === savedLang),
       );
+      console.log(`✅ UI successfully updated to saved language: ${savedLang}`);
     }
   }
 }

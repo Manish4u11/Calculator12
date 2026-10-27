@@ -1,0 +1,400 @@
+<!-- Calculator12.com - Dynamic Header Component -->
+<div class="header" role="banner">
+  <div class="container">
+    <div class="header__wrapper">
+      <!-- Logo -->
+      <div class="header__logo">
+        <a
+          href="javascript:void(0)"
+          data-nav-link="home"
+          aria-label="Calculator12 Home"
+          class="logo-wrapper"
+        >
+          <div class="logo-icon">
+            <svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <linearGradient
+                  id="logoGrad1"
+                  x1="0%"
+                  y1="0%"
+                  x2="100%"
+                  y2="100%"
+                >
+                  <stop
+                    offset="0%"
+                    style="stop-color: #8b5cf6; stop-opacity: 1"
+                  />
+                  <stop
+                    offset="100%"
+                    style="stop-color: #06b6d4; stop-opacity: 1"
+                  />
+                </linearGradient>
+                <linearGradient
+                  id="logoGrad2"
+                  x1="100%"
+                  y1="0%"
+                  x2="0%"
+                  y2="100%"
+                >
+                  <stop
+                    offset="0%"
+                    style="stop-color: #ec4899; stop-opacity: 1"
+                  />
+                  <stop
+                    offset="100%"
+                    style="stop-color: #8b5cf6; stop-opacity: 1"
+                  />
+                </linearGradient>
+              </defs>
+              <rect
+                x="10"
+                y="10"
+                width="100"
+                height="100"
+                rx="25"
+                fill="url(#logoGrad1)"
+                opacity="0.15"
+                stroke="url(#logoGrad1)"
+                stroke-width="3"
+              />
+              <rect
+                x="25"
+                y="22"
+                width="70"
+                height="25"
+                rx="6"
+                fill="url(#logoGrad2)"
+                opacity="0.9"
+              />
+              <text
+                x="60"
+                y="40"
+                font-family="Arial"
+                font-size="18"
+                fill="white"
+                text-anchor="middle"
+                font-weight="bold"
+              >
+                =
+              </text>
+              <circle
+                cx="35"
+                cy="62"
+                r="10"
+                fill="url(#logoGrad1)"
+                opacity="0.8"
+              />
+              <text
+                x="35"
+                y="67"
+                font-family="Arial"
+                font-size="14"
+                fill="white"
+                text-anchor="middle"
+                font-weight="bold"
+              >
+                +
+              </text>
+              <circle
+                cx="60"
+                cy="62"
+                r="10"
+                fill="url(#logoGrad2)"
+                opacity="0.8"
+              />
+              <text
+                x="60"
+                y="67"
+                font-family="Arial"
+                font-size="14"
+                fill="white"
+                text-anchor="middle"
+                font-weight="bold"
+              >
+                −
+              </text>
+              <circle
+                cx="85"
+                cy="62"
+                r="10"
+                fill="url(#logoGrad1)"
+                opacity="0.8"
+              />
+              <text
+                x="85"
+                y="67"
+                font-family="Arial"
+                font-size="14"
+                fill="white"
+                text-anchor="middle"
+                font-weight="bold"
+              >
+                ×
+              </text>
+              <circle
+                cx="35"
+                cy="87"
+                r="10"
+                fill="url(#logoGrad2)"
+                opacity="0.8"
+              />
+              <text
+                x="35"
+                y="92"
+                font-family="Arial"
+                font-size="14"
+                fill="white"
+                text-anchor="middle"
+                font-weight="bold"
+              >
+                ÷
+              </text>
+              <circle
+                cx="60"
+                cy="87"
+                r="10"
+                fill="url(#logoGrad1)"
+                opacity="0.8"
+              />
+              <text
+                x="60"
+                y="92"
+                font-family="Arial"
+                font-size="14"
+                fill="white"
+                text-anchor="middle"
+                font-weight="bold"
+              >
+                √
+              </text>
+              <circle
+                cx="85"
+                cy="87"
+                r="10"
+                fill="url(#logoGrad2)"
+                opacity="0.8"
+              />
+              <text
+                x="85"
+                y="92"
+                font-family="Arial"
+                font-size="14"
+                fill="white"
+                text-anchor="middle"
+                font-weight="bold"
+              >
+                %
+              </text>
+            </svg>
+          </div>
+          <span class="logo-text"
+            >Calculator<span class="logo-number">12</span></span
+          >
+        </a>
+      </div>
+
+      <!-- Navigation -->
+      <nav class="header__nav" role="navigation" aria-label="Main navigation">
+        <ul class="nav__list">
+          <li class="nav__item">
+            <a
+              href="javascript:void(0)"
+              data-nav-link="home"
+              class="nav__link"
+              data-i18n="nav.home"
+              >Home</a
+            >
+          </li>
+
+          <!-- ✅ यह link dynamically update होगा - इसे TOUCH नहीं करना -->
+          <li class="nav__item">
+            <a
+              href="javascript:void(0)"
+              data-nav-link="category"
+              class="nav__link"
+              data-i18n="nav.categories"
+              >Categories</a
+            >
+          </li>
+
+          <!-- ✅ Popular page पर जाएगा -->
+          <li class="nav__item">
+            <a
+              href="popular.html"
+              data-nav-link="popular"
+              class="nav__link"
+              data-i18n="nav.popular"
+              >Popular</a
+            >
+          </li>
+
+          <li class="nav__item">
+            <a
+              href="about.html"
+              data-nav-link="about"
+              class="nav__link"
+              data-i18n="nav.about"
+              >About</a
+            >
+          </li>
+        </ul>
+      </nav>
+
+      <!-- Header Actions -->
+      <div class="header__actions">
+        <!-- Language Selector -->
+        <div class="language-selector">
+          <button
+            id="langToggle"
+            class="lang-toggle-btn"
+            aria-expanded="false"
+            aria-haspopup="true"
+          >
+            <span class="lang-flag" id="currentFlag">🇺🇸</span>
+            <span class="lang-name" id="currentLang">EN</span>
+            <span class="lang-arrow">▼</span>
+          </button>
+          <div id="langDropdown" class="lang-dropdown" role="menu">
+            <button
+              class="lang-option active"
+              data-lang="en"
+              data-flag="🇺🇸"
+              role="menuitem"
+            >
+              <span class="flag">🇺🇸</span><span class="lang-text">English</span
+              ><span class="lang-native">English</span>
+            </button>
+            <button
+              class="lang-option"
+              data-lang="hi"
+              data-flag="🇮🇳"
+              role="menuitem"
+            >
+              <span class="flag">🇮🇳</span><span class="lang-text">Hindi</span
+              ><span class="lang-native">हिन्दी</span>
+            </button>
+            <button
+              class="lang-option"
+              data-lang="es"
+              data-flag="🇪🇸"
+              role="menuitem"
+            >
+              <span class="flag">🇪🇸</span><span class="lang-text">Spanish</span
+              ><span class="lang-native">Español</span>
+            </button>
+            <button
+              class="lang-option"
+              data-lang="fr"
+              data-flag="🇫🇷"
+              role="menuitem"
+            >
+              <span class="flag">🇫🇷</span><span class="lang-text">French</span
+              ><span class="lang-native">Français</span>
+            </button>
+            <button
+              class="lang-option"
+              data-lang="de"
+              data-flag="🇩🇪"
+              role="menuitem"
+            >
+              <span class="flag">🇩🇪</span><span class="lang-text">German</span
+              ><span class="lang-native">Deutsch</span>
+            </button>
+            <button
+              class="lang-option"
+              data-lang="pt"
+              data-flag="🇵🇹"
+              role="menuitem"
+            >
+              <span class="flag">🇵🇹</span
+              ><span class="lang-text">Portuguese</span
+              ><span class="lang-native">Português</span>
+            </button>
+            <button
+              class="lang-option"
+              data-lang="ru"
+              data-flag="🇷🇺"
+              role="menuitem"
+            >
+              <span class="flag">🇷🇺</span><span class="lang-text">Russian</span
+              ><span class="lang-native">Русский</span>
+            </button>
+            <button
+              class="lang-option"
+              data-lang="ar"
+              data-flag="🇸🇦"
+              role="menuitem"
+            >
+              <span class="flag">🇸🇦</span><span class="lang-text">Arabic</span
+              ><span class="lang-native">العربية</span>
+            </button>
+            <button
+              class="lang-option"
+              data-lang="zh"
+              data-flag="🇨🇳"
+              role="menuitem"
+            >
+              <span class="flag">🇨🇳</span><span class="lang-text">Chinese</span
+              ><span class="lang-native">中文</span>
+            </button>
+            <button
+              class="lang-option"
+              data-lang="ja"
+              data-flag="🇯🇵"
+              role="menuitem"
+            >
+              <span class="flag">🇯🇵</span><span class="lang-text">Japanese</span
+              ><span class="lang-native">日本語</span>
+            </button>
+            <button
+              class="lang-option"
+              data-lang="ko"
+              data-flag="🇰🇷"
+              role="menuitem"
+            >
+              <span class="flag">🇰🇷</span><span class="lang-text">Korean</span
+              ><span class="lang-native">한국어</span>
+            </button>
+            <button
+              class="lang-option"
+              data-lang="vi"
+              data-flag="🇻🇳"
+              role="menuitem"
+            >
+              <span class="flag">🇻🇳</span
+              ><span class="lang-text">Vietnamese</span
+              ><span class="lang-native">Tiếng Việt</span>
+            </button>
+            <button
+              class="lang-option"
+              data-lang="id"
+              data-flag="🇮🇩"
+              role="menuitem"
+            >
+              <span class="flag">🇮🇩</span
+              ><span class="lang-text">Indonesian</span
+              ><span class="lang-native">Bahasa</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Theme Toggle -->
+        <button class="theme-toggle" aria-label="Toggle dark mode">
+          <i class="fas fa-sun theme-toggle__icon theme-toggle__icon--sun"></i>
+          <i
+            class="fas fa-moon theme-toggle__icon theme-toggle__icon--moon"
+          ></i>
+        </button>
+
+        <!-- Mobile Menu Toggle -->
+        <button
+          class="mobile-menu-toggle"
+          aria-label="Toggle mobile menu"
+          aria-expanded="false"
+        >
+          <span class="hamburger"></span>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

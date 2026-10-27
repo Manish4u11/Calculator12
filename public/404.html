@@ -1,0 +1,266 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>404 - Page Not Found | Calculator12</title>
+    <meta
+      name="description"
+      content="The calculator or page you're looking for doesn't exist. Return to Calculator12 homepage to find 340+ free calculators."
+    />
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Calculator12" />
+    <meta property="og:title" content="404 - Page Not Found | Calculator12" />
+    <meta property="og:description" content="The page you're looking for doesn't exist." />
+    <meta property="og:image" content="https://calculator12.com/og-image.png" />
+    <meta property="og:url" content="https://calculator12.com/404.html" />
+    <meta property="og:locale" content="en_US" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@calculator12" />
+    <meta name="twitter:title" content="404 - Page Not Found | Calculator12" />
+    <meta name="twitter:description" content="The page you're looking for doesn't exist." />
+    <meta name="twitter:image" content="https://calculator12.com/og-image.png" />
+
+    <!-- Favicon -->
+    <link
+      rel="icon"
+      href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120'><defs><linearGradient id='lg1' x1='0%25' y1='0%25' x2='100%25' y2='100%25'><stop offset='0%25' style='stop-color:%238b5cf6'/><stop offset='100%25' style='stop-color:%2306b6d4'/></linearGradient><linearGradient id='lg2' x1='100%25' y1='0%25' x2='0%25' y2='100%25'><stop offset='0%25' style='stop-color:%23ec4899'/><stop offset='100%25' style='stop-color:%238b5cf6'/></linearGradient></defs><rect x='10' y='10' width='100' height='100' rx='25' fill='url(%23lg1)' opacity='0.15' stroke='url(%23lg1)' stroke-width='3'/><rect x='25' y='22' width='70' height='25' rx='6' fill='url(%23lg2)' opacity='0.9'/><text x='60' y='40' font-family='Arial' font-size='18' fill='white' text-anchor='middle' font-weight='bold'>=</text><circle cx='35' cy='62' r='10' fill='url(%23lg1)' opacity='0.8'/><text x='35' y='67' font-family='Arial' font-size='14' fill='white' text-anchor='middle' font-weight='bold'>+</text><circle cx='60' cy='62' r='10' fill='url(%23lg2)' opacity='0.8'/><text x='60' y='67' font-family='Arial' font-size='14' fill='white' text-anchor='middle' font-weight='bold'>−</text><circle cx='85' cy='62' r='10' fill='url(%23lg1)' opacity='0.8'/><text x='85' y='67' font-family='Arial' font-size='14' fill='white' text-anchor='middle' font-weight='bold'>×</text><circle cx='35' cy='87' r='10' fill='url(%23lg2)' opacity='0.8'/><text x='35' y='92' font-family='Arial' font-size='14' fill='white' text-anchor='middle' font-weight='bold'>÷</text><circle cx='60' cy='87' r='10' fill='url(%23lg1)' opacity='0.8'/><text x='60' y='92' font-family='Arial' font-size='14' fill='white' text-anchor='middle' font-weight='bold'>√</text><circle cx='85' cy='87' r='10' fill='url(%23lg2)' opacity='0.8'/><text x='85' y='92' font-family='Arial' font-size='14' fill='white' text-anchor='middle' font-weight='bold'>%</text></svg>"
+    />
+
+    <!-- Fonts & Icons -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Poppins:wght@600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
+
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="assets/css/variables.css" />
+    <link rel="stylesheet" href="assets/css/reset.css" />
+    <link rel="stylesheet" href="assets/css/base.css" />
+    <link rel="stylesheet" href="assets/css/theme.css" />
+    <link rel="stylesheet" href="assets/css/layout.css" />
+    <link rel="stylesheet" href="assets/css/components.css" />
+
+    <!-- Custom 404 Page Styles -->
+    <style>
+      .error-page {
+        min-height: 70vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        padding: 60px 20px;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .error-page::before {
+        content: "";
+        position: absolute;
+        top: -100px;
+        right: -100px;
+        width: 400px;
+        height: 400px;
+        background: radial-gradient(
+          circle,
+          rgba(139, 92, 246, 0.1) 0%,
+          transparent 70%
+        );
+        border-radius: 50%;
+        animation: float 6s ease-in-out infinite;
+      }
+
+      .error-page::after {
+        content: "";
+        position: absolute;
+        bottom: -100px;
+        left: -100px;
+        width: 400px;
+        height: 400px;
+        background: radial-gradient(
+          circle,
+          rgba(6, 182, 212, 0.1) 0%,
+          transparent 70%
+        );
+        border-radius: 50%;
+        animation: float 8s ease-in-out infinite reverse;
+      }
+
+      @keyframes float {
+        0%,
+        100% {
+          transform: translateY(0px);
+        }
+        50% {
+          transform: translateY(-20px);
+        }
+      }
+
+      .error-content {
+        position: relative;
+        z-index: 1;
+        max-width: 600px;
+      }
+
+      .error-content h1 {
+        font-size: clamp(8rem, 20vw, 12rem);
+        font-weight: 900;
+        background: linear-gradient(135deg, #7c3aed 0%, #06b6d4 100%);
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+        margin: 0;
+        line-height: 1;
+        animation: glitch 3s ease-in-out infinite;
+      }
+
+      @keyframes glitch {
+        0%,
+        90%,
+        100% {
+          transform: translate(0);
+        }
+        92% {
+          transform: translate(-2px, 2px);
+        }
+        94% {
+          transform: translate(2px, -2px);
+        }
+        96% {
+          transform: translate(-2px, -2px);
+        }
+        98% {
+          transform: translate(2px, 2px);
+        }
+      }
+
+      .error-content h2 {
+        font-size: clamp(1.8rem, 4vw, 2.5rem);
+        font-weight: 800;
+        color: var(--text-primary);
+        margin: 20px 0 15px;
+      }
+
+      .error-content p {
+        font-size: 1.1rem;
+        color: var(--text-secondary);
+        max-width: 500px;
+        margin: 0 auto 30px;
+        line-height: 1.6;
+      }
+
+      .error-buttons {
+        display: flex;
+        gap: 15px;
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+
+      .error-btn {
+        padding: 14px 30px;
+        border-radius: 30px;
+        text-decoration: none;
+        font-weight: 700;
+        font-size: 1rem;
+        transition: all 0.3s ease;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .error-btn-primary {
+        background: linear-gradient(135deg, #7c3aed, #06b6d4);
+        color: white;
+        box-shadow: 0 8px 20px rgba(124, 58, 237, 0.3);
+      }
+
+      .error-btn-primary:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 12px 30px rgba(124, 58, 237, 0.4);
+      }
+
+      .error-btn-secondary {
+        background: rgba(139, 92, 246, 0.1);
+        color: #7c3aed;
+        border: 2px solid rgba(139, 92, 246, 0.3);
+      }
+
+      .error-btn-secondary:hover {
+        background: rgba(139, 92, 246, 0.2);
+        transform: translateY(-3px);
+      }
+
+      .error-icon {
+        font-size: 4rem;
+        margin-bottom: 20px;
+        background: linear-gradient(135deg, #7c3aed, #06b6d4);
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+
+      @media (max-width: 768px) {
+        .error-buttons {
+          flex-direction: column;
+          align-items: center;
+        }
+        .error-btn {
+          width: 100%;
+          max-width: 280px;
+          justify-content: center;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Header -->
+    <header id="header-container"></header>
+
+    <!-- Main Content -->
+    <main id="main-content" role="main">
+      <div class="container">
+        <div class="error-page">
+          <div class="error-content">
+            <div class="error-icon">
+              <i class="fas fa-calculator"></i>
+            </div>
+            <h1>404</h1>
+            <h2>Page Not Found</h2>
+            <p>
+              Oops! The calculator or page you're looking for doesn't exist. It
+              might have been moved, deleted, or the URL might be incorrect.
+              Don't worry, we have 340+ other calculators to help you!
+            </p>
+            <div class="error-buttons">
+              <a href="/" class="error-btn error-btn-primary">
+                <i class="fas fa-home"></i> Go to Homepage
+              </a>
+              <a
+                href="/all-calculators.html"
+                class="error-btn error-btn-secondary"
+              >
+                <i class="fas fa-calculator"></i> Browse All Calculators
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer id="footer-container"></footer>
+
+    <!-- Scripts -->
+    <script src="engines/translation/translations.js" defer></script>
+    <script src="engines/translation/i18n.js" defer></script>
+    <script src="assets/js/core/theme-switcher.js" defer></script>
+    <script src="assets/js/core/components-loader.js" defer></script>
+  </body>
+</html>
